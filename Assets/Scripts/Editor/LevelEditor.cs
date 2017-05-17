@@ -27,6 +27,7 @@ public class LevelEditor : Editor
 	static Vector3 lastPlaced;
 	static string lastNamed;  
 	static GameObject tiles;
+	static string folderName;
 
 	public void OnEnable()
 	{
@@ -35,10 +36,10 @@ public class LevelEditor : Editor
 		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
 		SceneView.onSceneGUIDelegate = GridUpdate;
 
-		tiles = GameObject.Find ("Tiles"); //Sets up a nice little folder for everything to go into :)
+		tiles = GameObject.Find (folderName); //Sets up a nice little folder for everything to go into :)
 		if (tiles == null) {
 			tiles = new GameObject ();
-			tiles.name = "Tiles";
+			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
 		}
 	}
@@ -99,6 +100,11 @@ public class LevelEditor : Editor
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label (" Tile "); //Allows user to select an object from a list
 		currentObj = (GameObject) EditorGUILayout.ObjectField(currentObj, typeof(GameObject), false);
+		GUILayout.EndHorizontal ();
+
+		GUILayout.BeginHorizontal ();
+		GUILayout.Label (" Folder Name "); //Allows user to select an object from a list
+		folderName = EditorGUILayout.TextField(folderName, GUILayout.Width(100));
 		GUILayout.EndHorizontal ();
 
 		SceneView.RepaintAll();

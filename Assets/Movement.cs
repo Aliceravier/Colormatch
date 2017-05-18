@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
+    public Team playerTeam = Team.blue;
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;

@@ -27,7 +27,7 @@ public class LevelEditor : Editor
 	static Vector3 lastPlaced;
 	static string lastNamed;  
 	static GameObject tiles;
-	static string folderName;
+	static string folderName = "Tiles";
 
 	public void OnEnable()
 	{

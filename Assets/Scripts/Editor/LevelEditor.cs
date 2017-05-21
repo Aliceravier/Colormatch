@@ -42,6 +42,7 @@ public class LevelEditor : Editor
 			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
 			tiles.AddComponent<RoomManager> ();
+			tiles.tag = "Room";
 		}
 	}
 

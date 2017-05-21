@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class ButtonBehaviour : MonoBehaviour {
+public class ButtonBehaviour : ExtendedBehaviour {
     private Animator anim;
     
 
@@ -21,8 +21,11 @@ public class ButtonBehaviour : MonoBehaviour {
     {
 		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
         {
-            anim.SetTrigger("ButtonPressed");            
-			setRoom (c.transform.gameObject);
+			anim.SetTrigger ("ButtonPressed"); 
+			Wait (1f, () => {
+				           
+				setRoom (c.transform.gameObject);
+			});
             
 
         }
@@ -34,6 +37,7 @@ public class ButtonBehaviour : MonoBehaviour {
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
 
 	}
+		
 
 
 }

@@ -3530,6 +3530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f798f2b89bae6344b9df3a5534e8dded, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomTeam: 2
 --- !u!114 &114970778076628092
 MonoBehaviour:
   m_ObjectHideFlags: 1

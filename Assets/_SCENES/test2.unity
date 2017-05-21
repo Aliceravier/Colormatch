@@ -575,7 +575,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -615,8 +615,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79efdfde9b3b58b42b75f25ed32e1a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 689606892}
-  offset: 20
 --- !u!1 &2076090069
 GameObject:
   m_ObjectHideFlags: 0

@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 4138098885559876}
   - component: {fileID: 114909888185795084}
   m_Layer: 0
-  m_Name: Middle Room
+  m_Name: Middle room
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

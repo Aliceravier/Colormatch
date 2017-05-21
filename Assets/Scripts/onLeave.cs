@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class onLeave : MonoBehaviour {
-
+    GameObject camera;
 	// Use this for initialization
 	void Start () {
-		
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
 	}
 	
 	// Update is called once per frame
@@ -15,7 +15,8 @@ public class onLeave : MonoBehaviour {
 	}
 
 	void onTriggerEnter2D(Collider2D c){
-
+        GameObject nextRoom;
+        camera.GetComponent<moveCamera>().moveToNextRoom(nextRoom);
 
 	}
 }

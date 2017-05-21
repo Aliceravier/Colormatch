@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb255eb345dd2a4c8a907adc6ae1352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentPrefab: {fileID: 1832830581776868, guid: f5b0e508fd54a4f47b5772880b632e75,
+  parentPrefab: {fileID: 1674140603397078, guid: b833bf6cc67c6e2419ed6862c55688e3,
     type: 2}
   childrenPrefabs:
   - {fileID: 0}
@@ -119,15 +119,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   nameOfOldPrefabs:
-  - Tile
-  - Wall
+  - Tile(Clone)
+  - Wall(Clone)
   replacementPrefabs:
   - {fileID: 1005901207169962, guid: 4fb7037b338cf6d409bf170e2599b23a, type: 2}
   - {fileID: 1035498214242040, guid: 4ed6bedb97cdd394bb4241575dab3b57, type: 2}

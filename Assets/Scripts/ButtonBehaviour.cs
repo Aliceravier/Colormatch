@@ -22,7 +22,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
         {
 			anim.SetTrigger ("ButtonPressed"); 
-			Wait (1f, () => {
+			Wait (0.5f, () => {
 				           
 				setRoom (c.transform.gameObject);
 			});

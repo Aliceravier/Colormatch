@@ -19,23 +19,21 @@ public class ButtonBehaviour : MonoBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.transform.gameObject.tag == "Player")
+		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
         {
             anim.SetTrigger("ButtonPressed");            
-            ChangeTiles(c.transform.gameObject.GetComponent<SpriteRenderer>().color, "Tile");
+			setRoom (c.transform.gameObject);
             
 
         }
     }
-    void ChangeTiles(Color color, string tag)
-    {
-        foreach (Transform child in transform.parent.transform)
-        {
-            if (child.gameObject.tag == tag)
-            {
-                child.gameObject.GetComponent<SpriteRenderer>().color = color;
-               
-            }
-        }
-    }
+    
+	void setRoom(GameObject player){
+		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
+		rm.setRoomTeam (player.GetComponent<Movement> ().playerTeam);
+		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
+
+	}
+
+
 }

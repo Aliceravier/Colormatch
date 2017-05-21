@@ -41,6 +41,7 @@ public class LevelEditor : Editor
 			tiles = new GameObject ();
 			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
+			tiles.AddComponent<RoomManager> ();
 		}
 	}
 

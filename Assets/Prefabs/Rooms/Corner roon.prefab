@@ -622,6 +622,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4217373231641196}
+  - component: {fileID: 114712786815435836}
   m_Layer: 0
   m_Name: Corner roon
   m_TagString: Untagged
@@ -1319,7 +1320,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1674140603397078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5781956, y: 0.23028374, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4059553898920326}
@@ -3162,6 +3163,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114712786815435836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1674140603397078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f798f2b89bae6344b9df3a5534e8dded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114859673645822328
 MonoBehaviour:
   m_ObjectHideFlags: 1

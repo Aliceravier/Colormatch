@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
 
-	Team roomTeam;
+	public Team roomTeam = Team.neutral;
+	public int roomId = 0;
+	public int roomValue = 5;
 	// Use this for initialization
 	void Start () {
-		roomTeam = Team.neutral;
+		
 	}
 	
 	// Update is called once per frame

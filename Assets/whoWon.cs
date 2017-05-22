@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class whoWon : MonoBehaviour {
@@ -35,7 +36,7 @@ public class whoWon : MonoBehaviour {
                     if (value1 + value2 + value3 == 15)
                     {
                         print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
-                        Application.Quit();
+                        SceneManagement.SceneManager.LoadScene("word scene");
                         endGame(player);
                         return;
                     }

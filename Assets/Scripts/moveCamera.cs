@@ -36,7 +36,7 @@ public int playersRoomId()
 	void FixedUpdate () {
         //focus on centre of that room
         if (!isInScope(player)){
-            GameObject newRoom = 
+			GameObject newRoom = null;
             moveToNextRoom(newRoom);
         }
 	}

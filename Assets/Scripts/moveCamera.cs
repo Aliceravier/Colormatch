@@ -85,31 +85,7 @@ public class moveCamera : MonoBehaviour {
 
     //get dimensions of room
 	public Vector2 maxRoom(GameObject Room) {
-       Transform firstTile = Room.transform.GetChild(1);
-        Transform secondTile = Room.transform.GetChild(2);
-        float tileSize = Mathf.Abs(firstTile.position.x - secondTile.position.x); //only works for square tiles
-        float xmax, xmin = firstTile.position.x;
-        xmax = xmin;
-        float ymax, ymin = firstTile.position.y;
-        ymax = ymin;
-
-       foreach (Transform tile in Room.transform)
-        {
-            float xtile = tile.position.x;
-            float ytile = tile.position.y;
-
-            if (xtile > xmax)
-                xmax = xtile;
-            if (xtile < xmin)
-                xmin = xtile;
-            if (ytile > ymax)
-                ymax = ytile;
-            if (ytile < ymin)
-                ymin = ytile;      
-        }
-       float height = Mathf.Abs(ymax - ymin) + tileSize;
-       float width = Mathf.Abs(xmax - xmin) + tileSize;
-		return new Vector2 (width, height); //dimensions of room
+		return Room.GetComponent<RoomManager> ().getSize ();
 	}
 	
 

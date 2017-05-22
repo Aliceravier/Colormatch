@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Team { blue, green, neutral }
+public enum Team {blue, green, neutral}
 
 public class Enums : MonoBehaviour {
 

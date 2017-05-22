@@ -16,7 +16,7 @@ public class onLeave : MonoBehaviour {
 
 	void onTriggerEnter2D(Collider2D c){
         GameObject nextRoom;
-        camera.GetComponent<moveCamera>().moveToNextRoom(nextRoom);
+        //camera.GetComponent<moveCamera>().moveToNextRoom(nextRoom);
 
 	}
 }

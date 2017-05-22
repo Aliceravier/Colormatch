@@ -11,17 +11,21 @@ public class moveCamera : MonoBehaviour {
 
 	Camera camera;
 
-public int playersRoomId()
-    {
-        
+public GameObject getPlayersRoom()
+    {     
         player = GameObject.FindGameObjectWithTag("Player1");
-        foreach(GameObject room in GameObject.FindGameObjectsWithTag("room"))
+        GameObject[] Rooms;
+        Rooms = GameObject.FindGameObjectsWithTag("Room");
+        foreach (GameObject room in Rooms)
         {
             Vector2 roomDims = maxRoom(room);
-            if (Mathf.Abs(player.transform.x - room.transform.x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.y - room.transform.y) < (roomDims.y / 2))
-                return roomId;
+            if (Mathf.Abs(player.transform.position.x - room.transform.position.x) < (roomDims.x / 2) &&
+                Mathf.Abs(player.transform.position.y - room.transform.position.y) < (roomDims.y / 2))
+            {
+                return room;
+            }       
         }
+        return player;
     }
 
 
@@ -36,7 +40,7 @@ public int playersRoomId()
 	void FixedUpdate () {
         //focus on centre of that room
         if (!isInScope(player)){
-            GameObject newRoom = 
+            GameObject newRoom = getPlayersRoom();
             moveToNextRoom(newRoom);
         }
 	}
@@ -82,7 +86,7 @@ public int playersRoomId()
 	}
 
     //get dimensions of room
-	Vector2 maxRoom(GameObject Room) {
+	public Vector2 maxRoom(GameObject Room) {
        Transform firstTile = Room.transform.GetChild(1);
         Transform secondTile = Room.transform.GetChild(2);
         print(firstTile.position.x);

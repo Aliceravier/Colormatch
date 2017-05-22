@@ -127,7 +127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &51282234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,15 +172,15 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.5
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 22.944845
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -203,7 +203,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 51282233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -2.7, y: -43.8, z: -10}
   m_LocalScale: {x: 1.0273373, y: 1.0273373, z: 1.0273373}
   m_Children: []
   m_Father: {fileID: 0}
@@ -718,13 +718,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 46.1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -747,7 +747,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 991076233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -2.7, y: 2.7, z: -10}
   m_LocalScale: {x: 1.0273373, y: 1.0273373, z: 1.0273373}
   m_Children: []
   m_Father: {fileID: 0}
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 991076233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79efdfde9b3b58b42b75f25ed32e1a7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2edca9b1a83e6574e9c3d198dd8bfbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1275870488
@@ -848,6 +848,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4401065678390174, guid: 8c0dd18d706e0384d85d973d74746ef4, type: 2}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114329071154911284, guid: 8c0dd18d706e0384d85d973d74746ef4,
+        type: 2}
+      propertyPath: playerTeam
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

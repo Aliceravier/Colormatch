@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class moveCamera : MonoBehaviour {
+public class moveCamera2 : MonoBehaviour {
 
     
     private GameObject player;
@@ -61,7 +61,7 @@ public class moveCamera : MonoBehaviour {
         float targetaspect = 1.0f / 1.0f;
 
         // determine the game window's current aspect ratio
-        float windowaspect = (float)Screen.width / (float)Screen.height;
+        float windowaspect = (((float)Screen.width / (float)Screen.height))/2;
 
         // current viewport height should be scaled by this amount
         float scaleheight = windowaspect / targetaspect;
@@ -71,7 +71,7 @@ public class moveCamera : MonoBehaviour {
         float scalewidth = 1.0f / scaleheight;
         rect.width = scalewidth;
         rect.height = 1.0f;
-        rect.x = (1.0f - scalewidth) / 2;
+        rect.x = (1.0f - scalewidth) / 2 + 0.5f;
         rect.y = 0;
 
         camera.rect = rect;

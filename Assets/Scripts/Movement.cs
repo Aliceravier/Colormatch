@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
     public Team playerTeam = Team.blue;
+    public List<int> values;
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;

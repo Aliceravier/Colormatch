@@ -11,27 +11,10 @@ public class moveCamera : MonoBehaviour {
 
 	Camera camera;
 
-public GameObject getPlayersRoom()
-    {     
-        player = GameObject.FindGameObjectWithTag("Player1");
-        GameObject[] Rooms;
-        Rooms = GameObject.FindGameObjectsWithTag("Room");
-        foreach (GameObject room in Rooms)
-        {
-            Vector2 roomDims = maxRoom(room);
-            if (Mathf.Abs(player.transform.position.x - room.transform.position.x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.position.y - room.transform.position.y) < (roomDims.y / 2))
-            {
-                return room;
-            }       
-        }
-        return player;
-    }
-
 
 	// Use this for initialization
 	void Awake () {
-        player = GameObject.FindGameObjectWithTag("Player1");
+        player = GameObject.FindGameObjectWithTag("Player2");
         camera = GetComponent<Camera> ();
         focusOnRoom();
     }
@@ -50,13 +33,28 @@ public GameObject getPlayersRoom()
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
+    public GameObject getPlayersRoom()
+    {
+        player = GameObject.FindGameObjectWithTag("Player2");
+        GameObject[] Rooms;
+        Rooms = GameObject.FindGameObjectsWithTag("Room");
+        foreach (GameObject room in Rooms)
+        {
+            Vector2 roomDims = maxRoom(room);
+            if (Mathf.Abs(player.transform.position.x - room.transform.position.x) < (roomDims.x / 2) &&
+                Mathf.Abs(player.transform.position.y - room.transform.position.y) < (roomDims.y / 2))
+            {
+                return room;
+            }
+        }
+        return player;
+    }
 
-	void focusOnRoom(){
+    void focusOnRoom(){
         GameObject room = GameObject.FindGameObjectsWithTag("Room")[0];
        
         Vector2 roomDims = maxRoom(room);
         this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
-        print(roomDims);
         camera.orthographicSize = roomDims.y/2;
 
         //set aspect wanted
@@ -89,10 +87,7 @@ public GameObject getPlayersRoom()
 	public Vector2 maxRoom(GameObject Room) {
        Transform firstTile = Room.transform.GetChild(1);
         Transform secondTile = Room.transform.GetChild(2);
-        print(firstTile.position.x);
-        print(secondTile.position.x);
         float tileSize = Mathf.Abs(firstTile.position.x - secondTile.position.x); //only works for square tiles
-        print (tileSize);
         float xmax, xmin = firstTile.position.x;
         xmax = xmin;
         float ymax, ymin = firstTile.position.y;

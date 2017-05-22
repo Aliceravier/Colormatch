@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class ButtonBehaviour : ExtendedBehaviour {
     private Animator anim;
+    private GameObject button;
     
 
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animator>();		
+        anim = GetComponent<Animator>();	
+        
 	}
 	
 	// Update is called once per frame
@@ -21,13 +23,17 @@ public class ButtonBehaviour : ExtendedBehaviour {
     {
 		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
         {
-			anim.SetTrigger ("ButtonPressed"); 
+            GameObject player = c.transform.gameObject;
+            anim.SetTrigger ("ButtonPressed"); 
 			Wait (0.5f, () => {
 				           
-				setRoom (c.transform.gameObject);
+				setRoom (player);
 			});
-            
 
+            GameObject god = GameObject.FindGameObjectWithTag("God");
+            whoWon ww = god.GetComponent<whoWon>();
+            int roomValue = this.GetComponentInParent<RoomManager>().roomValue;
+            ww.updateInfo(player, roomValue);            
         }
     }
     
@@ -37,7 +43,6 @@ public class ButtonBehaviour : ExtendedBehaviour {
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
 
 	}
-		
 
 
 }

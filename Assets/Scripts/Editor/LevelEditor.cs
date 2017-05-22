@@ -185,7 +185,6 @@ public class LevelEditor : Editor
 
 
 					GameObject obj = tile.gameObject;
-					Debug.Log (obj);
 					Undo.RecordObject (obj.transform, "Rotate " + obj.name);
 					obj.transform.Rotate (new Vector3 (0, 0, 90));
 				}

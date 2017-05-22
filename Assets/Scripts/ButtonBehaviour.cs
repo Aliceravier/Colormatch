@@ -21,8 +21,10 @@ public class ButtonBehaviour : ExtendedBehaviour {
 	}
     void OnTriggerEnter2D(Collider2D c)
     {
+		//if player touches button
 		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
         {
+			//change anim + change room colour
             GameObject player = c.transform.gameObject;
             anim.SetTrigger ("ButtonPressed"); 
 			Wait (0.5f, () => {
@@ -30,10 +32,8 @@ public class ButtonBehaviour : ExtendedBehaviour {
 				setRoom (player);
 			});
 
-            GameObject god = GameObject.FindGameObjectWithTag("God");
-            whoWon ww = god.GetComponent<whoWon>();
-            int roomValue = this.GetComponentInParent<RoomManager>().roomValue;
-            ww.updateInfo(player, roomValue);            
+			//keep God UPDATED
+                    
         }
     }
     
@@ -41,6 +41,15 @@ public class ButtonBehaviour : ExtendedBehaviour {
 		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
 		rm.setRoomTeam (player.GetComponent<Movement> ().playerTeam);
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
+
+	}
+
+	void updateInfo(GameObject player){
+		/*Wrapper to send things to God :)*/
+		GameObject god = GameObject.FindGameObjectWithTag("God");
+		whoWon ww = god.GetComponent<whoWon>();
+		int roomValue = this.GetComponentInParent<RoomManager>().roomValue;
+		ww.updateInfo(player, roomValue);    
 
 	}
 

@@ -36,7 +36,7 @@ public class whoWon : MonoBehaviour {
                     if (value1 + value2 + value3 == 15)
                     {
                         print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
-                        SceneManagement.SceneManager.LoadScene("word scene");
+                        SceneManager.LoadScene("word scene");
                         endGame(player);
                         return;
                     }

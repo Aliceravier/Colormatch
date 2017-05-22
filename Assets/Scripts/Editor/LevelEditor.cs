@@ -29,8 +29,8 @@ public class LevelEditor : Editor
 	static GameObject tiles;
 	static string folderName = "Tiles";
 	static string objtag = "Room";
-	static float storedgridh;
-	static float storedgridw;
+	//static float storedgridh;
+	//static float storedgridw;
 
 	public void OnEnable()
 	{
@@ -38,8 +38,8 @@ public class LevelEditor : Editor
 
 		grid = (Grid)target;
 
-		storedgridh = grid.height;
-		storedgridw = grid.width;
+		//storedgridh = grid.height;
+		//storedgridw = grid.width;
 		lastPlaced = new Vector3 (0, 0, 2000);
 		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
 
@@ -101,6 +101,7 @@ public class LevelEditor : Editor
 
 	public override void OnInspectorGUI ()
 	{
+		/*
 		GUILayout.BeginHorizontal (); //This allows the user to change grid width
 		GUILayout.Label (" Grid Width ");
 		storedgridw = EditorGUILayout.FloatField (storedgridw, GUILayout.Width (50));
@@ -110,7 +111,7 @@ public class LevelEditor : Editor
 		GUILayout.Label (" Grid Height ");
 		storedgridh= EditorGUILayout.FloatField (storedgridh, GUILayout.Width (50));
 		GUILayout.EndHorizontal();
-		/*
+
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label (" Type of tile being placed "); //Allows user to select if tile is room or standard tile
 		toPlace = (Thing) EditorGUILayout.EnumPopup(toPlace, GUILayout.Width(50));
@@ -134,14 +135,14 @@ public class LevelEditor : Editor
 	{
 		Event e = Event.current;
 
-		//sets size to be big if object is room.
+		//sets size to be big if object is room. Sets size to be tilesize if object is not
 		if (currentObj != null) {
 			if (currentObj.CompareTag (objtag)) {
 				grid.width = currentObj.GetComponent<RoomManager> ().getSize ().x;
 				grid.height = currentObj.GetComponent<RoomManager> ().getSize ().y;
 			} else {
-				grid.width = storedgridw;
-				grid.height = storedgridh;
+				grid.width = currentObj.GetComponent<SpriteRenderer> ().bounds.size.x;
+				grid.height = currentObj.GetComponent<SpriteRenderer>().bounds.size.y;
 			}
 		}
 

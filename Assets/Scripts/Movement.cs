@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
+	
     public string horizontalMovInput;
     public string verticalMovInput;
     public Team playerTeam = Team.blue;
@@ -10,6 +11,8 @@ public class Movement : MonoBehaviour {
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;
+
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();

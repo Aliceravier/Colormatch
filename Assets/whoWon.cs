@@ -36,11 +36,10 @@ public class whoWon : ExtendedBehaviour {
                     if (value1 + value2 + value3 == 15)
                     {
                         print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
-                        Wait(2, () =>
+                        Wait(1.5f, () =>
                         {
                             SceneManager.LoadScene("word screen");
-                        });
-                        return;
+                        }); //may need to re-add return
                     }
                 }
             }

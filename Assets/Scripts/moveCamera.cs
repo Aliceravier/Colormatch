@@ -11,17 +11,21 @@ public class moveCamera : MonoBehaviour {
 
 	Camera camera;
 
-public int playersRoomId()
-    {
-        
+public GameObject getPlayersRoom()
+    {     
         player = GameObject.FindGameObjectWithTag("Player1");
-        foreach(GameObject room in GameObject.FindGameObjectsWithTag("room"))
+        GameObject[] Rooms;
+        Rooms = GameObject.FindGameObjectsWithTag("Room");
+        foreach (GameObject room in Rooms)
         {
             Vector2 roomDims = maxRoom(room);
-            if (Mathf.Abs(player.transform.x - room.transform.x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.y - room.transform.y) < (roomDims.y / 2))
-                return roomId;
+            if (Mathf.Abs(player.transform.position.x - room.transform.position.x) < (roomDims.x / 2) &&
+                Mathf.Abs(player.transform.position.y - room.transform.position.y) < (roomDims.y / 2))
+            {
+                return room;
+            }       
         }
+        return player;
     }
 
 
@@ -36,7 +40,7 @@ public int playersRoomId()
 	void FixedUpdate () {
         //focus on centre of that room
         if (!isInScope(player)){
-			GameObject newRoom = null;
+            GameObject newRoom = getPlayersRoom();
             moveToNextRoom(newRoom);
         }
 	}
@@ -52,7 +56,6 @@ public int playersRoomId()
        
         Vector2 roomDims = maxRoom(room);
         this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
-        print(roomDims);
         camera.orthographicSize = roomDims.y/2;
 
         //set aspect wanted
@@ -82,35 +85,8 @@ public int playersRoomId()
 	}
 
     //get dimensions of room
-	Vector2 maxRoom(GameObject Room) {
-       Transform firstTile = Room.transform.GetChild(1);
-        Transform secondTile = Room.transform.GetChild(2);
-        print(firstTile.position.x);
-        print(secondTile.position.x);
-        float tileSize = Mathf.Abs(firstTile.position.x - secondTile.position.x); //only works for square tiles
-        print (tileSize);
-        float xmax, xmin = firstTile.position.x;
-        xmax = xmin;
-        float ymax, ymin = firstTile.position.y;
-        ymax = ymin;
-
-       foreach (Transform tile in Room.transform)
-        {
-            float xtile = tile.position.x;
-            float ytile = tile.position.y;
-
-            if (xtile > xmax)
-                xmax = xtile;
-            if (xtile < xmin)
-                xmin = xtile;
-            if (ytile > ymax)
-                ymax = ytile;
-            if (ytile < ymin)
-                ymin = ytile;      
-        }
-       float height = Mathf.Abs(ymax - ymin) + tileSize;
-       float width = Mathf.Abs(xmax - xmin) + tileSize;
-		return new Vector2 (width, height); //dimensions of room
+	public Vector2 maxRoom(GameObject Room) {
+		return Room.GetComponent<RoomManager> ().getSize ();
 	}
 	
 

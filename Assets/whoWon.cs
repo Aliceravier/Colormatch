@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Team {blue, green, neutral}
-
-public class Enums : MonoBehaviour {
+public class whoWon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

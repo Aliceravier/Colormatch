@@ -28,23 +28,34 @@ public class LevelEditor : Editor
 	static string lastNamed;  
 	static GameObject tiles;
 	static string folderName = "Tiles";
+	static bool haveSized = false;
+	static string objtag = "Room";
 
 	public void OnEnable()
 	{
 		grid = (Grid)target;
 		lastPlaced = new Vector3 (0, 0, 2000);
 		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
-		SceneView.onSceneGUIDelegate = GridUpdate;
 
+		if (currentObj != null){ 
+			if (currentObj.CompareTag(objtag)){
+				grid.width = currentObj.GetComponent<RoomManager>().getSize().y;
+				grid.height = currentObj.GetComponent<RoomManager> ().getSize().x;
+			}
+		} 	
+		SceneView.onSceneGUIDelegate = GridUpdate;
 		tiles = GameObject.Find (folderName); //Sets up a nice little folder for everything to go into :)
 		if (tiles == null) {
 			tiles = new GameObject ();
 			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
-			tiles.AddComponent<RoomManager> ();
-			tiles.tag = "Room";
+			//only relevant if placing a tile in a room
+			if (!currentObj.CompareTag(objtag)) {
+				tiles.AddComponent<RoomManager> ();
+				tiles.tag = "Room";
+			}
 		}
-	}
+	} 
 
 
 	void PlaceThing(Vector3 aligned)
@@ -98,6 +109,11 @@ public class LevelEditor : Editor
 		GUILayout.Label (" Grid Height ");
 		grid.height = EditorGUILayout.FloatField (grid.height, GUILayout.Width (50));
 		GUILayout.EndHorizontal();
+		/*
+		GUILayout.BeginHorizontal ();
+		GUILayout.Label (" Type of tile being placed "); //Allows user to select if tile is room or standard tile
+		toPlace = (Thing) EditorGUILayout.EnumPopup(toPlace, GUILayout.Width(50));
+		GUILayout.EndHorizontal ();*/
 
 		GUILayout.BeginHorizontal ();
 		GUILayout.Label (" Tile "); //Allows user to select an object from a list
@@ -105,7 +121,7 @@ public class LevelEditor : Editor
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal ();
-		GUILayout.Label (" Folder Name "); //Allows user to select an object from a list
+		GUILayout.Label (" Folder Name "); //Allows user to set which gameObject they want to put things into
 		folderName = EditorGUILayout.TextField(folderName, GUILayout.Width(100));
 		GUILayout.EndHorizontal ();
 
@@ -124,14 +140,16 @@ public class LevelEditor : Editor
 			Mathf.Floor (mousePos.y / grid.height) * grid.height + grid.height / 2.0f);
 		//Aligns the tiles to the centre of the closest grid tile, taking width and height
 
-		if (e.isKey && e.character == (char)'a') {
+		if (e.isKey && e.character == (char)'a') { //APPENDING/REPLACING
 
 			if (currentObj != null) {
-			
-				replace (aligned);
-
+				if (!currentObj.CompareTag (objtag))
+					replace (aligned);
+				else
+					PlaceThing (aligned);
 			}
-		} else if (e.isKey && e.character == (char)'d') 
+
+		} else if (e.isKey && e.character == (char)'d') //DELETING
 		{
 			
 			foreach (Transform tile in tiles.transform) 
@@ -142,7 +160,7 @@ public class LevelEditor : Editor
 				}
 			}
 				
-		} else if (e.isKey && e.character == (char)'r') {
+		} else if (e.isKey && e.character == (char)'r') { //ROTATING
 			
 			if (Selection.activeObject) 
 			{

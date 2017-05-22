@@ -133,6 +133,7 @@ public class LevelEditor : Editor
 
 	void GridUpdate (SceneView sceneview)
 	{
+		tiles = GameObject.Find (folderName);
 		Event e = Event.current;
 
 		//sets size to be big if object is room. Sets size to be tilesize if object is not
@@ -151,6 +152,8 @@ public class LevelEditor : Editor
 		Vector3 aligned = new Vector3 (
 			Mathf.Floor (mousePos.x / grid.width) * grid.width + grid.width / 2.0f,
 			Mathf.Floor (mousePos.y / grid.height) * grid.height + grid.height / 2.0f);
+
+		Bounds alignedBounds = new Bounds (aligned, new Vector3 (grid.width, grid.height));
 		//Aligns the tiles to the centre of the closest grid tile, taking width and height
 
 		if (e.isKey && e.character == (char)'a') { //APPENDING/REPLACING
@@ -167,7 +170,7 @@ public class LevelEditor : Editor
 			
 			foreach (Transform tile in tiles.transform) 
 			{
-				if (aligned == tile.transform.position) 
+				if (alignedBounds.Contains(tile.transform.position)) 
 				{
 					Undo.DestroyObjectImmediate (tile.gameObject);
 				}
@@ -175,14 +178,17 @@ public class LevelEditor : Editor
 				
 		} else if (e.isKey && e.character == (char)'r') { //ROTATING
 			
-			if (Selection.activeObject) 
+			foreach (Transform tile in tiles.transform)
 			{
-				Undo.IncrementCurrentGroup ();
+				if (alignedBounds.Contains(tile.transform.position)) {
+					Undo.IncrementCurrentGroup ();
 
 
-				GameObject obj = Selection.activeGameObject;
-				Undo.RecordObject (obj.transform, "Rotate " + obj.name);
-				obj.transform.Rotate (new Vector3 (0, 0, 90));
+					GameObject obj = tile.gameObject;
+					Debug.Log (obj);
+					Undo.RecordObject (obj.transform, "Rotate " + obj.name);
+					obj.transform.Rotate (new Vector3 (0, 0, 90));
+				}
 
 
 			} 

@@ -6,7 +6,7 @@ public class RoomManager : MonoBehaviour {
 
 	public Team roomTeam = Team.neutral;
 	public int roomId = 0;
-    public int roomValue = 5;
+	public int roomValue = 5;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,13 +31,15 @@ public class RoomManager : MonoBehaviour {
 	public Vector2 getSize() {
 		Transform firstTile = transform.GetChild(1);
 		Transform secondTile = transform.GetChild(2);
-		float tileSize = Mathf.Abs(firstTile.position.x - secondTile.position.x); //only works for square tiles
+		Vector3 tileSize = firstTile.GetComponent<SpriteRenderer> ().bounds.size;
 
+		//sets all vars to look at first tile
 		float xmax, xmin = firstTile.position.x;
 		xmax = xmin;
 		float ymax, ymin = firstTile.position.y;
 		ymax = ymin;
 
+		//makes max, min checks for both x and y values
 		foreach (Transform tile in transform)
 		{
 			float xtile = tile.position.x;
@@ -52,8 +54,10 @@ public class RoomManager : MonoBehaviour {
 			if (ytile < ymin)
 				ymin = ytile;      
 		}
-		float height = Mathf.Abs(ymax - ymin) + tileSize;
-		float width = Mathf.Abs(xmax - xmin) + tileSize;
+
+		//find diff between 
+		float height = Mathf.Abs(ymax - ymin) + tileSize.y;
+		float width = Mathf.Abs(xmax - xmin) + tileSize.x;
 		return new Vector2 (width, height); //dimensions of room
 	}
 

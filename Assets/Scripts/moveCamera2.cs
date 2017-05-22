@@ -35,7 +35,6 @@ public class moveCamera2 : MonoBehaviour {
 
     public GameObject getPlayersRoom()
     {
-        player = GameObject.FindGameObjectWithTag("Player2");
         GameObject[] Rooms;
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         foreach (GameObject room in Rooms)
@@ -66,18 +65,32 @@ public class moveCamera2 : MonoBehaviour {
         // current viewport height should be scaled by this amount
         float scaleheight = windowaspect / targetaspect;
 
-        Rect rect = camera.rect;
+        // if scaled height is less than current height, add letterbox
+        if (scaleheight < 1.0f)
+        {
+            Rect rect = camera.rect;
 
-        float scalewidth = 1.0f / scaleheight;
-        rect.width = scalewidth;
-        rect.height = 1.0f;
-        rect.x = (1.0f - scalewidth) / 2 + 0.5f;
-        rect.y = 0;
+            rect.width = 1.0f/2;
+            rect.height = scaleheight;
+            rect.x = 0.5f;
+            rect.y = (1.0f - scaleheight) / 2.0f;
 
-        camera.rect = rect;
+            camera.rect = rect;
+        }
+        else // else add pillarbox
+        {
+            float scalewidth = 1.0f / scaleheight;
 
-        //camera.aspect = (roomDims.x / roomDims.y);
-	}
+            Rect rect = camera.rect;
+
+            rect.width = scalewidth/2;
+            rect.height = 1.0f;
+            rect.x = (1.0f - scalewidth) / 2.0f+0.5f;
+            rect.y = 0;
+
+            camera.rect = rect;
+        }
+    }
 
 	public void moveToNextRoom(GameObject room){
         this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);

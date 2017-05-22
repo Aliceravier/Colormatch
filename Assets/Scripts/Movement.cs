@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour {
+    public string horizontalMovInput;
+    public string verticalMovInput;
     public Team playerTeam = Team.blue;
     public List<int> values;
     private Rigidbody2D rb;
@@ -16,8 +18,8 @@ public class Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        float moveHori = Input.GetAxisRaw("Horizontal");
-        float moveVert = Input.GetAxisRaw("Vertical");
+        float moveHori = Input.GetAxisRaw(horizontalMovInput);
+        float moveVert = Input.GetAxisRaw(verticalMovInput);
         Vector2 movement = new Vector2(moveHori, moveVert);
         rb.velocity = speed*movement;
 

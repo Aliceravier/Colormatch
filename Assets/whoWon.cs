@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class whoWon : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Start() {
+        //gameOverText.text = "something";
+    }
+
+        //public text gameOverText; 
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -30,6 +35,8 @@ public class whoWon : MonoBehaviour {
                     if (value1 + value2 + value3 == 15)
                     {
                         print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
+                        Application.Quit();
+                        endGame(player);
                         return;
                     }
                 }
@@ -45,6 +52,11 @@ public class whoWon : MonoBehaviour {
         playerWinState(player);
     }
 
+    void endGame(GameObject player)
+    {
+    //gameOverText.text = "Game Over!";
+}
+
     GameObject findOtherPlayer(GameObject player)
     {
         if (player.transform.gameObject.CompareTag("Player1"))
@@ -53,3 +65,4 @@ public class whoWon : MonoBehaviour {
             return GameObject.FindGameObjectWithTag("Player1");
     }
 }
+

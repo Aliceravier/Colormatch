@@ -40,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442660717668988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.910347, y: -34.2597, z: 0}
+  m_LocalPosition: {x: -13, y: -41.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -133,9 +133,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTeam: 0
+  horizontalMovInput: Hori2
+  verticalMovInput: Vert2
+  playerTeam: 1
   values: 
-  speed: 10
+  speed: 20
 --- !u!114 &114612154661326270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -180,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 00b74889b7afec440b47b830bffb7210, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.11724138, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

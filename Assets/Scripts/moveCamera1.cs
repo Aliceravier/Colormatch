@@ -67,7 +67,7 @@ public class moveCamera1 : MonoBehaviour
         float targetaspect = 1.0f / 1.0f;
 
         // determine the game window's current aspect ratio
-        float windowaspect = ((float)Screen.width / (float)Screen.height);
+        float windowaspect = ((float)Screen.width / (float)Screen.height)/2;
 
         // current viewport height should be scaled by this amount
         float scaleheight = windowaspect / targetaspect;
@@ -77,7 +77,7 @@ public class moveCamera1 : MonoBehaviour
         {
             Rect rect = camera.rect;
 
-            rect.width = 1.0f;
+            rect.width = 1.0f/2;
             rect.height = scaleheight;
             rect.x = 0;
             rect.y = (1.0f - scaleheight) / 2.0f;
@@ -90,7 +90,7 @@ public class moveCamera1 : MonoBehaviour
 
             Rect rect = camera.rect;
 
-            rect.width = scalewidth;
+            rect.width = scalewidth/2;
             rect.height = 1.0f;
             rect.x = (1.0f - scalewidth) / 2.0f;
             rect.y = 0;

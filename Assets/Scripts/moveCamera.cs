@@ -14,7 +14,7 @@ public class moveCamera : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        player = GameObject.FindGameObjectWithTag("Player2");
+        player = GameObject.FindGameObjectWithTag("Player1");
         camera = GetComponent<Camera> ();
         focusOnRoom();
     }
@@ -35,7 +35,6 @@ public class moveCamera : MonoBehaviour {
 
     public GameObject getPlayersRoom()
     {
-        player = GameObject.FindGameObjectWithTag("Player2");
         GameObject[] Rooms;
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         foreach (GameObject room in Rooms)

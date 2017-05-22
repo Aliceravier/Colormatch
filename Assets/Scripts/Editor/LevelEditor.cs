@@ -28,21 +28,21 @@ public class LevelEditor : Editor
 	static string lastNamed;  
 	static GameObject tiles;
 	static string folderName = "Tiles";
-	static bool haveSized = false;
 	static string objtag = "Room";
+	static float storedgridh;
+	static float storedgridw;
 
 	public void OnEnable()
 	{
+		
+
 		grid = (Grid)target;
+
+		storedgridh = grid.height;
+		storedgridw = grid.width;
 		lastPlaced = new Vector3 (0, 0, 2000);
 		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
 
-		if (currentObj != null){ 
-			if (currentObj.CompareTag(objtag)){
-				grid.width = currentObj.GetComponent<RoomManager>().getSize().y;
-				grid.height = currentObj.GetComponent<RoomManager> ().getSize().x;
-			}
-		} 	
 		SceneView.onSceneGUIDelegate = GridUpdate;
 		tiles = GameObject.Find (folderName); //Sets up a nice little folder for everything to go into :)
 		if (tiles == null) {
@@ -50,7 +50,8 @@ public class LevelEditor : Editor
 			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
 			//only relevant if placing a tile in a room
-			if (!currentObj.CompareTag(objtag)) {
+
+			if (currentObj != null && !currentObj.CompareTag(objtag)) {
 				tiles.AddComponent<RoomManager> ();
 				tiles.tag = "Room";
 			}
@@ -102,12 +103,12 @@ public class LevelEditor : Editor
 	{
 		GUILayout.BeginHorizontal (); //This allows the user to change grid width
 		GUILayout.Label (" Grid Width ");
-		grid.width = EditorGUILayout.FloatField (grid.width, GUILayout.Width (50));
+		storedgridw = EditorGUILayout.FloatField (storedgridw, GUILayout.Width (50));
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal (); //Allows user to change grid height
 		GUILayout.Label (" Grid Height ");
-		grid.height = EditorGUILayout.FloatField (grid.height, GUILayout.Width (50));
+		storedgridh= EditorGUILayout.FloatField (storedgridh, GUILayout.Width (50));
 		GUILayout.EndHorizontal();
 		/*
 		GUILayout.BeginHorizontal ();
@@ -132,6 +133,17 @@ public class LevelEditor : Editor
 	void GridUpdate (SceneView sceneview)
 	{
 		Event e = Event.current;
+
+		//sets size to be big if object is room.
+		if (currentObj != null) {
+			if (currentObj.CompareTag (objtag)) {
+				grid.width = currentObj.GetComponent<RoomManager> ().getSize ().x;
+				grid.height = currentObj.GetComponent<RoomManager> ().getSize ().y;
+			} else {
+				grid.width = storedgridw;
+				grid.height = storedgridh;
+			}
+		}
 
 		Vector3 mousePos = getMousePoint (e);
 

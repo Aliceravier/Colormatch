@@ -7,11 +7,10 @@ public class RoomManager : ExtendedBehaviour {
 	public Team roomTeam = Team.neutral;
 	public int roomId = 0;
 	public int roomValue = 5;
-	public Transform firstTile;
+	Transform firstTile;
 	// Use this for initialization
 	void Awake () {
-		firstTile = transform.GetChild (1);
-
+		 firstTile = transform.GetChild (1);
 	}
 	
 	// Update is called once per frame
@@ -37,7 +36,9 @@ public class RoomManager : ExtendedBehaviour {
 		/*Gets size of room
 		 */
 
-		print (firstTile.gameObject);
+		//special case checks :))))
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
 		//get size of a single tile, for magical variable purposes
 		Vector2 tileSize = getTileSize(firstTile.gameObject);
 

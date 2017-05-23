@@ -11,6 +11,8 @@ TagManager:
   - Player2
   - God
   - Minimap
+  - Camera1
+  - Camera2
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - 
   - 
   - Minimap
-  - 
+  - Invisibilty cloak
   - 
   - 
   - 

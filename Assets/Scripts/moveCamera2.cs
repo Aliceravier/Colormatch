@@ -7,18 +7,22 @@ public class moveCamera2 : ExtendedBehaviour {
     [SerializeField]
 	Team playerTeam = Team.green;
     private GameObject player;
+    GameObject[] Rooms;
 
-	Camera camera;
+    Camera camera;
 
 
 	// Use this for initialization
 	void Awake () {
-		player = getPlayerOfTeam (playerTeam);
+
+        Rooms = GameObject.FindGameObjectsWithTag("Room");
+        player = getPlayerOfTeam (playerTeam);
         camera = GetComponent<Camera> ();
 		if (playerTeam == Team.green)
 			p2FocusOnRoom ();
 		else if (playerTeam == Team.blue)
 			p1FocusOnRoom ();
+        
     }
 
 	// Update is called once per frame
@@ -27,18 +31,18 @@ public class moveCamera2 : ExtendedBehaviour {
         if (!isInScope(player)){
             GameObject newRoom = getPlayersRoom();
             moveToNextRoom(newRoom);
+            //RoomManager rm = newRoom.GetComponent<RoomManager>(); 
+            //rm.UpdateMinimap(player);
         }
 	}
 
-	bool isInScope(GameObject obj){
+	public bool isInScope(GameObject obj){
 		Vector3 screenPoint = camera.WorldToViewportPoint (obj.transform.position); //LOOKS FOR THING
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
     public GameObject getPlayersRoom()
-    {
-        GameObject[] Rooms;
-        Rooms = GameObject.FindGameObjectsWithTag("Room");
+    {        
 		//look for room which player is in
         foreach (GameObject room in Rooms)
         {
@@ -55,7 +59,7 @@ public class moveCamera2 : ExtendedBehaviour {
 
     void p2FocusOnRoom(){
         GameObject room = GameObject.FindGameObjectsWithTag("Room")[0];
-       
+
         Vector2 roomDims = maxRoom(room);
         this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
         camera.orthographicSize = roomDims.y/2;
@@ -145,7 +149,7 @@ public class moveCamera2 : ExtendedBehaviour {
 
     //get dimensions of room
 	public Vector2 maxRoom(GameObject Room) {
-		return Room.GetComponent<RoomManager> ().getSize ();
+		return Room.GetComponent<RoomManager> ().roomSize;
 	}
 	
 

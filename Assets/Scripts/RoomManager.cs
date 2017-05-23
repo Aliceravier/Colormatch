@@ -7,20 +7,28 @@ public class RoomManager : ExtendedBehaviour {
 	public Team roomTeam = Team.neutral;
 	public int roomId = 0;
 	public int roomValue = 5;
+
+    [HideInInspector]
+    public Vector2 roomSize;
+
 	public Transform firstTile;
 
     private GameObject overlay;
+    moveCamera2 mC2;
 	// Use this for initialization
 	void Awake () {
+        roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
+        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+
+    }
 
 	public void ChangeTiles(Color color, string tag){
 		/*Changes all child tiles with a specified tag to a specified color.
@@ -31,6 +39,23 @@ public class RoomManager : ExtendedBehaviour {
         overlay.GetComponent<SpriteRenderer>().color = color;
 	}
 
+    
+
+
+    //makes room on minimap blink yellow once
+
+
+    /*public void UpdateMinimap(GameObject player)
+    {
+        GameObject room;
+        moveCamera2 mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
+        room = mC2.getPlayersRoom();
+        overlay = room.transform.Find("Overlay").gameObject;
+        if (mC2.isInScope(player))
+        {
+            makeBlinkOnce(overlay);
+        }
+    }*/
 	public void setRoomTeam(Team t){
 		/*Worthless setter atm :)
 		 */
@@ -41,7 +66,9 @@ public class RoomManager : ExtendedBehaviour {
 		/*Gets size of room
 		 */
 
-		print (firstTile.gameObject);
+		//special case checks :))))
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
 		//get size of a single tile, for magical variable purposes
 		Vector2 tileSize = getTileSize(firstTile.gameObject);
 

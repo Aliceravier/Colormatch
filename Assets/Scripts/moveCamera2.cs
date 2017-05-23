@@ -8,6 +8,10 @@ public class moveCamera2 : ExtendedBehaviour {
 	Team playerTeam = Team.green;
     private GameObject player;
     GameObject[] Rooms;
+    public bool isLeaving = false;
+    UserInterface ui;
+    [HideInInspector]
+    public GameObject newRoom;
 
     Camera camera;
 
@@ -15,6 +19,7 @@ public class moveCamera2 : ExtendedBehaviour {
 	// Use this for initialization
 	void Awake () {
 
+        ui = GameObject.FindGameObjectWithTag("God").GetComponent<UserInterface>();
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
         camera = GetComponent<Camera> ();
@@ -28,11 +33,11 @@ public class moveCamera2 : ExtendedBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //focus on centre of that room
-        if (!isInScope(player)){
-            GameObject newRoom = getPlayersRoom();
+        if (!isInScope(player))
+        {
+            newRoom = getPlayersRoom();
             moveToNextRoom(newRoom);
-            //RoomManager rm = newRoom.GetComponent<RoomManager>(); 
-            //rm.UpdateMinimap(player);
+            
         }
 	}
 

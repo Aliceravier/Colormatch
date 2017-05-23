@@ -22,7 +22,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
     void OnTriggerEnter2D(Collider2D c)
     {
 		//if player touches button
-		if (c.transform.gameObject.CompareTag("Player1") || c.transform.gameObject.CompareTag("Player2"))
+		if (c.transform.gameObject.CompareTag("Player"))
         {
 			//change anim + change room colour
             GameObject player = c.transform.gameObject;

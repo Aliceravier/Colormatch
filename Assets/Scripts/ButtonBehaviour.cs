@@ -32,12 +32,13 @@ public class ButtonBehaviour : ExtendedBehaviour {
 				setRoom (player);
 			});
 
-			//keep God UPDATED
+			updateInfo (player);
                     
         }
     }
     
 	void setRoom(GameObject player){
+		/* Takes a player, sets the room to be their team and colour */
 		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
 		rm.setRoomTeam (player.GetComponent<Movement> ().playerTeam);
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
@@ -45,7 +46,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 	}
 
 	void updateInfo(GameObject player){
-		/*Wrapper to send things to God :)*/
+		/*Tells God what button was pressed by which player*/
 		GameObject god = GameObject.FindGameObjectWithTag("God");
 		whoWon ww = god.GetComponent<whoWon>();
 		int roomValue = this.GetComponentInParent<RoomManager>().roomValue;

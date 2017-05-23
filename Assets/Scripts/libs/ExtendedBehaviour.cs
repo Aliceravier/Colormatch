@@ -10,9 +10,10 @@ public class ExtendedBehaviour : MonoBehaviour {
 
 	}
 
-	public Vector2 getSize(Transform tile){
+	public static Vector2 getTileSize(GameObject tile){
 		/*Gets the size of a tile :)
 		 */
+		print (tile);
 		Vector3 size = tile.GetComponent<SpriteRenderer> ().bounds.size;
 		return new Vector2 (size.x, size.y);
 	}

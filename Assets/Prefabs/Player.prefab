@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Hori1
-  verticalMovInput: Vert1
+  horizontalMovInput: Horizontal
+  verticalMovInput: Vertical
   playerTeam: 0
   values: 
   speed: 30

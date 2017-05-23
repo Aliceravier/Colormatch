@@ -29,12 +29,12 @@ public class LevelEditor : Editor
 	static GameObject tiles;
 	static string folderName = "Tiles";
 	static string objtag = "Room";
+	bool isComplete;
 	//static float storedgridh;
 	//static float storedgridw;
 
 	public void OnEnable()
 	{
-		
 
 		grid = (Grid)target;
 
@@ -50,11 +50,6 @@ public class LevelEditor : Editor
 			tiles.name = folderName;
 			tiles.transform.position = Vector3.zero;
 			//only relevant if placing a tile in a room
-
-			if (currentObj != null && !currentObj.CompareTag(objtag)) {
-				tiles.AddComponent<RoomManager> ();
-				tiles.tag = "Room";
-			}
 		}
 	} 
 
@@ -67,6 +62,7 @@ public class LevelEditor : Editor
 
 		obj = (GameObject)PrefabUtility.InstantiatePrefab (currentObj);
 		obj.transform.position = aligned;
+		
 		obj.transform.SetParent (tiles.transform, true);
 
 		lastPlaced = aligned;
@@ -127,12 +123,17 @@ public class LevelEditor : Editor
 		folderName = EditorGUILayout.TextField(folderName, GUILayout.Width(100));
 		GUILayout.EndHorizontal ();
 
+		GUILayout.BeginHorizontal (); //Allows user to set which gameObject they want to put things into
+		isComplete = GUILayout.Button(" Complete Room ");
+		GUILayout.EndHorizontal ();
+
 		SceneView.RepaintAll();
 
 	}
 
 	void GridUpdate (SceneView sceneview)
 	{
+		
 		tiles = GameObject.Find (folderName);
 		Event e = Event.current;
 
@@ -193,6 +194,9 @@ public class LevelEditor : Editor
 			} 
 		}
 
+		if (isComplete)
+			completeRoom ();
+
 
 
 	}
@@ -209,5 +213,20 @@ public class LevelEditor : Editor
 			-e.mousePosition.y + Camera.current.pixelHeight));
 
 		return r.origin;
+	}
+
+	void completeRoom(){
+		tiles.AddComponent<RoomManager> ();
+		tiles.tag = "Room";
+
+		RoomManager rm = tiles.GetComponent<RoomManager> ();
+		Vector2 dist = rm.diffBetweenCentre(rm.getClosestCentreTile ());
+
+		foreach (Transform tile in tiles.transform) {
+			tile.position += (Vector3) dist;
+		}
+
+		isComplete = false;
+
 	}
 }

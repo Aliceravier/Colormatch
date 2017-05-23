@@ -62,9 +62,9 @@ public class whoWon : ExtendedBehaviour {
     GameObject findOtherPlayer(GameObject player)
     {
 		if (player.GetComponent<Movement> ().playerTeam == Team.blue)
-			getPlayerOfTeam (Team.green);
+			return getPlayerOfTeam (Team.green);
 		else
-			getPlayerOfTeam (Team.blue);
+			return getPlayerOfTeam (Team.blue);
     }
 }
 

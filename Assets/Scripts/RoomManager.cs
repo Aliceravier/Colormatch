@@ -8,11 +8,14 @@ public class RoomManager : ExtendedBehaviour {
 	public int roomId = 0;
 	public int roomValue = 5;
 	public Transform firstTile;
+
+    private GameObject overlay;
 	// Use this for initialization
 	void Awake () {
 		firstTile = transform.GetChild (1);
+        overlay = transform.Find("Overlay").gameObject;
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,6 +28,7 @@ public class RoomManager : ExtendedBehaviour {
 		foreach (Transform child in transform)
 			if (child.gameObject.CompareTag(tag))
 				child.gameObject.GetComponent<SpriteRenderer>().color = color;
+        overlay.GetComponent<SpriteRenderer>().color = color;
 	}
 
 	public void setRoomTeam(Team t){

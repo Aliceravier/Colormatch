@@ -7,6 +7,7 @@ public class RoomManager : ExtendedBehaviour {
 	public Team roomTeam = Team.neutral;
 	public int roomId = 0;
 	public int roomValue = 5;
+
 	public Transform firstTile;
 
     private GameObject overlay;
@@ -41,7 +42,9 @@ public class RoomManager : ExtendedBehaviour {
 		/*Gets size of room
 		 */
 
-		print (firstTile.gameObject);
+		//special case checks :))))
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
 		//get size of a single tile, for magical variable purposes
 		Vector2 tileSize = getTileSize(firstTile.gameObject);
 

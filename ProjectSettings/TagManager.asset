@@ -10,6 +10,7 @@ TagManager:
   - Player1
   - Player2
   - God
+  - Minimap
   layers:
   - Default
   - TransparentFX
@@ -55,4 +56,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 126489017
+    locked: 0
+  - name: Minimap
+    uniqueID: 3825679401
     locked: 0

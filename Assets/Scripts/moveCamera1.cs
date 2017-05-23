@@ -17,6 +17,7 @@ public class moveCamera1 : MonoBehaviour
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player1");
+        print(player);
         camera = GetComponent<Camera>();
         focusOnRoom();
     }

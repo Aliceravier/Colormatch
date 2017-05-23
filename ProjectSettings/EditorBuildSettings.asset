@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_SCENES/test2.unity
+    guid: e293f92a96bfb034ba90c754354097f9
+  - enabled: 1
+    path: Assets/_SCENES/word screen.unity
+    guid: 00000000000000000000000000000000

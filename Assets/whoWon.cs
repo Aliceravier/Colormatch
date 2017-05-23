@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class whoWon : MonoBehaviour {
+public class whoWon : ExtendedBehaviour {
 
     // Use this for initialization
     void Start() {
@@ -36,9 +36,10 @@ public class whoWon : MonoBehaviour {
                     if (value1 + value2 + value3 == 15)
                     {
                         print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
-                        SceneManager.LoadScene("word scene");
-                        endGame(player);
-                        return;
+                        Wait(1.5f, () =>
+                        {
+                            SceneManager.LoadScene("word screen");
+                        }); //may need to re-add return
                     }
                 }
             }

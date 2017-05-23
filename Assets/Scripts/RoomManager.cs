@@ -11,7 +11,7 @@ public class RoomManager : ExtendedBehaviour {
     [HideInInspector]
     public Vector2 roomSize;
 
-	public Transform firstTile;
+	Transform firstTile;
 
     private GameObject overlay;
     moveCamera2 mC2;
@@ -87,7 +87,8 @@ public class RoomManager : ExtendedBehaviour {
 	public Vector2 getMinPoint(){
 		/*Gets minimum point of room.
 		 */ 
-
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
 
 		float xmin = firstTile.position.x;
 		float ymin = firstTile.position.y;
@@ -109,6 +110,10 @@ public class RoomManager : ExtendedBehaviour {
 	public Vector2 getMaxPoint(){
 		/* Gets maximum point of room.
 		 */
+
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
+		
 		float ymax = firstTile.position.y;
 		float xmax = firstTile.position.x;
 
@@ -126,5 +131,40 @@ public class RoomManager : ExtendedBehaviour {
 		return new Vector2 (xmax, ymax);
 	}
 
+	public Vector2 getCentre(){
+		/*Gets the centre point :)
+		 */
+		Vector2 min = getMinPoint();
+		Vector2 size = getSize();
 
+		return new Vector2 (min.x + (size.x / 2), min.y + (size.y / 2));
+	}
+
+	public Transform getClosestCentreTile(){
+		Vector2 centre = getCentre();
+
+
+
+		if (firstTile == null)
+			firstTile = transform.GetChild (1);
+
+		Transform closestobj = firstTile;
+		float closest = Vector2.Distance(centre, firstTile.position);
+
+		foreach (Transform tile in transform)
+		{
+			if (Vector2.Distance(centre, tile.position) < closest){
+				closest = Vector2.Distance(centre, tile.position);
+				closestobj = tile;
+			}
+		}
+
+		return closestobj;
+	}
+
+	public Vector2 diffBetweenCentre(Transform tile){
+		return transform.position - tile.position;
+	}
+
+		
 }

@@ -13,14 +13,19 @@ public class RoomManager : ExtendedBehaviour {
 
 	Transform firstTile;
 
-    private GameObject overlay;
+    private GameObject positionOverlay;
     moveCamera2 mC2;
+
+    private GameObject overlay;
 	// Use this for initialization
 	void Awake () {
+        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
+        positionOverlay = transform.Find("PositionOverlay").gameObject;
+        print(positionOverlay);
+        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
-        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
 
     }
 	
@@ -30,6 +35,14 @@ public class RoomManager : ExtendedBehaviour {
 
     }
 
+    void resetState()
+    {
+        if(mC2.newRoom != this)
+        {
+            positionOverlay = this.transform.Find("PositionOverlay").gameObject;
+            positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
 	public void ChangeTiles(Color color, string tag){
 		/*Changes all child tiles with a specified tag to a specified color.
 		 */
@@ -39,23 +52,6 @@ public class RoomManager : ExtendedBehaviour {
         overlay.GetComponent<SpriteRenderer>().color = color;
 	}
 
-    
-
-
-    //makes room on minimap blink yellow once
-
-
-    /*public void UpdateMinimap(GameObject player)
-    {
-        GameObject room;
-        moveCamera2 mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
-        room = mC2.getPlayersRoom();
-        overlay = room.transform.Find("Overlay").gameObject;
-        if (mC2.isInScope(player))
-        {
-            makeBlinkOnce(overlay);
-        }
-    }*/
 	public void setRoomTeam(Team t){
 		/*Worthless setter atm :)
 		 */

@@ -7,36 +7,28 @@ public class UserInterface : MonoBehaviour {
     public float flashTime = 0.5f;
     public float downTime = 0.5f;
     moveCamera2 mC2;
-    Color roomColor;
     GameObject positionOverlay;
+    GameObject tile;
+    public GameObject oldRoom;
     // Use this for initialization
     void Start () {
         
         mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
-        GameObject room = mC2.getPlayersRoom();
-        positionOverlay = room.transform.Find("PositionOverlay").gameObject;
         StartCoroutine(blink(flashTime, downTime));
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () { //constantly gets the room the player is in and makes this room blink
+        
+
         GameObject room = mC2.getPlayersRoom();
-        makeBlinkOnce(room.transform.Find("Overlay").gameObject);
+        makeBlink(room.transform.Find("PositionOverlay").gameObject);
     }
 
-    void makeBlinkOnce(GameObject overlay)
+    void makeBlink(GameObject positionOverlay)
     {
-        if (isBlink)
-        {
-            overlay.GetComponent<SpriteRenderer>().color = new Color(1, 0.92f, 0.016f, 1);
-        }
-        else
-        {
-            overlay.GetComponent<SpriteRenderer>().color = roomColor;
-            roomColor = overlay.GetComponent<SpriteRenderer>().color;
-        }
-
+        positionOverlay.GetComponent<SpriteRenderer>().enabled = isBlink;
     }
 
     IEnumerator blink(float flashTime, float downTime)
@@ -48,5 +40,12 @@ public class UserInterface : MonoBehaviour {
             isBlink = false;
             yield return new WaitForSeconds(downTime);
         }
+    }
+
+    public void hidePositionOverlay(GameObject oldRoom)
+    {
+        GameObject positionOverlay;
+        positionOverlay = oldRoom.transform.Find("PositionOverlay").gameObject;
+        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

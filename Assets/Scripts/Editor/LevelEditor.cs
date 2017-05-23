@@ -143,8 +143,8 @@ public class LevelEditor : Editor
 				grid.width = currentObj.GetComponent<RoomManager> ().getSize ().x;
 				grid.height = currentObj.GetComponent<RoomManager> ().getSize ().y;
 			} else {
-				grid.width = currentObj.GetComponent<SpriteRenderer> ().bounds.size.x;
-				grid.height = currentObj.GetComponent<SpriteRenderer>().bounds.size.y;
+				grid.width = ExtendedBehaviour.getTileSize (currentObj).x;
+				grid.height = ExtendedBehaviour.getTileSize (currentObj).y;
 			}
 		}
 
@@ -225,8 +225,48 @@ public class LevelEditor : Editor
 		foreach (Transform tile in tiles.transform) {
 			tile.position += (Vector3) dist;
 		}
-
+		placeOverlays ();	
 		isComplete = false;
 
 	}
+
+	void placeOverlays(){
+		//loadan shit
+		Object overlay, posOverlay; 
+		string overlayS = "Overlay.prefab", posOverlayS = "PositionOverlay.prefab";
+		overlay = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/"+overlayS, typeof(GameObject));
+		posOverlay = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/"+ posOverlayS, typeof(GameObject));
+
+		Debug.Log (overlayS);
+		Debug.Log (posOverlay);
+
+
+		//instantiate objects
+		GameObject overlayObj = (GameObject)PrefabUtility.InstantiatePrefab (overlay);
+		GameObject posOverlayObj = (GameObject)PrefabUtility.InstantiatePrefab (posOverlay);
+
+		//get sizes
+		Vector2 size = ExtendedBehaviour.getTileSize (overlayObj);
+		Vector2 roomSize = tiles.GetComponent<RoomManager> ().getSize ();
+
+		//% magic to calculate true size
+		Vector3 trueSize = new Vector3((size.x / ExtendedBehaviour.getTileSize(tiles.transform.GetChild(1).gameObject).x) * roomSize.x,
+			(size.y / ExtendedBehaviour.getTileSize(tiles.transform.GetChild(1).gameObject).y) * roomSize.y,
+			1);
+		
+		//place them in the correct place
+		overlayObj.transform.SetParent (tiles.transform, true);
+		posOverlayObj.transform.SetParent (tiles.transform, true);
+
+		overlayObj.transform.localScale = trueSize;
+		posOverlayObj.transform.localScale = trueSize;
+
+		overlayObj.transform.position = tiles.transform.position;
+		posOverlayObj.transform.position = tiles.transform.position;
+
+
+
+
+	}
+		
 }

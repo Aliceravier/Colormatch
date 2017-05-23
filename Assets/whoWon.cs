@@ -61,10 +61,10 @@ public class whoWon : ExtendedBehaviour {
 
     GameObject findOtherPlayer(GameObject player)
     {
-        if (player.transform.gameObject.CompareTag("Player1"))
-            return GameObject.FindGameObjectWithTag("Player2");
-        else
-            return GameObject.FindGameObjectWithTag("Player1");
+		if (player.GetComponent<Movement> ().playerTeam == Team.blue)
+			getPlayerOfTeam (Team.green);
+		else
+			getPlayerOfTeam (Team.blue);
     }
 }
 

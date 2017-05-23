@@ -18,10 +18,23 @@ public class ExtendedBehaviour : MonoBehaviour {
 		return new Vector2 (size.x, size.y);
 	}
 
+	public static GameObject getPlayerOfTeam(Team team){
+		GameObject[] players;
+		players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in players)
+			if (team == player.GetComponent<Movement> ().playerTeam)
+				return player;
+
+		return null;
+
+	}
+
 	IEnumerator _wait(float seconds, Action callback){
 		yield return new WaitForSeconds (seconds);
 		callback();
 
 	}
+
+
 
 }

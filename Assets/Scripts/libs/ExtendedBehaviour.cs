@@ -10,12 +10,23 @@ public class ExtendedBehaviour : MonoBehaviour {
 
 	}
 
+	public static float getScalingFactor(GameObject tile){
+		Sprite s = tile.GetComponent<SpriteRenderer> ().sprite;
+		return s.rect.width / s.bounds.size.x;
+
+	}
 	public static Vector2 getTileSize(GameObject tile){
 		/*Gets the size of a tile :)
 		 */
 		Vector3 size = tile.GetComponent<SpriteRenderer> ().bounds.size;
 		return new Vector2 (size.x, size.y);
 	}
+
+	public static Vector2 getRealSize(GameObject thing){
+		Vector2 size = getTileSize (thing);
+		return new Vector2 (size.x * thing.transform.localScale.x, size.y * thing.transform.localScale.y);
+	}
+
 
 	public static GameObject getPlayerOfTeam(Team team){
 		GameObject[] players;
@@ -33,6 +44,7 @@ public class ExtendedBehaviour : MonoBehaviour {
 		callback();
 
 	}
+
 
 
 

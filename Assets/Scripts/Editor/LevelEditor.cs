@@ -24,8 +24,8 @@ public class LevelEditor : Editor
 {
 	Grid grid;
 	static GameObject currentObj;
-	static Vector3 lastPlaced;
-	static string lastNamed;  
+//	static Vector3 lastPlaced;
+//	static string lastNamed;  
 	static GameObject tiles;
 	static string folderName = "Tiles";
 	static string objtag = "Room";
@@ -40,8 +40,8 @@ public class LevelEditor : Editor
 
 		//storedgridh = grid.height;
 		//storedgridw = grid.width;
-		lastPlaced = new Vector3 (0, 0, 2000);
-		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
+//		lastPlaced = new Vector3 (0, 0, 2000);
+//		lastNamed = "this is my soul leaving my body and going straight to hell im coming 2pac";
 
 		SceneView.onSceneGUIDelegate = GridUpdate;
 		tiles = GameObject.Find (folderName); //Sets up a nice little folder for everything to go into :)
@@ -65,8 +65,8 @@ public class LevelEditor : Editor
 		
 		obj.transform.SetParent (tiles.transform, true);
 
-		lastPlaced = aligned;
-		lastNamed = obj.name;
+//		lastPlaced = aligned;
+//		lastNamed = obj.name;
 
 		Undo.RegisterCreatedObjectUndo (obj, "Create " + obj.name);
 
@@ -236,11 +236,7 @@ public class LevelEditor : Editor
 		string overlayS = "Overlay.prefab", posOverlayS = "PositionOverlay.prefab";
 		overlay = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/"+overlayS, typeof(GameObject));
 		posOverlay = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/"+ posOverlayS, typeof(GameObject));
-
-		Debug.Log (overlayS);
-		Debug.Log (posOverlay);
-
-
+	
 		//instantiate objects
 		GameObject overlayObj = (GameObject)PrefabUtility.InstantiatePrefab (overlay);
 		GameObject posOverlayObj = (GameObject)PrefabUtility.InstantiatePrefab (posOverlay);
@@ -248,21 +244,37 @@ public class LevelEditor : Editor
 		//get sizes
 		Vector2 size = ExtendedBehaviour.getTileSize (overlayObj);
 		Vector2 roomSize = tiles.GetComponent<RoomManager> ().getSize ();
+		Vector2 sizeOfOneTile = ExtendedBehaviour.getTileSize (tiles.transform.GetChild (1).gameObject);
+		float scalar = 1;
+
+		Debug.Log (roomSize);
+		Debug.Log (size);
+		Debug.Log (sizeOfOneTile);
+
 
 		//% magic to calculate true size
-		Vector3 trueSize = new Vector3((size.x / ExtendedBehaviour.getTileSize(tiles.transform.GetChild(1).gameObject).x) * roomSize.x,
-			(size.y / ExtendedBehaviour.getTileSize(tiles.transform.GetChild(1).gameObject).y) * roomSize.y,
+		Vector3 trueSize = new Vector3((roomSize.x/size.x),
+			(roomSize.y/size.y),
 			1);
-		
+		Debug.Log (trueSize);
 		//place them in the correct place
+
+		Vector3 dist = tiles.GetComponent<RoomManager>().getClosestCentreTile().position;
+		overlayObj.transform.position = dist;
+		posOverlayObj.transform.position = dist;
+
+		posOverlayObj.transform.position += new Vector3 (0, -sizeOfOneTile.y);
+		overlayObj.transform.position += new Vector3 (0, -sizeOfOneTile.y);
+
 		overlayObj.transform.SetParent (tiles.transform, true);
 		posOverlayObj.transform.SetParent (tiles.transform, true);
+
+
 
 		overlayObj.transform.localScale = trueSize;
 		posOverlayObj.transform.localScale = trueSize;
 
-		overlayObj.transform.position = tiles.transform.position;
-		posOverlayObj.transform.position = tiles.transform.position;
+
 
 
 

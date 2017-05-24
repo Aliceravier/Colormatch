@@ -22,12 +22,13 @@ public class ButtonBehaviour : ExtendedBehaviour {
     void OnTriggerEnter2D(Collider2D c)
     {
 		//if player touches button
-		if (c.transform.gameObject.CompareTag("Player"))
+		if (c.transform.gameObject.CompareTag("Player") && anim.GetBool("ButtonOn") == false)
         {
-			//change anim + change room colour
+            //change anim + change room colour
+            print("let's go, button is pressed");
             GameObject player = c.transform.gameObject;
             anim.SetBool ("ButtonOn", true); //changes anim to pushed
-
+            print(anim.GetBool("ButtonOn"));
 			Wait (0.5f, () => { //changes room color				           
 				setRoom (player);
 			});

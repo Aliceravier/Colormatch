@@ -220,11 +220,14 @@ public class LevelEditor : Editor
 		tiles.tag = "Room";
 
 		RoomManager rm = tiles.GetComponent<RoomManager> ();
-		Vector2 dist = rm.diffBetweenCentre(rm.getClosestCentreTile ());
+		Vector2 dist = rm.diffBetweenCentre(rm.getClosestCentreTile());
+		Debug.Log ("Centre Now: " + rm.getCentre ());
 
+		Debug.Log ("DIST " + dist);
 		foreach (Transform tile in tiles.transform) {
 			tile.position += (Vector3) dist;
 		}
+		Debug.Log ("Centre Later: " + rm.getCentre ());
 		placeOverlays ();	
 		isComplete = false;
 
@@ -247,9 +250,9 @@ public class LevelEditor : Editor
 		Vector2 sizeOfOneTile = ExtendedBehaviour.getTileSize (tiles.transform.GetChild (1).gameObject);
 		float scalar = 1;
 
-		Debug.Log (roomSize);
+		/*Debug.Log (roomSize);
 		Debug.Log (size);
-		Debug.Log (sizeOfOneTile);
+		Debug.Log (sizeOfOneTile);*/
 
 
 		//% magic to calculate true size
@@ -262,9 +265,6 @@ public class LevelEditor : Editor
 		Vector3 dist = tiles.GetComponent<RoomManager>().getClosestCentreTile().position;
 		overlayObj.transform.position = dist;
 		posOverlayObj.transform.position = dist;
-
-		posOverlayObj.transform.position += new Vector3 (0, -sizeOfOneTile.y);
-		overlayObj.transform.position += new Vector3 (0, -sizeOfOneTile.y);
 
 		overlayObj.transform.SetParent (tiles.transform, true);
 		posOverlayObj.transform.SetParent (tiles.transform, true);

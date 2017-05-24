@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class whoWon : ExtendedBehaviour {
 	public static Team winningTeam;
 	public static Team losingTeam;
+    bool gameIsWon = false;
 
     // Use this for initialization
     void Start() {
@@ -25,6 +26,7 @@ public class whoWon : ExtendedBehaviour {
 
     void playerWinState(GameObject player)
     {
+        
         List<int> values = player.GetComponent<Movement>().values;
         foreach (int value1 in values)
         {
@@ -36,14 +38,19 @@ public class whoWon : ExtendedBehaviour {
                 {
                     if (value3 == value2 || value3 == value1)
                         continue;
-                    if (value1 + value2 + value3 == 15)
+                    if (value1 + value2 + value3 == 15 && !gameIsWon)
                     {
-						winningTeam = player.GetComponent<Movement> ().playerTeam; //REFACTOR LATER OK :)
-						losingTeam = findOtherPlayer (player).GetComponent<Movement> ().playerTeam;
-                        Wait(0.5f, () =>
-                        {
-                            SceneManager.LoadScene("word screen");
-                        });
+                        gameIsWon = true;
+                        winningTeam = player.GetComponent<Movement> ().playerTeam; //REFACTOR LATER OK :)
+						losingTeam = findOtherPlayer (player).GetComponent<Movement> ().playerTeam;   
+                            print(winningTeam.ToString());
+                            Wait(0.5f, () =>
+                            {
+                                SceneManager.LoadScene("word screen");
+                            });
+
+
+                        
                         return;
                     }
                 }

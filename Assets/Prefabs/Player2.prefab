@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 50031627835840300}
   - component: {fileID: 61573179700451970}
   - component: {fileID: 114329071154911284}
-  - component: {fileID: 114612154661326270}
   - component: {fileID: 95828758241620244}
   - component: {fileID: 111267382512343512}
   m_Layer: 0
@@ -40,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442660717668988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.15, y: -34.2597, z: 0}
+  m_LocalPosition: {x: 78.4, y: -77.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -137,18 +136,7 @@ MonoBehaviour:
   verticalMovInput: Vert2
   playerTeam: 1
   values: 
-  speed: 20
---- !u!114 &114612154661326270
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1442660717668988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  speed: 30
 --- !u!212 &212250831921230820
 SpriteRenderer:
   m_ObjectHideFlags: 1

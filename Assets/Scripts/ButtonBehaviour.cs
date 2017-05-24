@@ -7,7 +7,6 @@ using UnityEngine;
 public class ButtonBehaviour : ExtendedBehaviour {
     private Animator anim;
     private GameObject button;
-    
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +18,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 	void Update () {
 
 	}
+
     void OnTriggerEnter2D(Collider2D c)
     {
 		//if player touches button
@@ -26,9 +26,8 @@ public class ButtonBehaviour : ExtendedBehaviour {
         {
 			//change anim + change room colour
             GameObject player = c.transform.gameObject;
-            anim.SetTrigger ("ButtonPressed"); 
-			Wait (0.5f, () => {
-				           
+            anim.SetTrigger ("ButtonPressed"); //changes anim
+			Wait (0.5f, () => { //changes room color				           
 				setRoom (player);
 			});
 
@@ -36,6 +35,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
                     
         }
     }
+
     
 	void setRoom(GameObject player){
 		/* Takes a player, sets the room to be their team and colour */

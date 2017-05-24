@@ -170,7 +170,7 @@ public class PrefabReplacement : MonoBehaviour
 						{
 							Vector3 instancePos = childrenPrefabs[j].transform.position;
 							DestroyImmediate(childrenPrefabs[j]);
-							GameObject newInstance;
+							//GameObject newInstance;
 							Instantiate(replacementPrefabs[i],instancePos, Quaternion.identity, parentPrefab.transform);
 						}
 					}
@@ -185,10 +185,10 @@ public class PrefabReplacement : MonoBehaviour
 
 public class UniqueInstance : MonoBehaviour 
 {
-	public string name;
+	public string name2;
 
 	public UniqueInstance(string instanceName)
 	{
-		name = instanceName;
+		name2 = instanceName;
 	}
 }

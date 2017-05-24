@@ -5,7 +5,6 @@ using UnityEngine;
 public class RoomManager : ExtendedBehaviour {
 
 	public Team roomTeam = Team.neutral;
-	public int roomId = 0;
 	public int roomValue = 5;
 
     [HideInInspector]
@@ -14,14 +13,13 @@ public class RoomManager : ExtendedBehaviour {
 	Transform firstTile;
 
     private GameObject positionOverlay;
-    moveCamera2 mC2;
+    moveCamera mC2;
 
     private GameObject overlay;
 	// Use this for initialization
 	void Awake () {
-        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera2>();
+        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
-        print(positionOverlay);
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
@@ -31,11 +29,10 @@ public class RoomManager : ExtendedBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-
+        resetState();
     }
 
-    void resetState()
+    public void resetState()
     {
         if(mC2.newRoom != this)
         {

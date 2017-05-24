@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4467071870893532}
   - component: {fileID: 212416096117155932}
   m_Layer: 8
-  m_Name: 'PositionOverlay '
+  m_Name: PositionOverlay
   m_TagString: Minimap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

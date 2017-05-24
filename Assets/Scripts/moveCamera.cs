@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class moveCamera2 : ExtendedBehaviour {
+public class moveCamera : ExtendedBehaviour {
 
     [SerializeField]
-	Team playerTeam = Team.green;
+	Team playerTeam = Team.neutral;
     private GameObject player;
     GameObject[] Rooms;
     public bool isLeaving = false;
-    UserInterface ui;
+
     [HideInInspector]
     public GameObject newRoom;
 
-    Camera camera;
+
+    Camera cam;
 
 
 	// Use this for initialization
 	void Awake () {
 
-        ui = GameObject.FindGameObjectWithTag("God").GetComponent<UserInterface>();
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
-        camera = GetComponent<Camera> ();
+        cam = GetComponent<Camera> ();
 		if (playerTeam == Team.green)
 			p2FocusOnRoom ();
 		else if (playerTeam == Team.blue)
@@ -37,12 +37,11 @@ public class moveCamera2 : ExtendedBehaviour {
         {
             newRoom = getPlayersRoom();
             moveToNextRoom(newRoom);
-            
         }
 	}
 
 	public bool isInScope(GameObject obj){
-		Vector3 screenPoint = camera.WorldToViewportPoint (obj.transform.position); //LOOKS FOR THING
+		Vector3 screenPoint = cam.WorldToViewportPoint (obj.transform.position); //LOOKS FOR THING
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
@@ -67,7 +66,7 @@ public class moveCamera2 : ExtendedBehaviour {
 
         Vector2 roomDims = maxRoom(room);
         this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
-        camera.orthographicSize = roomDims.y/2;
+        cam.orthographicSize = roomDims.y/2;
 
         //set aspect wanted
         float targetaspect = 1.0f / 1.0f;
@@ -81,27 +80,27 @@ public class moveCamera2 : ExtendedBehaviour {
         // if scaled height is less than current height, add letterbox
         if (scaleheight < 1.0f)
         {
-            Rect rect = camera.rect;
+            Rect rect = cam.rect;
 
             rect.width = 1.0f/2;
             rect.height = scaleheight;
             rect.x = 0.5f;
             rect.y = (1.0f - scaleheight) / 2.0f;
 
-            camera.rect = rect;
+            cam.rect = rect;
         }
         else // else add pillarbox
         {
             float scalewidth = 1.0f / scaleheight;
 
-            Rect rect = camera.rect;
+            Rect rect = cam.rect;
 
             rect.width = scalewidth/2;
             rect.height = 1.0f;
             rect.x = (1.0f - scalewidth) / 2.0f+0.5f;
             rect.y = 0;
 
-            camera.rect = rect;
+            cam.rect = rect;
         }
     }
 
@@ -110,7 +109,7 @@ public class moveCamera2 : ExtendedBehaviour {
 
 		Vector2 roomDims = maxRoom(room);
 		this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);
-		camera.orthographicSize = roomDims.y/2;
+		cam.orthographicSize = roomDims.y/2;
 
 		//set aspect wanted
 		float targetaspect = 1.0f / 1.0f;
@@ -124,27 +123,27 @@ public class moveCamera2 : ExtendedBehaviour {
 		// if scaled height is less than current height, add letterbox
 		if (scaleheight < 1.0f)
 		{
-			Rect rect = camera.rect;
+			Rect rect = cam.rect;
 
 			rect.width = 1.0f/2;
 			rect.height = scaleheight;
 			rect.x = 0;
 			rect.y = (1.0f - scaleheight) / 2.0f;
 
-			camera.rect = rect;
+			cam.rect = rect;
 		}
 		else // else add pillarbox
 		{
 			float scalewidth = 1.0f / scaleheight;
 
-			Rect rect = camera.rect;
+			Rect rect = cam.rect;
 
 			rect.width = scalewidth/2;
 			rect.height = 1.0f;
 			rect.x = (1.0f - scalewidth) / 2.0f;
 			rect.y = 0;
 
-			camera.rect = rect;
+			cam.rect = rect;
 		}
 	}
 

@@ -20,7 +20,7 @@ public class RoomManager : ExtendedBehaviour {
     private GameObject overlay;
 	// Use this for initialization
 	void Awake () {
-        mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
+        mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
@@ -76,7 +76,7 @@ public class RoomManager : ExtendedBehaviour {
 		if (firstTile == null)
 			firstTile = transform.GetChild (1);
 		//get size of a single tile, for magical variable purposes
-		Vector2 tileSize = getTileSize(firstTile.gameObject);
+
 
 		//find max, min points
 		Vector2 min = getMinPoint();
@@ -84,8 +84,8 @@ public class RoomManager : ExtendedBehaviour {
 
 
 		//get height and width
-		float height = Mathf.Abs(max.y - min.y) + tileSize.y;
-		float width = Mathf.Abs (max.x - min.x) + tileSize.x;
+		float height = Mathf.Abs(max.y - min.y);
+		float width = Mathf.Abs (max.x - min.x);
 
 		return new Vector2 (width, height); //dimensions of room
 	}
@@ -96,6 +96,7 @@ public class RoomManager : ExtendedBehaviour {
 		if (firstTile == null)
 			firstTile = transform.GetChild (1);
 
+		Vector2 tileSize = getTileSize(firstTile.gameObject);
 		float xmin = firstTile.position.x;
 		float ymin = firstTile.position.y;
 
@@ -109,7 +110,7 @@ public class RoomManager : ExtendedBehaviour {
 				ymin = ytile;
 
 		}
-		return new Vector2 (xmin, ymin);
+		return new Vector2 (xmin - tileSize.x/2, ymin - tileSize.y/2);
 
 	}
 
@@ -119,6 +120,8 @@ public class RoomManager : ExtendedBehaviour {
 
 		if (firstTile == null)
 			firstTile = transform.GetChild (1);
+
+		Vector2 tileSize = getTileSize(firstTile.gameObject);
 		
 		float ymax = firstTile.position.y;
 		float xmax = firstTile.position.x;
@@ -134,7 +137,7 @@ public class RoomManager : ExtendedBehaviour {
 			if (xtile > xmax)
 				xmax = xtile;      
 		}
-		return new Vector2 (xmax, ymax);
+		return new Vector2 (xmax + tileSize.x/2, ymax + tileSize.y/2);
 	}
 
 	public Vector2 getCentre(){
@@ -150,7 +153,7 @@ public class RoomManager : ExtendedBehaviour {
 		Vector2 centre = getCentre();
 
 
-
+		Debug.Log (centre);
 		if (firstTile == null)
 			firstTile = transform.GetChild (1);
 
@@ -163,13 +166,21 @@ public class RoomManager : ExtendedBehaviour {
 				closest = Vector2.Distance(centre, tile.position);
 				closestobj = tile;
 			}
-		}
 
+			if (tile.name == "Tile")
+				Debug.Log (tile.position);
+		}
+		Debug.Log (closestobj.position);
+		Debug.Log (closestobj.name);
 		return closestobj;
 	}
 
 	public Vector2 diffBetweenCentre(Transform tile){
 		return transform.position - tile.position;
+	}
+
+	public Vector2 diffBetweenCentres(){
+		return (Vector2) transform.position - getCentre ();
 	}
 
 		

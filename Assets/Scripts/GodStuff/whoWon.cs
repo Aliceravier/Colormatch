@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class whoWon : ExtendedBehaviour {
+	public static Team winningTeam;
+	public static Team losingTeam;
 
     // Use this for initialization
     void Start() {
@@ -35,7 +38,8 @@ public class whoWon : ExtendedBehaviour {
                         continue;
                     if (value1 + value2 + value3 == 15)
                     {
-                        print("Team " + player.GetComponent<Movement>().playerTeam.ToString() + " wins!");
+						winningTeam = player.GetComponent<Movement> ().playerTeam; //REFACTOR LATER OK :)
+						losingTeam = findOtherPlayer (player).GetComponent<Movement> ().playerTeam;
                         Wait(0.5f, () =>
                         {
                             SceneManager.LoadScene("word screen");
@@ -68,5 +72,9 @@ public class whoWon : ExtendedBehaviour {
 		else
 			return getPlayerOfTeam (Team.blue);
     }
+
+	public Team getWinningTeam(){
+		return winningTeam;
+	}
 }
 

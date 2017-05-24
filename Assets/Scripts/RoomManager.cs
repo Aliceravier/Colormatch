@@ -13,12 +13,15 @@ public class RoomManager : ExtendedBehaviour {
 	Transform firstTile;
 
     private GameObject positionOverlay;
+    private GameObject button;
+    moveCamera mC;
     moveCamera mC2;
 
     private GameObject overlay;
 	// Use this for initialization
 	void Awake () {
         mC2 = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
+        mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
@@ -33,11 +36,21 @@ public class RoomManager : ExtendedBehaviour {
     }
 
     public void resetState()
+        /*sets all rooms the players aren't in to have 
+         * no visible positionOverlay and have their button unpressed*/
     {
-        if(mC2.newRoom != this)
+
+        if (mC.newRoom != this.transform.gameObject && mC2.newRoom != this.transform.gameObject) //if the new room the player is going to is not this one... (also works for first room somehow)
+                                                       //basically, if the players aren't in this room
         {
+            //set positionOverlay to invisible
             positionOverlay = this.transform.Find("PositionOverlay").gameObject;
             positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+
+            //set button animation to unpressed
+            button = this.transform.Find("Button").gameObject;
+            Animator buttonAnim = button.GetComponent<Animator>();
+            buttonAnim.SetBool("ButtonOn", false); //changes anim to unpushed
         }
     }
 	public void ChangeTiles(Color color, string tag){

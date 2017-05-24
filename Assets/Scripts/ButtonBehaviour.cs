@@ -26,7 +26,8 @@ public class ButtonBehaviour : ExtendedBehaviour {
         {
 			//change anim + change room colour
             GameObject player = c.transform.gameObject;
-            anim.SetTrigger ("ButtonPressed"); //changes anim
+            anim.SetBool ("ButtonOn", true); //changes anim to pushed
+
 			Wait (0.5f, () => { //changes room color				           
 				setRoom (player);
 			});
@@ -46,11 +47,11 @@ public class ButtonBehaviour : ExtendedBehaviour {
 	}
 
 	void updateInfo(GameObject player){
-		/*Tells God what button was pressed by which player*/
+		/*Tells God what room was got by which player*/
 		GameObject god = GameObject.FindGameObjectWithTag("God");
 		whoWon ww = god.GetComponent<whoWon>();
 		int roomValue = this.GetComponentInParent<RoomManager>().roomValue;
-		ww.updateInfo(player, roomValue);    
+		ww.updateInfo(player, roomValue);  //updates the players' value tables and checks if someone won  
 
 	}
 

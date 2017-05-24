@@ -48,6 +48,7 @@ public class whoWon : ExtendedBehaviour {
     }
 
     public void updateInfo(GameObject player, int roomValue)
+    //updates the players' value tables and checks if someone won  
     {
         player.GetComponent<Movement>().values.Add(roomValue);
         GameObject otherPlayer = findOtherPlayer(player);

@@ -9,6 +9,7 @@ public class Blinking : MonoBehaviour {
     public float downTime = 0.5f;
     moveCamera mC;
     moveCamera mC2;
+    Camera minimapCamera1;
     GameObject positionOverlay;
     GameObject tile;
 
@@ -16,6 +17,7 @@ public class Blinking : MonoBehaviour {
     void Start () {
         
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
+        minimapCamera1 = GameObject.FindGameObjectWithTag("MinimapCamera1").GetComponent<Camera>();
         mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         StartCoroutine(blink(flashTime, downTime));
 
@@ -26,6 +28,14 @@ public class Blinking : MonoBehaviour {
 
         GameObject room1 = mC.getPlayersRoom();
         GameObject room2 = mC2.getPlayersRoom();
+        if (room1 == room2)
+        {
+            minimapCamera1.cullingMask |= (1 << LayerMask.NameToLayer("MinimapPos2"));
+        }
+        else
+        {
+            minimapCamera1.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapPos2"));
+        }
         makeBlink(room1.transform.Find("PositionOverlay").gameObject, Team.blue);
         makeBlink(room2.transform.Find("PositionOverlay").gameObject, Team.green);
     }

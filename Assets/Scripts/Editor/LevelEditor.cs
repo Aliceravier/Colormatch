@@ -199,13 +199,8 @@ public class LevelEditor : Editor
 			} 
 		}
 
-		if (isComplete && tiles.GetComponent<RoomManager>() == null)
+		if (isComplete)
 			completeRoom ();
-		if (isIncomplete && tiles.GetComponent<RoomManager>() == null)
-			incompleteRoom ();
-
-
-
 	}
 
 	Vector3 getMousePoint(Event e)
@@ -223,16 +218,27 @@ public class LevelEditor : Editor
 	}
 
 	void completeRoom(){
-		tiles.AddComponent<RoomManager> ();
+		if (tiles.GetComponent<RoomManager>() == null)
+			tiles.AddComponent<RoomManager> ();
 		tiles.tag = "Room";
 
 		RoomManager rm = tiles.GetComponent<RoomManager> ();
 		Vector2 dist = rm.diffBetweenCentre(rm.getClosestCentreTile());
 
+		if (tiles.GetComponent<BoxCollider2D> () == null) {
+			tiles.AddComponent<BoxCollider2D> ();
+			BoxCollider2D box = tiles.GetComponent<BoxCollider2D> ();
+			box.offset = new Vector2 (0, 0);
+			box.size = rm.getSize ();
+		}
+
 		foreach (Transform tile in tiles.transform) {
 			tile.position += (Vector3) dist;
 		}
-		placeOverlays ();	
+
+		if (rm.findChildObjectByName("Overlay") == null)
+			placeOverlays ();	
+		
 		isComplete = false;
 
 	}

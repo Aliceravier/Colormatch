@@ -129,7 +129,7 @@ public class LevelEditor : Editor
 		GUILayout.EndHorizontal ();
 
 		GUILayout.BeginHorizontal (); //Allows user to set which gameObject they want to put things into
-		isComplete = GUILayout.Button(" Edit Completed Room ");
+		isIncomplete = GUILayout.Button(" Edit Completed Room ");
 		GUILayout.EndHorizontal ();
 
 		SceneView.RepaintAll();

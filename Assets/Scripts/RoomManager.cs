@@ -53,8 +53,10 @@ public class RoomManager : ExtendedBehaviour {
             Vector3 position = (Vector3)randomVector2(smallestCoordsInRoom, biggestCoordsInRoom);
             Vector3 castingPosition = position + new Vector3(0, 0, -10);
             collider.enabled = false; //maybe this is useless?
-            Physics2D.Linecast(castingPosition, castingPosition - new Vector3(0, 0, +10),playerInteraction);
+            RaycastHit2D hit = Physics2D.Linecast(castingPosition, castingPosition + new Vector3(0, 0, +20),playerInteraction);
             collider.enabled = true; //maybe this is useless?
+            if (hit == true) { i -= 1; print("hit"); }
+            else
             Instantiate(enemy, position, Quaternion.identity);
         }
     }

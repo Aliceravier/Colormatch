@@ -1741,7 +1741,7 @@ GameObject:
   - component: {fileID: 4715157364176176}
   - component: {fileID: 114655936168340876}
   m_Layer: 0
-  m_Name: Corner room
+  m_Name: Corner room 1
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

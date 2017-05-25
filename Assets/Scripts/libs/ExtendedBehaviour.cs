@@ -39,6 +39,40 @@ public class ExtendedBehaviour : MonoBehaviour {
 
 	}
 
+	public Transform findChildObjectByName(string name){
+		foreach (Transform tile in this.transform)
+			if (tile.name.CompareTo (name) == 0)
+				return tile;
+
+		return null;
+	}
+
+	public Transform[] findChildObjectsByName(string name){
+		List<Transform> objs = new List<Transform> ();
+		foreach (Transform tile in this.transform)
+			if (tile.name.CompareTo (name) == 0)
+				objs.Add (tile);
+
+		return objs.ToArray ();
+	}
+
+	public Transform findChildObjectByTag(string tag){
+		foreach (Transform tile in this.transform)
+			if (tile.CompareTag(tag))
+				return tile;
+
+		return null;	
+	}
+
+	public Transform[] findChildObjectsByTag(string tag){
+		List<Transform> objs = new List<Transform> ();
+		foreach (Transform tile in this.transform)
+			if (tile.CompareTag(tag))
+				objs.Add (tile);
+
+		return objs.ToArray ();
+	}
+
 	IEnumerator _wait(float seconds, Action callback){
 		yield return new WaitForSeconds (seconds);
 		callback();

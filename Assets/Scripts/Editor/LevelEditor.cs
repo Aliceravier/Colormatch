@@ -230,6 +230,7 @@ public class LevelEditor : Editor
 			BoxCollider2D box = tiles.GetComponent<BoxCollider2D> ();
 			box.offset = new Vector2 (0, 0);
 			box.size = rm.getSize ();
+			box.isTrigger = true;
 		}
 
 		foreach (Transform tile in tiles.transform) {

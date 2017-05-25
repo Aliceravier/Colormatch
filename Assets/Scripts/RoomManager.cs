@@ -192,9 +192,7 @@ public class RoomManager : ExtendedBehaviour {
 				closest = Vector2.Distance(centre, tile.position);
 				closestobj = tile;
 			}
-
-			if (tile.name == "Tile")
-				Debug.Log (tile.position);
+				
 		}
 		return closestobj;
 	}

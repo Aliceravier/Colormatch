@@ -30,6 +30,7 @@ public class LevelEditor : Editor
 	static string folderName = "Tiles";
 	static string objtag = "Room";
 	bool isComplete;
+	bool isIncomplete;
 	//static float storedgridh;
 	//static float storedgridw;
 
@@ -127,6 +128,10 @@ public class LevelEditor : Editor
 		isComplete = GUILayout.Button(" Complete Room ");
 		GUILayout.EndHorizontal ();
 
+		GUILayout.BeginHorizontal (); //Allows user to set which gameObject they want to put things into
+		isComplete = GUILayout.Button(" Edit Completed Room ");
+		GUILayout.EndHorizontal ();
+
 		SceneView.RepaintAll();
 
 	}
@@ -194,8 +199,10 @@ public class LevelEditor : Editor
 			} 
 		}
 
-		if (isComplete)
+		if (isComplete && tiles.GetComponent<RoomManager>() == null)
 			completeRoom ();
+		if (isIncomplete && tiles.GetComponent<RoomManager>() == null)
+			incompleteRoom ();
 
 
 
@@ -221,15 +228,36 @@ public class LevelEditor : Editor
 
 		RoomManager rm = tiles.GetComponent<RoomManager> ();
 		Vector2 dist = rm.diffBetweenCentre(rm.getClosestCentreTile());
-		Debug.Log ("Centre Now: " + rm.getCentre ());
 
-		Debug.Log ("DIST " + dist);
 		foreach (Transform tile in tiles.transform) {
 			tile.position += (Vector3) dist;
 		}
-		Debug.Log ("Centre Later: " + rm.getCentre ());
 		placeOverlays ();	
 		isComplete = false;
+
+	}
+
+	void incompleteRoom(){
+		//puts room back, breaks if even number of rows/columns
+		RoomManager rm = tiles.GetComponent<RoomManager> ();
+
+		Vector2 tileSize = ExtendedBehaviour.getTileSize (tiles.transform.GetChild (1).gameObject);
+		Vector3 offset = new Vector3 (-tileSize.x / 2, -tileSize.y / 2);
+
+		foreach (Transform tile in tiles.transform) {
+			tile.position += offset;
+		}
+
+
+
+		Destroy (rm.findChildObjectByName ("Overlay"));
+		Destroy (rm.findChildObjectByName ("PositionOverlay"));
+		Destroy(rm);
+
+		tiles.tag = "Untagged";
+
+		isIncomplete = false;
+			
 
 	}
 
@@ -247,19 +275,11 @@ public class LevelEditor : Editor
 		//get sizes
 		Vector2 size = ExtendedBehaviour.getTileSize (overlayObj);
 		Vector2 roomSize = tiles.GetComponent<RoomManager> ().getSize ();
-		Vector2 sizeOfOneTile = ExtendedBehaviour.getTileSize (tiles.transform.GetChild (1).gameObject);
-		float scalar = 1;
-
-		/*Debug.Log (roomSize);
-		Debug.Log (size);
-		Debug.Log (sizeOfOneTile);*/
-
 
 		//% magic to calculate true size
 		Vector3 trueSize = new Vector3((roomSize.x/size.x),
 			(roomSize.y/size.y),
 			1);
-		Debug.Log (trueSize);
 		//place them in the correct place
 
 		Vector3 dist = tiles.GetComponent<RoomManager>().getClosestCentreTile().position;

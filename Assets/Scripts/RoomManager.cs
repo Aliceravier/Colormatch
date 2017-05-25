@@ -196,8 +196,6 @@ public class RoomManager : ExtendedBehaviour {
 			if (tile.name == "Tile")
 				Debug.Log (tile.position);
 		}
-		Debug.Log (closestobj.position);
-		Debug.Log (closestobj.name);
 		return closestobj;
 	}
 

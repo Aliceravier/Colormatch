@@ -62,7 +62,7 @@ public class moveCamera : ExtendedBehaviour {
     }
 
     void p2FocusOnRoom(){
-        GameObject room = GameObject.FindGameObjectsWithTag("Room")[0];
+		GameObject room = getPlayersRoom();
 
         Vector2 roomDims = maxRoom(room);
         this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
@@ -105,7 +105,7 @@ public class moveCamera : ExtendedBehaviour {
     }
 
 	void p1FocusOnRoom(){
-		GameObject room = GameObject.FindGameObjectsWithTag("Room")[0];
+		GameObject room = getPlayersRoom();
 
 		Vector2 roomDims = maxRoom(room);
 		this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);

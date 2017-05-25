@@ -23,11 +23,12 @@ public class moveCamera : ExtendedBehaviour {
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
         cam = GetComponent<Camera> ();
-		if (playerTeam == Team.green)
-			p2FocusOnRoom ();
-		else if (playerTeam == Team.blue)
-			p1FocusOnRoom ();
-        
+		setAspectRatio (playerTeam);
+		newRoom = getPlayersRoom();
+		if (newRoom != null)
+			focusOnRoom (newRoom);
+		else //REMOVE LATER
+			this.transform.position = player.transform.position;
     }
 
 	// Update is called once per frame
@@ -36,9 +37,10 @@ public class moveCamera : ExtendedBehaviour {
         if (!isInScope(player))
         {
             newRoom = getPlayersRoom();
-            if (newRoom != null)
-                moveToNextRoom(newRoom);
-            else moveToNextRoom(player);
+			if (newRoom != null)
+				focusOnRoom (newRoom);
+			else //REMOVE LATER
+				this.transform.position = player.transform.position;
         }
 	}
 
@@ -63,61 +65,19 @@ public class moveCamera : ExtendedBehaviour {
         return null;
     }
 
-    void p2FocusOnRoom(){
-		GameObject room = getPlayersRoom();
-
-        Vector2 roomDims = maxRoom(room);
-        this.transform.position = new Vector3 (room.transform.position.x, room.transform.position.y, -10);
-        cam.orthographicSize = roomDims.y/2;
-
-        //set aspect wanted
-        float targetaspect = 1.0f / 1.0f;
-
-        // determine the game window's current aspect ratio
-        float windowaspect = (((float)Screen.width / (float)Screen.height))/2;
-
-        // current viewport height should be scaled by this amount
-        float scaleheight = windowaspect / targetaspect;
-
-        // if scaled height is less than current height, add letterbox
-        if (scaleheight < 1.0f)
-        {
-            Rect rect = cam.rect;
-
-            rect.width = 1.0f/2;
-            rect.height = scaleheight;
-            rect.x = 0.5f;
-            rect.y = (1.0f - scaleheight) / 2.0f;
-
-            cam.rect = rect;
-        }
-        else // else add pillarbox
-        {
-            float scalewidth = 1.0f / scaleheight;
-
-            Rect rect = cam.rect;
-
-            rect.width = scalewidth/2;
-            rect.height = 1.0f;
-            rect.x = (1.0f - scalewidth) / 2.0f+0.5f;
-            rect.y = 0;
-
-            cam.rect = rect;
-        }
-    }
-
-	void p1FocusOnRoom(){
-		GameObject room = getPlayersRoom();
-
+	public void focusOnRoom(GameObject room){
+        this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);
 		Vector2 roomDims = maxRoom(room);
-		this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);
+		//print (playerTeam.ToString () + " " + room);
 		cam.orthographicSize = roomDims.y/2;
+	}
 
+	void setAspectRatio(Team team){
 		//set aspect wanted
 		float targetaspect = 1.0f / 1.0f;
 
 		// determine the game window's current aspect ratio
-		float windowaspect = ((float)Screen.width / (float)Screen.height)/2;
+		float windowaspect = (((float)Screen.width / (float)Screen.height))/2;
 
 		// current viewport height should be scaled by this amount
 		float scaleheight = windowaspect / targetaspect;
@@ -129,7 +89,12 @@ public class moveCamera : ExtendedBehaviour {
 
 			rect.width = 1.0f/2;
 			rect.height = scaleheight;
-			rect.x = 0;
+
+			if (team == Team.blue)
+				rect.x = 0;
+			else
+				rect.x = 0.5f;
+			
 			rect.y = (1.0f - scaleheight) / 2.0f;
 
 			cam.rect = rect;
@@ -142,20 +107,19 @@ public class moveCamera : ExtendedBehaviour {
 
 			rect.width = scalewidth/2;
 			rect.height = 1.0f;
-			rect.x = (1.0f - scalewidth) / 2.0f;
+			if (team == Team.blue)
+				rect.x = (1.0f - scalewidth) / 2.0f;
+			else
+				rect.x = (1.0f - scalewidth) / 2.0f + 0.5f;
 			rect.y = 0;
 
 			cam.rect = rect;
 		}
-	}
 
-	public void moveToNextRoom(GameObject room){
-        this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);
 	}
 
     //get dimensions of room
 	public Vector2 maxRoom(GameObject room) {
-        print(room);
 		return room.GetComponent<RoomManager>().roomSize;
 	}
 	

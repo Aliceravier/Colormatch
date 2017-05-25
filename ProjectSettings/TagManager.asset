@@ -15,6 +15,7 @@ TagManager:
   - Camera2
   - MinimapCamera1
   - Enemy
+  - blueSpawn
   layers:
   - Default
   - TransparentFX

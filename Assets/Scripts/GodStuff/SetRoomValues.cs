@@ -112,7 +112,6 @@ public class SetRoomValues : MonoBehaviour {
                 orderedRooms[8] = roomInfo.room;
             else orderedRooms[7] = roomInfo.room;
         }
-        print(orderedRooms[2]);
       return orderedRooms;
     }
 

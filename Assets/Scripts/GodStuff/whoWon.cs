@@ -27,7 +27,7 @@ public class whoWon : ExtendedBehaviour {
     void playerWinState(GameObject player)
     {
         
-        List<int> values = player.GetComponent<Movement>().values;
+        List<int> values = player.GetComponent<PlayerBehaviour>().values;
         foreach (int value1 in values)
         {
             foreach (int value2 in values)
@@ -41,9 +41,8 @@ public class whoWon : ExtendedBehaviour {
                     if (value1 + value2 + value3 == 15 && !gameIsWon)
                     {
                         gameIsWon = true;
-                        winningTeam = player.GetComponent<Movement> ().playerTeam; //REFACTOR LATER OK :)
-						losingTeam = findOtherPlayer (player).GetComponent<Movement> ().playerTeam;   
-                            print(winningTeam.ToString());
+                        winningTeam = player.GetComponent<PlayerBehaviour> ().playerTeam; //REFACTOR LATER OK :)
+						losingTeam = findOtherPlayer (player).GetComponent<PlayerBehaviour> ().playerTeam;   
                             Wait(0.5f, () =>
                             {
                                 SceneManager.LoadScene("word screen");
@@ -61,9 +60,9 @@ public class whoWon : ExtendedBehaviour {
     public void updateInfo(GameObject player, int roomValue)
     //updates the players' value tables and checks if someone won  
     {
-        player.GetComponent<Movement>().values.Add(roomValue);
+        player.GetComponent<PlayerBehaviour>().values.Add(roomValue);
         GameObject otherPlayer = findOtherPlayer(player);
-        otherPlayer.GetComponent<Movement>().values.Remove(roomValue);
+        otherPlayer.GetComponent<PlayerBehaviour>().values.Remove(roomValue);
         playerWinState(player);
     }
 
@@ -74,7 +73,7 @@ public class whoWon : ExtendedBehaviour {
 
     GameObject findOtherPlayer(GameObject player)
     {
-		if (player.GetComponent<Movement> ().playerTeam == Team.blue)
+		if (player.GetComponent<PlayerBehaviour> ().playerTeam == Team.blue)
 			return getPlayerOfTeam (Team.green);
 		else
 			return getPlayerOfTeam (Team.blue);

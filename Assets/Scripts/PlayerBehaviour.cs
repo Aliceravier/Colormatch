@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour {
+public class PlayerBehaviour : MonoBehaviour {
 	
     public string horizontalMovInput;
     public string verticalMovInput;

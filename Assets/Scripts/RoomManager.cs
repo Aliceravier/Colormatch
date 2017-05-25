@@ -6,6 +6,9 @@ public class RoomManager : ExtendedBehaviour {
 
 	public Team roomTeam = Team.neutral;
 	public int roomValue = 5;
+    public int nbEnemies;
+    public GameObject enemy;
+    public LayerMask playerInteraction;
 
     [HideInInspector]
     public Vector2 roomSize;
@@ -27,12 +30,33 @@ public class RoomManager : ExtendedBehaviour {
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
+        makeEnemies(enemy, nbEnemies);
 
     }
 	
 	// Update is called once per frame
 	void Update () {
         resetState();
+
+    }
+
+    void makeEnemies(GameObject enemy, int nbEnemies)
+    {
+        Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
+        Vector2 enemyDims = getTileSize(enemy);
+        Vector2 smallestCoordsInRoom = getMinPoint() + wallDims + enemyDims / 2;
+        Vector2 biggestCoordsInRoom = getMaxPoint() - wallDims - enemyDims / 2;
+        CircleCollider2D collider = enemy.GetComponent<CircleCollider2D>(); //maybe this is useless?
+
+        for (int i = 0; i < nbEnemies; i++)
+        {
+            Vector3 position = (Vector3)randomVector2(smallestCoordsInRoom, biggestCoordsInRoom);
+            Vector3 castingPosition = position + new Vector3(0, 0, -10);
+            collider.enabled = false; //maybe this is useless?
+            Physics2D.Linecast(castingPosition, castingPosition - new Vector3(0, 0, +10),playerInteraction);
+            collider.enabled = true; //maybe this is useless?
+            Instantiate(enemy, position, Quaternion.identity);
+        }
     }
 
     public void resetState()

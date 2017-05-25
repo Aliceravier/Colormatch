@@ -36,7 +36,9 @@ public class moveCamera : ExtendedBehaviour {
         if (!isInScope(player))
         {
             newRoom = getPlayersRoom();
-            moveToNextRoom(newRoom);
+            if (newRoom != null)
+                moveToNextRoom(newRoom);
+            else moveToNextRoom(player);
         }
 	}
 
@@ -57,8 +59,8 @@ public class moveCamera : ExtendedBehaviour {
                 return room;
             }
         }
-		//no room found, just focus on player pls
-        return player;
+		//no room found, just return null
+        return null;
     }
 
     void p2FocusOnRoom(){
@@ -152,11 +154,11 @@ public class moveCamera : ExtendedBehaviour {
 	}
 
     //get dimensions of room
-	public Vector2 maxRoom(GameObject Room) {
-		return Room.GetComponent<RoomManager> ().roomSize;
+	public Vector2 maxRoom(GameObject room) {
+        print(room);
+		return room.GetComponent<RoomManager>().roomSize;
 	}
 	
-
 }
 
 

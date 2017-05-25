@@ -19,6 +19,12 @@ public class PlayerBehaviour : MonoBehaviour {
         anim = GetComponent<Animator>();
 	}
 	
+    void  OnCollisionEnter(Collision enemyCollider)
+    {
+        print("collided");
+        Destroy(gameObject);
+    }
+
 	// Update is called once per frame
 	void FixedUpdate () {
         float moveHori = Input.GetAxisRaw(horizontalMovInput);

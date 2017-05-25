@@ -11,6 +11,7 @@ public class TransSkullBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//find player in room if a player is in the room
+        //move towards player
 	}
 }

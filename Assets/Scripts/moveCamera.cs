@@ -34,7 +34,6 @@ public class moveCamera : ExtendedBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //focus on centre of that room
-		print (playerTeam.ToString());
         if (!isInScope(player))
         {
             newRoom = getPlayersRoom();
@@ -120,11 +119,10 @@ public class moveCamera : ExtendedBehaviour {
 	}
 
     //get dimensions of room
-	public Vector2 maxRoom(GameObject Room) {
-		return Room.GetComponent<RoomManager> ().roomSize;
+	public Vector2 maxRoom(GameObject room) {
+		return room.GetComponent<RoomManager>().roomSize;
 	}
 	
-
 }
 
 

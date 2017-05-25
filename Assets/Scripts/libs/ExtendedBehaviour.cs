@@ -46,36 +46,41 @@ public class ExtendedBehaviour : MonoBehaviour {
 
 	}
 
-	public Transform findChildObjectByName(string name){
+	public GameObject findChildObjectByName(string name){
 		foreach (Transform tile in this.transform)
 			if (tile.name.CompareTo (name) == 0)
-				return tile;
+				return tile.gameObject;
 
 		return null;
 	}
 
-	public Transform[] findChildObjectsByName(string name){
-		List<Transform> objs = new List<Transform> ();
+	public GameObject[] findChildObjectsByName(string name){
+		List<GameObject> objs = new List<GameObject> ();
 		foreach (Transform tile in this.transform)
 			if (tile.name.CompareTo (name) == 0)
-				objs.Add (tile);
+				objs.Add (tile.gameObject);
 
 		return objs.ToArray ();
 	}
 
-	public Transform findChildObjectByTag(string tag){
+	public GameObject findChildObjectByTag(string tag){
 		foreach (Transform tile in this.transform)
 			if (tile.CompareTag(tag))
-				return tile;
+				return tile.gameObject;
 
 		return null;	
 	}
 
-	public Transform[] findChildObjectsByTag(string tag){
-		List<Transform> objs = new List<Transform> ();
-		foreach (Transform tile in this.transform)
-			if (tile.CompareTag(tag))
-				objs.Add (tile);
+	public GameObject[] findChildObjectsByTag(string tag){
+		List<GameObject> objs = new List<GameObject> ();
+        print(transform.gameObject);
+        print(this.transform.gameObject);
+        foreach (Transform tile in transform)
+        {
+            print(tile.gameObject);
+            if (tile.gameObject.tag == tag)
+                objs.Add(tile.gameObject);
+        }
 
 		return objs.ToArray ();
 	}

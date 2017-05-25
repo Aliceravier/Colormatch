@@ -30,7 +30,7 @@ public class RoomManager : ExtendedBehaviour {
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
-        //makeEnemies(enemy, nbEnemies);
+        makeEnemies(enemy, nbEnemies);
 
     }
 	
@@ -41,7 +41,7 @@ public class RoomManager : ExtendedBehaviour {
     }
 
     void makeEnemies(GameObject enemy, int nbEnemies)
-    {
+    {   //make not spawn on spawntile
         Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
         Vector2 enemyDims = getTileSize(enemy);
         Vector2 smallestCoordsInRoom = getMinPoint() + wallDims + enemyDims / 2;
@@ -50,12 +50,18 @@ public class RoomManager : ExtendedBehaviour {
 
         for (int i = 0; i < nbEnemies; i++)
         {
+            GameObject[] tiles = findChildObjectsByTag("Tile");
+            GameObject tile = tiles[Random.Range(0, tiles.Length)];
             Vector3 position = (Vector3)randomVector2(smallestCoordsInRoom, biggestCoordsInRoom);
             Vector3 castingPosition = position + new Vector3(0, 0, -10);
             collider.enabled = false; //maybe this is useless?
             RaycastHit2D hit = Physics2D.Linecast(castingPosition, castingPosition + new Vector3(0, 0, +20),playerInteraction);
             collider.enabled = true; //maybe this is useless?
-            if (hit == true) { i -= 1; print("hit"); }
+            if (hit == true)
+            {
+                i -= 1;
+                print("hit");
+            }
             else
             Instantiate(enemy, position, Quaternion.identity);
         }

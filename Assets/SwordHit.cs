@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwordHit : MonoBehaviour {
 
+	[SerializeField]
 	float damage;
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,8 @@ public class SwordHit : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c){
 		if (c.CompareTag ("Player") || c.CompareTag ("Enemy")) {
-			//c.gameObject.GetComponent<Health> ().hurt (damage);
+			c.gameObject.GetComponent<Health> ().hurt (damage);
+			
 		
 		}
 	}

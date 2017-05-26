@@ -13,7 +13,6 @@ public class PlayerBehaviour : ExtendedBehaviour {
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;
-    public bool isDead;
     
 	private SpriteRenderer renderer;
     private Collider2D collider;
@@ -25,6 +24,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	float moveHori = 0;
 	float moveVert = 0;
 
+	bool isDead;
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,12 +33,6 @@ public class PlayerBehaviour : ExtendedBehaviour {
         anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<BoxCollider2D>();
-    }
-	
-    void  OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Enemy")
-        isDead = true;
     }
 
     void killPlayer()
@@ -57,11 +52,13 @@ public class PlayerBehaviour : ExtendedBehaviour {
             renderer.enabled = true;
             collider.enabled = true;
             canMove = true;
+			GetComponent<Health>().setUp;
         });
-        isDead = false;
+		GetComponent<Health> ().setDeath (false);
     }
 
 	void Update(){
+		isDead = GetComponent<Health> ().getDeath ();
 		moveHori = 0;
 		moveVert = 0;
 		if (canMove)

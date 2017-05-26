@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50817565933074118}
   - component: {fileID: 58215690966232922}
   - component: {fileID: 114613397384378468}
+  - component: {fileID: 114179196485771898}
   m_Layer: 0
   m_Name: TransSkull
   m_TagString: Enemy
@@ -78,6 +79,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.56
+--- !u!114 &114179196485771898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549974085178952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367ee78b2f426874789a5e76e7fb6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 300
 --- !u!114 &114613397384378468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,6 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2fa4369e2f42f4a9adf43beb5ff0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  skullteam: 2
 --- !u!212 &212870102418815286
 SpriteRenderer:
   m_ObjectHideFlags: 1

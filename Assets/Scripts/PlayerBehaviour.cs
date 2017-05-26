@@ -69,6 +69,9 @@ public class PlayerBehaviour : ExtendedBehaviour {
 			moveHori = Input.GetAxisRaw(horizontalMovInput);
 			moveVert = Input.GetAxisRaw(verticalMovInput);
 		}
+		if (Input.GetButtonDown (StabInput) && !anim.GetBool("isSwing") && !isDead)
+			anim.SetTrigger ("isSwing");
+
 
 		if (isDead)
 		{
@@ -103,11 +106,11 @@ public class PlayerBehaviour : ExtendedBehaviour {
         //rotate player
         if (moveHori > 0)//right
         {
-            rb.MoveRotation(90);
+            rb.MoveRotation(270);
         }
         if (moveHori < 0)//left
         {
-            rb.MoveRotation(270);
+            rb.MoveRotation(90);
         }
 
         if (moveVert > 0)//up

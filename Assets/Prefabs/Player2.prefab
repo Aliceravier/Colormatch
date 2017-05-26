@@ -134,10 +134,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovInput: Hori2
   verticalMovInput: Vert2
+  StabInput: Stab2
   playerTeam: 1
   values: 
   speed: 30
   isDead: 0
+  canMove: 1
 --- !u!212 &212250831921230820
 SpriteRenderer:
   m_ObjectHideFlags: 1

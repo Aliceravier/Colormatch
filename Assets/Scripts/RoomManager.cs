@@ -30,7 +30,7 @@ public class RoomManager : ExtendedBehaviour {
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
-        makeEnemies(enemy, nbEnemies);
+        //makeEnemies(enemy, nbEnemies);
 
     }
 	

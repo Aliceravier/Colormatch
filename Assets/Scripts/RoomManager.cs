@@ -30,14 +30,16 @@ public class RoomManager : ExtendedBehaviour {
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         overlay = transform.Find("Overlay").gameObject;
-        makeEnemies(enemy, nbEnemies);
+        if (enemy != null)
+        {
+            makeEnemies(enemy, nbEnemies);
+        }
 
     }
 	
 	// Update is called once per frame
 	void Update () {
         resetState();
-
     }
 
     void makeEnemies(GameObject enemy, int nbEnemies)
@@ -52,18 +54,21 @@ public class RoomManager : ExtendedBehaviour {
         {
             GameObject[] tiles = findChildObjectsByTag("Tile");
             GameObject tile = tiles[Random.Range(0, tiles.Length)];
-            Vector3 position = (Vector3)randomVector2(smallestCoordsInRoom, biggestCoordsInRoom);
+            Vector3 position = tile.transform.position;
             Vector3 castingPosition = position + new Vector3(0, 0, -10);
+            Vector3 targetPosition = castingPosition + new Vector3(0, 0, +20);
+
+            
             collider.enabled = false; //maybe this is useless?
-            RaycastHit2D hit = Physics2D.Linecast(castingPosition, castingPosition + new Vector3(0, 0, +20),playerInteraction);
+            RaycastHit2D hit = Physics2D.Raycast(castingPosition, new Vector3(0,0,1));
             collider.enabled = true; //maybe this is useless?
-            if (hit == true)
-            {
-                i -= 1;
-                print("hit");
+
+            //Instantiate(enemy, position, Quaternion.identity);
+            if (hit.collider != null) {
+                    i -= 1;               
             }
             else
-            Instantiate(enemy, position, Quaternion.identity);
+                Instantiate(enemy, position, Quaternion.identity);
         }
     }
 

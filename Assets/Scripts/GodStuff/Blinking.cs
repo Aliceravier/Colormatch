@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//potential problem: minimap only works if the minimap layer is set above all the other layers. Reason: unknown
+
 public class Blinking : MonoBehaviour {
 
     private bool isBlink;

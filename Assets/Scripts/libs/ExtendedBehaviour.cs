@@ -73,11 +73,8 @@ public class ExtendedBehaviour : MonoBehaviour {
 
 	public GameObject[] findChildObjectsByTag(string tag){
 		List<GameObject> objs = new List<GameObject> ();
-        print(transform.gameObject);
-        print(this.transform.gameObject);
         foreach (Transform tile in transform)
         {
-            print(tile.gameObject);
             if (tile.gameObject.tag == tag)
                 objs.Add(tile.gameObject);
         }

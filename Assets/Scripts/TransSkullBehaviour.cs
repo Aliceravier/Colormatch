@@ -18,7 +18,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 
 
-	float deathTime = 0.5f;
+	public float deathTime = 0.5f;
 
 	Vector2 place2Go;
 

@@ -41,6 +41,20 @@ public class RoomManager : ExtendedBehaviour {
         resetState();
     }
 
+    void OnTriggerEnter2D(Collider2D c)
+    {
+        if (c.transform.gameObject)
+        {
+
+        }
+    }
+
+    public bool isInRoom(GameObject thing)
+    {
+        return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) &&
+                Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2));
+    }
+
     void makeEnemies(GameObject enemy, int nbEnemies)
     {   //make not spawn on spawntile
         Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
@@ -63,13 +77,18 @@ public class RoomManager : ExtendedBehaviour {
             collider.enabled = true; //maybe this is useless?
 
             //Instantiate(enemy, position, Quaternion.identity);
-            if (hit.collider != null) {
-                    i -= 1;               
+            if (hit.collider != null)
+            {
+                i -= 1;
             }
             else
-                Instantiate(enemy, position, Quaternion.identity);
+            {
+                GameObject monster = Instantiate(enemy, position, Quaternion.identity);
+                monster.transform.parent = transform;
+            }
         }
     }
+
 
     public void resetState()
         /*sets all rooms the players aren't in to have 

@@ -28,7 +28,7 @@ public class moveCamera : ExtendedBehaviour {
 		if (newRoom != null)
 			focusOnRoom (newRoom);
 		else //REMOVE LATER
-			this.transform.position = player.transform.position;
+            this.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
     }
 
 	// Update is called once per frame
@@ -40,7 +40,7 @@ public class moveCamera : ExtendedBehaviour {
 			if (newRoom != null)
 				focusOnRoom (newRoom);
 			else //REMOVE LATER
-				this.transform.position = player.transform.position;
+				this.transform.position = new Vector3 (player.transform.position.x, player.transform.position.y, -10);
         }
 	}
 
@@ -51,7 +51,7 @@ public class moveCamera : ExtendedBehaviour {
 
     public GameObject getPlayersRoom()
     {        
-		//look for room which player is in
+		//returns room which player is in
         foreach (GameObject room in Rooms)
         {
             Vector2 roomDims = maxRoom(room);

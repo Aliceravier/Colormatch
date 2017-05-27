@@ -14,9 +14,10 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 	Finder f; 
 	Health h;
+	Rigidbody2D rb;
+
 	List<GameObject> targets = new List<GameObject>();
-
-
+	Vector2 target = new Vector2 (0, 0);
 
 	float deathTime = 0.5f;
 
@@ -27,6 +28,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	void Awake(){
 		f = GetComponentInChildren<Finder>();
 		h = GetComponent<Health> ();
+		rb = GetComponent<Rigidbody2D> ();
 	}
 	void Start () {
 		
@@ -44,6 +46,13 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 			killSkull();
 
 		targets = f.getList ();
+		GameObject closestPlayer = findClosestPlayer ();
+		if (closestPlayer != null) {
+			target = transform.position - findClosestPlayer ().transform.position;
+		}
+		else
+			target = new Vector2 (0, 0);
+
 
 		//find player in room if a player is in the room
         //move towards player
@@ -51,7 +60,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 
 	void FixedUpdate(){
-
+		rb.AddForce (target.normalized * moveSpeed * Time.smoothDeltaTime);
 
 	}
 
@@ -62,13 +71,15 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 
 	GameObject findClosestPlayer(){
-		Vector2 mindist = new Vector2(0,0);
+		float mindist = float.MaxValue;
+		GameObject closestPlayer = null;
 		foreach (GameObject player in targets){
-			if (player.GetComponent<Health> ().getTeam() != skullteam)
-				print ("haha");
-
+			if (player.GetComponent<Health> ().getTeam () != skullteam && Vector2.Distance (transform.position, player.transform.position) < mindist) {
+				closestPlayer = player;
+				mindist = Vector2.Distance (transform.position, player.transform.position);
+			}
 		}
 
-		return null;
+		return closestPlayer;
 	}
 }

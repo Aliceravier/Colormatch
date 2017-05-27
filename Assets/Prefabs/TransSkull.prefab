@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549974085178952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.98, y: 5.69, z: 0}
+  m_LocalPosition: {x: 24.73, y: 13.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4801784087163002}
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367ee78b2f426874789a5e76e7fb6ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectTeam: 2
   maxHealth: 300
 --- !u!114 &114613397384378468
 MonoBehaviour:
@@ -148,9 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2fa4369e2f42f4a9adf43beb5ff0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  skullteam: 2
-  targetTag: 
+  moveSpeed: 30
+  targetTag: Player
 --- !u!114 &114885568006305752
 MonoBehaviour:
   m_ObjectHideFlags: 1

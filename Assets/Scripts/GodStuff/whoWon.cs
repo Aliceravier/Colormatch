@@ -41,8 +41,8 @@ public class whoWon : ExtendedBehaviour {
                     if (value1 + value2 + value3 == 15 && !gameIsWon)
                     {
                         gameIsWon = true;
-                        winningTeam = player.GetComponent<PlayerBehaviour> ().playerTeam; //REFACTOR LATER OK :)
-						losingTeam = findOtherPlayer (player).GetComponent<PlayerBehaviour> ().playerTeam;   
+						winningTeam = player.GetComponent<Health> ().getTeam (); //REFACTOR LATER OK :)
+						losingTeam = findOtherPlayer (player).GetComponent<Health> ().getTeam();   
                             Wait(0.5f, () =>
                             {
                                 SceneManager.LoadScene("word screen");
@@ -73,7 +73,7 @@ public class whoWon : ExtendedBehaviour {
 
     GameObject findOtherPlayer(GameObject player)
     {
-		if (player.GetComponent<PlayerBehaviour> ().playerTeam == Team.blue)
+		if (player.GetComponent<Health> ().getTeam() == Team.blue)
 			return getPlayerOfTeam (Team.green);
 		else
 			return getPlayerOfTeam (Team.blue);

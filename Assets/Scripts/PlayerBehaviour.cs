@@ -8,7 +8,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     public string verticalMovInput;
 	public string StabInput;
 
-    public Team playerTeam = Team.blue;
+	Team playerTeam;
     public List<int> values;
     private Rigidbody2D rb;
     public float speed;
@@ -33,6 +33,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
         anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<BoxCollider2D>();
+		playerTeam = GetComponent<Health> ().getTeam ();
     }
 
     void killPlayer()

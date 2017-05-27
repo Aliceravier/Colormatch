@@ -60,7 +60,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	Vector2 findClosestPlayer(){
 		Vector2 mindist;
 		foreach (GameObject player in targets){
-			if (player.GetComponent<PlayerBehaviour> ().playerTeam != skullteam)
+			if (player.GetComponent<Health> ().getTeam() != skullteam)
 				print ("haha");
 
 		}

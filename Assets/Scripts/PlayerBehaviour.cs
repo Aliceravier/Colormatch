@@ -52,7 +52,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
             renderer.enabled = true;
             collider.enabled = true;
             canMove = true;
-			GetComponent<Health>().setUp;
+			GetComponent<Health>().setUp();
         });
 		GetComponent<Health> ().setDeath (false);
     }

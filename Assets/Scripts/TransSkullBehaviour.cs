@@ -13,7 +13,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 	bool isDead;
 
-	Finder f = this.GetComponentInChildren<Finder>();
+	Finder f; 
 	List<GameObject> targets = new List<GameObject>();
 
 
@@ -23,7 +23,12 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	Vector2 place2Go;
 
 	// Use this for initialization
+
+	void Awake(){
+		f = GetComponentInChildren<Finder>();
+	}
 	void Start () {
+		
 		f.setTarget (targetTag);
 	}
 	
@@ -55,10 +60,11 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	Vector2 findClosestPlayer(){
 		Vector2 mindist;
 		foreach (GameObject player in targets){
-			if (player.GetComponent<PlayerBehaviour>().playerTeam != skullteam)
+			if (player.GetComponent<PlayerBehaviour> ().playerTeam != skullteam)
+				print ("haha");
 
 		}
 
-
+		return new Vector2 (0, 0);
 	}
 }

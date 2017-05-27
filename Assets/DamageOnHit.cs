@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DamageOnHit : MonoBehaviour {
 
+	float damage = 300;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +16,6 @@ public class DamageOnHit : MonoBehaviour {
 	void Update () {
 		
 	}
+
+
 }

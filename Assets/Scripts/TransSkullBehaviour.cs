@@ -7,13 +7,13 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	[SerializeField]
 	float moveSpeed;
 	[SerializeField]
-	Team skullteam = Team.neutral;
-	[SerializeField]
 	string targetTag;
 
 	bool isDead;
+	Team skullteam;
 
 	Finder f; 
+	Health h;
 	List<GameObject> targets = new List<GameObject>();
 
 
@@ -26,6 +26,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 	void Awake(){
 		f = GetComponentInChildren<Finder>();
+		h = GetComponent<Health> ();
 	}
 	void Start () {
 		
@@ -35,7 +36,10 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		isDead = GetComponent<Health> ().getDeath ();
+		isDead = h.getDeath ();
+		skullteam = h.getTeam ();
+
+
 		if (isDead)
 			killSkull();
 
@@ -57,14 +61,14 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		});
 	}
 
-	Vector2 findClosestPlayer(){
-		Vector2 mindist;
+	GameObject findClosestPlayer(){
+		Vector2 mindist = ;
 		foreach (GameObject player in targets){
 			if (player.GetComponent<Health> ().getTeam() != skullteam)
 				print ("haha");
 
 		}
 
-		return new Vector2 (0, 0);
+		return null;
 	}
 }

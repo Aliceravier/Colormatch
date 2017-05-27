@@ -62,7 +62,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 
 	GameObject findClosestPlayer(){
-		Vector2 mindist = ;
+		Vector2 mindist = new Vector2(0,0);
 		foreach (GameObject player in targets){
 			if (player.GetComponent<Health> ().getTeam() != skullteam)
 				print ("haha");

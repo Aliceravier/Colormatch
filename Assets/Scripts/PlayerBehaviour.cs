@@ -6,16 +6,25 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	
     public string horizontalMovInput;
     public string verticalMovInput;
+	public string StabInput;
+
     public Team playerTeam = Team.blue;
     public List<int> values;
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;
     public bool isDead;
-    private SpriteRenderer renderer;
+    
+	private SpriteRenderer renderer;
     private Collider2D collider;
     private Rigidbody2D body;
-    private bool canMove = true;
+
+	[HideInInspector]
+    public bool canMove = true;
+
+	float moveHori = 0;
+	float moveVert = 0;
+
 
 	// Use this for initialization
 	void Start () {
@@ -52,27 +61,38 @@ public class PlayerBehaviour : ExtendedBehaviour {
         isDead = false;
     }
 
+	void Update(){
+		moveHori = 0;
+		moveVert = 0;
+		if (canMove)
+		{
+			moveHori = Input.GetAxisRaw(horizontalMovInput);
+			moveVert = Input.GetAxisRaw(verticalMovInput);
+		}
+		if (Input.GetButtonDown (StabInput) && !anim.GetBool("isSwing") && !isDead)
+			anim.SetTrigger ("isSwing");
+
+
+		if (isDead)
+		{
+			//erase player
+			killPlayer();
+			respawnPlayer();
+
+
+		}
+
+	}
+
+
 	// Update is called once per frame
 	void FixedUpdate () {
-        float moveHori = 0;
-        float moveVert = 0;
-        if (canMove)
-        {
-            moveHori = Input.GetAxisRaw(horizontalMovInput);
-            moveVert = Input.GetAxisRaw(verticalMovInput);
-        }
+        
         Vector2 movement = new Vector2(moveHori, moveVert);
         rb.velocity = speed*movement;
 
         //kill and respawn player
-        if (isDead)
-        {
-            //erase player
-            killPlayer();
-            respawnPlayer();
-            
-
-        }
+       
 
 
         //walking animation set
@@ -86,11 +106,11 @@ public class PlayerBehaviour : ExtendedBehaviour {
         //rotate player
         if (moveHori > 0)//right
         {
-            rb.MoveRotation(90);
+            rb.MoveRotation(270);
         }
         if (moveHori < 0)//left
         {
-            rb.MoveRotation(270);
+            rb.MoveRotation(90);
         }
 
         if (moveVert > 0)//up

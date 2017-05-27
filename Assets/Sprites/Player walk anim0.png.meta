@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 guid: 00b74889b7afec440b47b830bffb7210
+<<<<<<< HEAD
 timeCreated: 1495789873
+=======
+timeCreated: 1495793138
+>>>>>>> 6d12000c66b0ed3fab9d65655eb218c22696fe2c
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -38,8 +42,13 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
+<<<<<<< HEAD
   spritePivot: {x: 0.5120557, y: 0.28908777}
   spriteBorder: {x: 1, y: 0, z: 0, w: 0}
+=======
+  spritePivot: {x: 0.5, y: 0.29}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+>>>>>>> 6d12000c66b0ed3fab9d65655eb218c22696fe2c
   spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -66,6 +75,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< HEAD
   - buildTarget: iPhone
     maxTextureSize: 2048
     textureFormat: -1
@@ -82,6 +92,8 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+=======
+>>>>>>> 6d12000c66b0ed3fab9d65655eb218c22696fe2c
   - buildTarget: WebGL
     maxTextureSize: 2048
     textureFormat: -1

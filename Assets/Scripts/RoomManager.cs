@@ -34,7 +34,6 @@ public class RoomManager : ExtendedBehaviour {
         {
             makeEnemies(enemy, nbEnemies);
         }
-
     }
 	
 	// Update is called once per frame

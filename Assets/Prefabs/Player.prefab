@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114447612091021740}
   - component: {fileID: 95190093611280576}
   - component: {fileID: 111545358429985292}
+  - component: {fileID: 114522410180275306}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -38,8 +39,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584200921595506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.6, y: 36.3, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.3, y: 33.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,10 +78,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.29}
     oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
@@ -134,9 +135,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovInput: Horizontal
   verticalMovInput: Vertical
+  StabInput: Stab1
   playerTeam: 0
   values: 
   speed: 30
+  isDead: 0
+  canMove: 1
+--- !u!114 &114522410180275306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584200921595506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 367ee78b2f426874789a5e76e7fb6ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212429551150426044
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -167,7 +182,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 126489017
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 00b74889b7afec440b47b830bffb7210, type: 3}
   m_Color: {r: 0, g: 1, b: 1, a: 1}

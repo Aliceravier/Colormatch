@@ -21,7 +21,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	List<GameObject> targets = new List<GameObject>();
 	Vector2 target = new Vector2 (0, 0);
 
-	float deathTime = 0.5f;
+	public float deathTime = 0.5f;
 
 
 	Vector2 place2Go;

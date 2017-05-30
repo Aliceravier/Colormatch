@@ -60,7 +60,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     }
 
 	void Update(){
-		isDead = GetComponent<Health> ().getDeath ();
+		isDead = GetComponent<Health>().getDeath ();
 		moveHori = 0;
 		moveVert = 0;
 		if (canMove)
@@ -74,11 +74,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 		if (isDead)
 		{
-			//erase player
 			killPlayer();
 			respawnPlayer();
-
-
 		}
 
 	}
@@ -89,10 +86,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
         
         Vector2 movement = new Vector2(moveHori, moveVert);
         rb.velocity = speed*movement;
-
-        //kill and respawn player
-       
-
+ 
 
         //walking animation set
         if (movement.x != 0 || movement.y != 0)

@@ -24,34 +24,21 @@ public class moveCamera : ExtendedBehaviour {
         player = getPlayerOfTeam (playerTeam);
         cam = GetComponent<Camera> ();
 		setAspectRatio (playerTeam);
-		newRoom = getPlayersRoom();
-		if (newRoom != null)
-			focusOnRoom (newRoom);
-		else //REMOVE LATER
-			this.transform.position = player.transform.position;
     }
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        //focus on centre of that room
-        if (!isInScope(player))
-        {
-            newRoom = getPlayersRoom();
-			if (newRoom != null)
-				focusOnRoom (newRoom);
-			else //REMOVE LATER
-				this.transform.position = player.transform.position;
-        }
+
 	}
 
-	public bool isInScope(GameObject obj){
+	public bool isInScope(GameObject obj){ //not using now
 		Vector3 screenPoint = cam.WorldToViewportPoint (obj.transform.position); //LOOKS FOR THING
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
     public GameObject getPlayersRoom()
     {        
-		//look for room which player is in
+		//returns room which player is in
         foreach (GameObject room in Rooms)
         {
             Vector2 roomDims = maxRoom(room);

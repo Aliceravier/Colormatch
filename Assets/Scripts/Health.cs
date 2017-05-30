@@ -10,6 +10,7 @@ public class Health : MonoBehaviour {
 	float maxHealth  = 300;
 	float health;
 	bool isDead;
+
 	// Use this for initialization
 	void Start () {
 		setUp ();
@@ -24,7 +25,6 @@ public class Health : MonoBehaviour {
 	public void hurt(float damage){
 		if (!isDead)
 			health -= damage;
-
 	}
 
 	public bool getDeath(){

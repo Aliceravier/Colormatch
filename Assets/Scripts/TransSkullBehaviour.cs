@@ -45,8 +45,11 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		skullteam = h.getTeam ();
 
 
-		if (isDead)
-			killSkull();
+        if (isDead)
+        {
+            print("Im dead");
+            killSkull();
+        }
 
 		//gets a list of players maybe. then finds the closest one
 		targets = f.getList ();
@@ -72,6 +75,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 	void killSkull(){
 		Wait (deathTime, () => {
+            print("die");
 			Destroy (this.gameObject);
 		});
 	}

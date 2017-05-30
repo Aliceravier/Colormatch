@@ -9,6 +9,7 @@ public class RoomManager : ExtendedBehaviour {
     public int nbEnemies;
     public GameObject enemy;
     public LayerMask playerInteraction;
+    public bool minimapActive;
 
     [HideInInspector]
     public Vector2 roomSize;
@@ -19,52 +20,83 @@ public class RoomManager : ExtendedBehaviour {
     private GameObject button;
     moveCamera mC;
     moveCamera mC2;
+    whoWon ww;
+    Blinking blink;
+    GameObject[] players;
 
     private GameObject overlay;
+
 	// Use this for initialization
 	void Awake () {
         mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
+        blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
+        ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
-        if(transform.Find("Overlay") != null)
-        overlay = transform.Find("Overlay").gameObject;
-        if (enemy != null)
-        {
-            makeEnemies(enemy, nbEnemies);
-        }
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        if (transform.Find("Overlay") != null)
+        overlay = transform.Find("Overlay").gameObject;       
     }
 	
 	// Update is called once per frame
 	void Update () {
-        resetState();
     }
 
-    void OnTriggerLeave2D(Collider c)
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("player");
-        foreach (GameObject player in players)
+    void OnTriggerExit2D(Collider2D c)
+    {   /*Checks if there are players still in the room when a player leaves and resets the rooms state if not
+         *
+         */        
+        if (c.CompareTag("Player"))
         {
-            if (isInRoom(player))
-                return;
-            else
+            print(c.gameObject + " exited room with position " + this.transform.position);
+            if (!isInRoom(ww.findOtherPlayer(c.gameObject)) && !isInRoom(c.gameObject))
+            {
+                print(ww.findOtherPlayer(c.gameObject) + " isnt here so lets reset");
                 resetState();
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D c)
     {
-        Health h = c.GetComponent<Health>();
-        if (h != null && h.getTeam() == Team.blue)
+        if (c.CompareTag("Player"))
         {
-            mC.focusOnRoom(this.gameObject);
+            Health h = c.GetComponent<Health>();
+            Team team = h.getTeam();
+
+
+            //focuses on room if thing that entered is a player and they're alive
+            if (!h.getDeath() && team == Team.blue)
+            {
+                mC.focusOnRoom(this.gameObject);
+                    
+            }
+            if (!h.getDeath() && team == Team.green)
+            {
+                mC2.focusOnRoom(this.gameObject);
+            }
+            if(minimapActive)
+            blink.makeBlink(positionOverlay, team);
+
+            //make enemies appear
+            if (enemy != null)
+            {
+                    if (!isInRoom(ww.findOtherPlayer(c.gameObject)))
+                        makeEnemies(enemy, nbEnemies);
+                
+            }
         }
-        if (h != null && h.getTeam() == Team.green)
-        {
-            mC2.focusOnRoom(this.gameObject);
-        }
+    }
+
+
+    public bool bothInThisRoom()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        return (isInRoom(players[0]) && isInRoom(players[1]));
     }
 
     public bool isInRoom(GameObject thing)
@@ -109,12 +141,16 @@ public class RoomManager : ExtendedBehaviour {
 
 
     public void resetState()
-        /*sets room to have 
-         * no visible positionOverlay and have their button unpressed*/
+        /* sets room to have 
+         * no visible positionOverlay and have their button unpressed
+         * and erase enemies
+         * 
+         */
     {
-            //set positionOverlay to invisible
-            positionOverlay = this.transform.Find("PositionOverlay").gameObject;
-            positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+        //set positionOverlay to invisible
+        print("state reset on room at position " + transform.position);
+        positionOverlay = this.transform.Find("PositionOverlay").gameObject;
+        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
 
         //set button animation to unpressed
         if (transform.Find("Button") != null)
@@ -122,6 +158,13 @@ public class RoomManager : ExtendedBehaviour {
             button = transform.Find("Button").gameObject;
             Animator buttonAnim = button.GetComponent<Animator>();
             buttonAnim.SetBool("ButtonOn", false); //changes anim to unpushed
+        }
+
+        //make enemies dissapear
+        GameObject[] enemies = findChildObjectsByTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
         }
     }
 
@@ -131,7 +174,7 @@ public class RoomManager : ExtendedBehaviour {
 		foreach (Transform child in transform)
 			if (child.gameObject.CompareTag(tag))
 				child.gameObject.GetComponent<SpriteRenderer>().color = color;
-        //overlay.GetComponent<SpriteRenderer>().color = color;
+        overlay.GetComponent<SpriteRenderer>().color = color;
 	}
 
 	public void setRoomTeam(Team t){

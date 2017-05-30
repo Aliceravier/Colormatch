@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2fa4369e2f42f4a9adf43beb5ff0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
+  moveSpeed: 2
   targetTag: Player
   retargetTime: 0
   deathTime: 0.5
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8037ab5f68f083d4685dbd3457e561cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 300
+  damage: 30
 --- !u!114 &114885568006305752
 MonoBehaviour:
   m_ObjectHideFlags: 1

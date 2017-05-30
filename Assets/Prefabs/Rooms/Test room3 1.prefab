@@ -4592,8 +4592,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomTeam: 2
   roomValue: 5
-  nbEnemies: 0
-  enemy: {fileID: 0}
+  nbEnemies: 3
+  enemy: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
   playerInteraction:
     serializedVersion: 2
     m_Bits: 0

@@ -17,6 +17,7 @@ public class SwordHit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D c){
+		
 		if (c.CompareTag ("Player") || c.CompareTag ("Enemy")) {
 			c.gameObject.GetComponent<Health> ().hurt (damage);
 			

@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367ee78b2f426874789a5e76e7fb6ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectTeam: 1
   maxHealth: 300
 --- !u!114 &114329071154911284
 MonoBehaviour:
@@ -204,7 +205,6 @@ MonoBehaviour:
   horizontalMovInput: Hori2
   verticalMovInput: Vert2
   StabInput: Stab2
-  playerTeam: 1
   values: 
   speed: 30
   canMove: 1

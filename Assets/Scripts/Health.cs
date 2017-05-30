@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+	
 public class Health : MonoBehaviour {
 
+	[SerializeField]
+	Team objectTeam = Team.neutral;
 	[SerializeField]
 	float maxHealth  = 300;
 	float health;
@@ -36,5 +38,14 @@ public class Health : MonoBehaviour {
 	public void setUp(){
 		health = maxHealth;
 		isDead = false;
+	}
+
+	public Team getTeam(){
+		return objectTeam;
+	}
+
+	public void setTeam(Team t){
+		objectTeam = t;
+
 	}
 }

@@ -192,7 +192,6 @@ MonoBehaviour:
   horizontalMovInput: Horizontal
   verticalMovInput: Vertical
   StabInput: Stab1
-  playerTeam: 0
   values: 
   speed: 30
   canMove: 1
@@ -207,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367ee78b2f426874789a5e76e7fb6ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectTeam: 0
   maxHealth: 300
 --- !u!114 &114540282758376204
 MonoBehaviour:

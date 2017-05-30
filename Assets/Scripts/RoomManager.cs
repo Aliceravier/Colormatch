@@ -29,6 +29,7 @@ public class RoomManager : ExtendedBehaviour {
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
+        if(transform.Find("Overlay") != null)
         overlay = transform.Find("Overlay").gameObject;
         if (enemy != null)
         {
@@ -41,11 +42,28 @@ public class RoomManager : ExtendedBehaviour {
         resetState();
     }
 
+    void OnTriggerLeave2D(Collider c)
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+        foreach (GameObject player in players)
+        {
+            if (isInRoom(player))
+                return;
+            else
+                resetState();
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.transform.gameObject)
+        Health h = c.GetComponent<Health>();
+        if (h != null && h.getTeam() == Team.blue)
         {
-
+            mC.focusOnRoom(this.gameObject);
+        }
+        if (h != null && h.getTeam() == Team.green)
+        {
+            mC2.focusOnRoom(this.gameObject);
         }
     }
 
@@ -91,30 +109,29 @@ public class RoomManager : ExtendedBehaviour {
 
 
     public void resetState()
-        /*sets all rooms the players aren't in to have 
+        /*sets room to have 
          * no visible positionOverlay and have their button unpressed*/
     {
-
-        if (mC.newRoom != this.transform.gameObject && mC2.newRoom != this.transform.gameObject) //if the new room the player is going to is not this one... (also works for first room somehow)
-                                                       //basically, if the players aren't in this room
-        {
             //set positionOverlay to invisible
             positionOverlay = this.transform.Find("PositionOverlay").gameObject;
             positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
 
-            //set button animation to unpressed
-            button = this.transform.Find("Button").gameObject;
+        //set button animation to unpressed
+        if (transform.Find("Button") != null)
+        {
+            button = transform.Find("Button").gameObject;
             Animator buttonAnim = button.GetComponent<Animator>();
             buttonAnim.SetBool("ButtonOn", false); //changes anim to unpushed
         }
     }
+
 	public void ChangeTiles(Color color, string tag){
 		/*Changes all child tiles with a specified tag to a specified color.
 		 */
 		foreach (Transform child in transform)
 			if (child.gameObject.CompareTag(tag))
 				child.gameObject.GetComponent<SpriteRenderer>().color = color;
-        overlay.GetComponent<SpriteRenderer>().color = color;
+        //overlay.GetComponent<SpriteRenderer>().color = color;
 	}
 
 	public void setRoomTeam(Team t){

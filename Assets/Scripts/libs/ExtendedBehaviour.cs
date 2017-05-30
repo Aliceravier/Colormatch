@@ -39,7 +39,7 @@ public class ExtendedBehaviour : MonoBehaviour {
 		GameObject[] players;
 		players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players)
-			if (team == player.GetComponent<PlayerBehaviour> ().playerTeam)
+			if (team == player.GetComponent<Health> ().getTeam())
 				return player;
 
 		return null;

@@ -40,7 +40,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 	void setRoom(GameObject player){
 		/* Takes a player, sets the room to be their team and colour */
 		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
-		rm.setRoomTeam (player.GetComponent<PlayerBehaviour> ().playerTeam);
+		rm.setRoomTeam (player.GetComponent<Health> ().getTeam());
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Tile");
 
 	}

@@ -21,7 +21,6 @@ public class DamageOnHit : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D c){
-		print ("hello");
 		theirHealth = c.gameObject.GetComponent<Health> ();
 		if (theirHealth != null && theirHealth.getTeam () != myTeam)
 			theirHealth.hurt (damage);

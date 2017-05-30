@@ -569,6 +569,26 @@ Prefab:
     - target: {fileID: 114622393076215526, guid: 20aac32697316814b8697f85e2c0b201,
         type: 2}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20.588741
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114622393076215526, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: damage
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

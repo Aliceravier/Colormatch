@@ -41,24 +41,26 @@ public class RoomManager : ExtendedBehaviour {
 	void Update () {
     }
 
-    void OnTriggerLeave2D(Collider2D c)
+    void OnTriggerExit2D(Collider2D c)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-			if (isInRoom (player))
-				break;
-			else {
-				resetState ();
-			}
-        }
-
-		if (!c.CompareTag ("Player")) {
-			Vector2 bounce = transform.position - c.transform.position;
-			print (c.name);
-			c.attachedRigidbody.AddForce (bounce.normalized * 100);
+		if (c.CompareTag("Player")) {
+        	GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        	foreach (GameObject player in players)
+        	{
+				if (isInRoom (player))
+					break;
+				else {
+					resetState ();
+				}
+        	}
+		}
+		else if (!c.CompareTag("goaway")) {
+			c.GetComponent<Collider2D> ().enabled = false;
+			c.transform.position = getCentre ();
+			c.GetComponent<Collider2D> ().enabled = true;
 		}
     }
+		
 
     void OnTriggerEnter2D(Collider2D c)
     {

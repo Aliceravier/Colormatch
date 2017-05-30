@@ -39,29 +39,35 @@ public class RoomManager : ExtendedBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        resetState();
     }
 
-    void OnTriggerLeave2D(Collider c)
+    void OnTriggerLeave2D(Collider2D c)
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("player");
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
-            if (isInRoom(player))
-                return;
-            else
-                resetState();
+			if (isInRoom (player))
+				break;
+			else {
+				resetState ();
+			}
         }
+
+		if (!c.CompareTag ("Player")) {
+			Vector2 bounce = transform.position - c.transform.position;
+			print (c.name);
+			c.attachedRigidbody.AddForce (bounce.normalized * 100);
+		}
     }
 
     void OnTriggerEnter2D(Collider2D c)
     {
         Health h = c.GetComponent<Health>();
-        if (h != null && h.getTeam() == Team.blue)
+		if (c.CompareTag("Player") && h != null && h.getTeam() == Team.blue)
         {
             mC.focusOnRoom(this.gameObject);
         }
-        if (h != null && h.getTeam() == Team.green)
+		if (c.CompareTag("Player") && h != null && h.getTeam() == Team.green)
         {
             mC2.focusOnRoom(this.gameObject);
         }

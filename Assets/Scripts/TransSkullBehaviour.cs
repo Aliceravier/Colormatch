@@ -8,6 +8,8 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	float moveSpeed;
 	[SerializeField]
 	string targetTag;
+	[SerializeField]
+	float retargetTime;
 
 	bool isDead;
 	Team skullteam;
@@ -20,6 +22,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	Vector2 target = new Vector2 (0, 0);
 
 	float deathTime = 0.5f;
+
 
 	Vector2 place2Go;
 
@@ -37,7 +40,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		//checks if dead also the current team of the skull
 		isDead = h.getDeath ();
 		skullteam = h.getTeam ();
 
@@ -45,10 +48,13 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		if (isDead)
 			killSkull();
 
+		//gets a list of players maybe. then finds the closest one
 		targets = f.getList ();
 		GameObject closestPlayer = findClosestPlayer ();
+
+		//finds the vector between player and position, or just doesn't lol
 		if (closestPlayer != null) {
-			target = transform.position - findClosestPlayer ().transform.position;
+			target = findClosestPlayer ().transform.position - transform.position;
 		}
 		else
 			target = new Vector2 (0, 0);
@@ -71,6 +77,9 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 
 	GameObject findClosestPlayer(){
+		/*Given a list of players, finds the closest one :)
+		 * 
+		 */
 		float mindist = float.MaxValue;
 		GameObject closestPlayer = null;
 		foreach (GameObject player in targets){

@@ -18,14 +18,14 @@ public class Finder : MonoBehaviour {
 	void Update () {
 	}
 
-	void onTriggerEnter2D(Collider2D c){
-		if (c.gameObject.tag == (target)) {
+	void OnTriggerEnter2D(Collider2D c){
+		if (c.gameObject.CompareTag(target)) {
 			usefulStuff.Add (c.gameObject);
 		}
 
 	}
 
-	void onTriggerExit2D(Collider2D c){
+	void OnTriggerExit2D(Collider2D c){
 		if (c.gameObject.tag ==(target))
 			usefulStuff.Remove (c.gameObject);
 

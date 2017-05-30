@@ -47,6 +47,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     {
         Wait(1, () => {
             //place player at respawn 
+			GetComponent<Health> ().setDeath (false);
             GameObject spawn = GameObject.FindGameObjectWithTag(playerTeam.ToString() + "Spawn");
             transform.position = spawn.transform.position;
             //make player visible
@@ -55,7 +56,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
             canMove = true;
 			GetComponent<Health>().setUp();
         });
-		GetComponent<Health> ().setDeath (false);
+
     }
 
 	void Update(){

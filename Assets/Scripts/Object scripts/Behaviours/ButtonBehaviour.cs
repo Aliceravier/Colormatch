@@ -5,8 +5,12 @@ using UnityEngine;
 
 
 public class ButtonBehaviour : ExtendedBehaviour {
+
+    public GameObject locker;
+
     private Animator anim;
     private GameObject button;
+
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +40,10 @@ public class ButtonBehaviour : ExtendedBehaviour {
         }
     }
 
+    public void makeLock()
+    {
+        Instantiate(locker, transform);
+    }
     
 	void setRoom(GameObject player){
 		/* Takes a player, sets the room to be their team and colour */

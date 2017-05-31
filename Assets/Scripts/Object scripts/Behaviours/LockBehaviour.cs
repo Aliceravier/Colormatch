@@ -8,7 +8,7 @@ public class LockBehaviour : ExtendedBehaviour {
     
     // Use this for initialization
     void Start () {
-		rm = this.transform.parent.gameObject.GetComponent<RoomManager>();
+		rm = this.transform.parent.parent.gameObject.GetComponent<RoomManager>();
         
     }
 	

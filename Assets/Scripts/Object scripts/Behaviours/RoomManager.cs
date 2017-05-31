@@ -22,6 +22,7 @@ public class RoomManager : ExtendedBehaviour {
     moveCamera mC2;
     whoWon ww;
     Blinking blink;
+    ButtonBehaviour bb;
     GameObject[] players;
 
     private GameObject overlay;
@@ -32,6 +33,8 @@ public class RoomManager : ExtendedBehaviour {
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
         ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
+        if(findChildObjectByTag("Button") != null)
+        bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         roomSize = getSize();
@@ -89,6 +92,8 @@ public class RoomManager : ExtendedBehaviour {
                         makeEnemies(enemy, nbEnemies, roomTeam);
                 
             }
+            if (findChildObjectByTag("Button") != null)
+                bb.makeLock();
         }
     }
 

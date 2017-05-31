@@ -42,9 +42,17 @@ public class RoomManager : ExtendedBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player");
 
         if (transform.Find("Overlay") != null)
-        overlay = transform.Find("Overlay").gameObject;       
+        overlay = transform.Find("Overlay").gameObject;
+
+        
+
     }
 	
+    void Start()
+    {
+        players[0].GetComponent<PlayerBehaviour>().spawnPlayer();
+        players[1].GetComponent<PlayerBehaviour>().spawnPlayer();
+    }
 	// Update is called once per frame
 	void Update () {
     }

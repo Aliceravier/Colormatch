@@ -86,14 +86,12 @@ public class SetRoomValues : MonoBehaviour {
         foreach (roomInfo roomInfo in highRow)
         {
             if (Mathf.Round(roomInfo.roomPosition[0]) == x1) {
-				print (0);
                 orderedRooms[0] = roomInfo.room;
             }            
 			else if (Mathf.Round(roomInfo.roomPosition[0]) == x3) {
-				print (2);
                 orderedRooms[2] = roomInfo.room;
             }            
-			else { print (1);orderedRooms[1] = roomInfo.room;}
+			else { orderedRooms[1] = roomInfo.room;}
             }
 
         //places rooms from the middle row into the 3-5 places of the orderedRooms array
@@ -133,7 +131,7 @@ public class SetRoomValues : MonoBehaviour {
         GameObject [] ordRooms = orderedRooms();
         for (int i = 0; i < 9; i++)
         {
-			print (ordRooms [i]);
+
             ordRooms[i].GetComponent<RoomManager>().roomValue = values[i]; //debug orderedRooms does not contain gOs
         }
     }

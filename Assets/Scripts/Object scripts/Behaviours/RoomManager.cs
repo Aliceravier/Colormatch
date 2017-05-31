@@ -61,9 +61,13 @@ public class RoomManager : ExtendedBehaviour {
 
     void OnTriggerStay2D(Collider2D c)
     {
+        
         if (minimapActive)
         {
-            blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
+            if (c.CompareTag("Player"))
+            {
+                blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
+            }
         }
     }
 

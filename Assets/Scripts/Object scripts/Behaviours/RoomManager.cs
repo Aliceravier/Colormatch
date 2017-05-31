@@ -8,6 +8,7 @@ public class RoomManager : ExtendedBehaviour {
 	public int roomValue = 5;
     public int nbEnemies;
     public GameObject enemy;
+	[HideInInspector] //WHAT THE FUCK
     public LayerMask playerInteraction;
     public bool minimapActive;
 

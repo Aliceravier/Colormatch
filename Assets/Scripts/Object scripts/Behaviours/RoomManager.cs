@@ -86,7 +86,7 @@ public class RoomManager : ExtendedBehaviour {
             if (enemy != null)
             {
                     if (!isInRoom(ww.findOtherPlayer(c.gameObject)))
-                        makeEnemies(enemy, nbEnemies);
+                        makeEnemies(enemy, nbEnemies, roomTeam);
                 
             }
         }
@@ -105,7 +105,7 @@ public class RoomManager : ExtendedBehaviour {
                 Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2));
     }
 
-    void makeEnemies(GameObject enemy, int nbEnemies)
+	void makeEnemies(GameObject enemy, int nbEnemies, Team team)
     {   //make not spawn on spawntile
         Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
         Vector2 enemyDims = getTileSize(enemy);
@@ -135,6 +135,7 @@ public class RoomManager : ExtendedBehaviour {
             {
                 GameObject monster = Instantiate(enemy, position, Quaternion.identity);
                 monster.transform.parent = transform;
+				monster.GetComponent<Health> ().setTeam (team);
             }
         }
     }

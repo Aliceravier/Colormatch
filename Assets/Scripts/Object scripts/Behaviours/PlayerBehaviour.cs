@@ -43,7 +43,13 @@ public class PlayerBehaviour : ExtendedBehaviour {
         canMove = false;
     }
 
-    void respawnPlayer()
+    public void spawnPlayer()
+    {
+        GameObject spawn = GameObject.FindGameObjectWithTag(playerTeam.ToString() + "Spawn");
+        transform.position = spawn.transform.position;
+    }
+
+    public void respawnPlayer()
     {
         stopKilling = true;
         Wait(1, () => {

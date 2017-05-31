@@ -45,7 +45,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
         Instantiate(locker, transform);
     }
     
-	void setRoom(GameObject player){
+	void setRoom(GameObject player){//RECOTJJAJNFJOR COLLOOUR
 		/* Takes a player, sets the room to be their team and colour */
 		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
 		rm.setRoomTeam (player.GetComponent<Health> ().getTeam());

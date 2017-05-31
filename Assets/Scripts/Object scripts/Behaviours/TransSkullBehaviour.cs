@@ -96,5 +96,14 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		return closestPlayer;
 	}
 
+	void setColour(Team t){
+		/*finds a player of team t, gets their color, sets enemy to be that color. Else, white*/
+		GameObject player = getPlayerOfTeam (t);
+		if (player != null)
+			GetComponent<SpriteRenderer> ().color = player.GetComponent<SpriteRenderer> ().color;
+		else
+			GetComponent<SpriteRenderer> ().color = Color.white;
+	}
+
 
 }

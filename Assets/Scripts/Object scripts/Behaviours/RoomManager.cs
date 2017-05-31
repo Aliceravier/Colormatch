@@ -141,6 +141,7 @@ public class RoomManager : ExtendedBehaviour {
                 GameObject monster = Instantiate(enemy, position, Quaternion.identity);
                 monster.transform.parent = transform;
 				monster.GetComponent<Health> ().setTeam (team);
+				monster.GetComponent<Health> ().colourByTeam ();
             }
         }
     }

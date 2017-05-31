@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 	
-public class Health : MonoBehaviour {
+public class Health : ExtendedBehaviour {
 
 	[SerializeField]
 	Team objectTeam = Team.neutral;
@@ -54,5 +54,14 @@ public class Health : MonoBehaviour {
 	public void setTeam(Team t){
 		objectTeam = t;
 
+	}
+
+	public void colourByTeam(){
+		/*finds a player of team t, gets their color, sets thing to be that color. Else, white*/
+		GameObject player = getPlayerOfTeam (objectTeam);
+		if (player != null)
+			GetComponent<SpriteRenderer> ().color = player.GetComponent<SpriteRenderer> ().color;
+		else
+			GetComponent<SpriteRenderer> ().color = Color.white;
 	}
 }

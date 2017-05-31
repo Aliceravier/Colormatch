@@ -25,7 +25,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	float moveVert = 0;
 
 	bool isDead;
-
+    bool stopKilling = false;
 
 	// Use this for initialization
 	void Start () {
@@ -45,16 +45,19 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
     void respawnPlayer()
     {
+        stopKilling = true;
+        print("respawning now");
         Wait(1, () => {
             //place player at respawn 
 			GetComponent<Health> ().setDeath (false);
             GameObject spawn = GameObject.FindGameObjectWithTag(playerTeam.ToString() + "Spawn");
             transform.position = spawn.transform.position;
             //make player visible
-            renderer.enabled = true;
-            collider.enabled = true;
             canMove = true;
+            renderer.enabled = true;
+            collider.enabled = true;            
 			GetComponent<Health>().setUp();
+            stopKilling = false;
         });
 
     }
@@ -72,7 +75,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 			anim.SetTrigger ("isSwing");
 
 
-		if (isDead)
+		if (isDead && !stopKilling)
 		{
 			killPlayer();
 			respawnPlayer();

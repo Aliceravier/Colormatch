@@ -107,7 +107,8 @@ public class RoomManager : ExtendedBehaviour {
     public bool isInRoom(GameObject thing)
     {
         return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) &&
-                Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2));
+                Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2) &&
+                thing.GetComponent<Collider2D>().enabled);
     }
 
 	void makeEnemies(GameObject enemy, int nbEnemies, Team team)

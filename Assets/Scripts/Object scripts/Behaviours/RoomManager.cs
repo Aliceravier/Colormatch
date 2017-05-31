@@ -59,7 +59,7 @@ public class RoomManager : ExtendedBehaviour {
 	void Update () {
     }
 
-    void OnTriggerStay2D(Collider c)
+    void OnTriggerStay2D(Collider2D c)
     {
         if (minimapActive)
         {

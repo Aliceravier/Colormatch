@@ -71,12 +71,15 @@ public class whoWon : ExtendedBehaviour {
     //gameOverText.text = "Game Over!";
 }
 
-    GameObject findOtherPlayer(GameObject player)
+    public GameObject findOtherPlayer(GameObject player)
     {
-		if (player.GetComponent<Health> ().getTeam() == Team.blue)
-			return getPlayerOfTeam (Team.green);
-		else
-			return getPlayerOfTeam (Team.blue);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject person in players)
+        {
+            if (person != player)
+                return person;
+        }
+        return null;
     }
 
 	public Team getWinningTeam(){

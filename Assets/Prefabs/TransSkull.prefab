@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 58215690966232922}
   - component: {fileID: 114613397384378468}
   - component: {fileID: 114179196485771898}
-  - component: {fileID: 114622393076215526}
+  - component: {fileID: 114746072621216078}
   m_Layer: 0
   m_Name: TransSkull
   m_TagString: Enemy
@@ -150,11 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c2fa4369e2f42f4a9adf43beb5ff0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 400
   targetTag: Player
   retargetTime: 0
   deathTime: 0.5
---- !u!114 &114622393076215526
+--- !u!114 &114746072621216078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1549974085178952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8037ab5f68f083d4685dbd3457e561cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 402ae262157c601478351b3296c9cbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 300

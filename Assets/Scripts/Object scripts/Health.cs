@@ -18,9 +18,16 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0)
-			isDead = true;
+        if (health <= 0)
+        {
+            isDead = true;
+        }
 	}
+
+    public float getHealth()
+    {
+        return health;
+    }
 
 	public void hurt(float damage){
 		if (!isDead)

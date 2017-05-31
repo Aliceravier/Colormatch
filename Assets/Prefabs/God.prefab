@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4020428517748414}
   - component: {fileID: 114867701060642720}
   - component: {fileID: 114547139215924140}
+  - component: {fileID: 114413117240077112}
+  - component: {fileID: 114963724602857564}
   m_Layer: 0
   m_Name: God
   m_TagString: God
@@ -41,6 +43,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114413117240077112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040793774296156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6170dfc674d4161458e7f859d97df957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashTime: 0.5
+  downTime: 0.5
 --- !u!114 &114547139215924140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -61,5 +76,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86fe416fb84a11546af8a6d9e6f65bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114963724602857564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1040793774296156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc783c37dec7e5468faa4b0e3cfff23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

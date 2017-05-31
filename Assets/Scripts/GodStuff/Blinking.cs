@@ -36,13 +36,6 @@ public class Blinking : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () { 
-
-        GameObject room1 = mC.getPlayersRoom();
-        GameObject room2 = mC2.getPlayersRoom();
-
-        //make the position overlays of the room(s) the players are in blink
-        makeBlink(room1.transform.Find("PositionOverlay").gameObject, Team.blue);
-        makeBlink(room2.transform.Find("PositionOverlay").gameObject, Team.green);
     }
 
     public void makeBlink(GameObject positionOverlay, Team team)

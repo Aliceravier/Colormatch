@@ -51,11 +51,20 @@ public class RoomManager : ExtendedBehaviour {
 	
     void Start()
     {
+        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
         players[0].GetComponent<PlayerBehaviour>().spawnPlayer();
         players[1].GetComponent<PlayerBehaviour>().spawnPlayer();
     }
 	// Update is called once per frame
 	void Update () {
+    }
+
+    void OnTriggerStay2D(Collider c)
+    {
+        if (minimapActive)
+        {
+            blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
+        }
     }
 
     void OnTriggerExit2D(Collider2D c)
@@ -91,8 +100,6 @@ public class RoomManager : ExtendedBehaviour {
             {
                 mC2.focusOnRoom(this.gameObject);
             }
-            if(minimapActive)
-            blink.makeBlink(positionOverlay, team);
 
             //make enemies appear
             if (enemy != null)

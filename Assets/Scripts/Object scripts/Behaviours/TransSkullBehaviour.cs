@@ -47,7 +47,6 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
         if (isDead)
         {
-            print("Im dead");
             killSkull();
         }
 

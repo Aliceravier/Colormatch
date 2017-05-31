@@ -22,12 +22,9 @@ public class LockBehaviour : ExtendedBehaviour {
 
     bool noEnemiesLeft()
     {
-        print("in function");
         GameObject[] enemies = rm.findChildObjectsByTag("Enemy");
         foreach (GameObject enemy in enemies) {
-            print(enemy);
             if (rm.isInRoom(enemy)) {
-                print("found enemy");
                 return false;
             }
         }

@@ -155,7 +155,6 @@ public class RoomManager : ExtendedBehaviour {
          */
     {
         //set positionOverlay to invisible
-        print("state reset on room at position " + transform.position);
         positionOverlay = this.transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
 

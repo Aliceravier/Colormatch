@@ -46,7 +46,6 @@ public class PlayerBehaviour : ExtendedBehaviour {
     void respawnPlayer()
     {
         stopKilling = true;
-        print("respawning now");
         Wait(1, () => {
             //place player at respawn 
 			GetComponent<Health> ().setDeath (false);

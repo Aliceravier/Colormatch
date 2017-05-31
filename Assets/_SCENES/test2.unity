@@ -521,9 +521,8 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 4259215980039040, guid: ade740d972634f9449efeba2fbeaef64,
     type: 2}
-<<<<<<< HEAD
-  m_PrefabInternal: {fileID: 817632796}
---- !u!1001 &887848556
+  m_PrefabInternal: {fileID: 656874048}
+--- !u!1001 &823735967
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -560,19 +559,41 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4942796695862882, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114613397384378468, guid: 20aac32697316814b8697f85e2c0b201,
         type: 2}
       propertyPath: moveSpeed
-      value: 10
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114622393076215526, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_Mass
+      value: 20.588741
+      objectReference: {fileID: 0}
+    - target: {fileID: 50817565933074118, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114622393076215526, guid: 20aac32697316814b8697f85e2c0b201,
+        type: 2}
+      propertyPath: damage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
   m_IsPrefabParent: 0
-=======
-  m_PrefabInternal: {fileID: 656874048}
->>>>>>> 66685407db9f838489688a2b4311444d6f3f8ddc
 --- !u!1001 &918960699
 Prefab:
   m_ObjectHideFlags: 0
@@ -1204,7 +1225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451ab34a2f824a64da3385942e3d83ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relevantThing: 
 --- !u!58 &2093605185
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1231,5 +1251,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

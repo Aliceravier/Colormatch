@@ -35,7 +35,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 	void Start () {
 		
-		f.setTarget (targetTag);
+		f.setTag (targetTag);
 	}
 	
 	// Update is called once per frame
@@ -69,7 +69,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	}
 
 	void FixedUpdate(){
-		rb.AddForce (target.normalized * moveSpeed * Time.smoothDeltaTime);
+		rb.velocity = (target.normalized * moveSpeed * Time.smoothDeltaTime);
 
 	}
 
@@ -95,4 +95,6 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 
 		return closestPlayer;
 	}
+
+
 }

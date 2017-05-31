@@ -52,14 +52,19 @@ public class RoomManager : ExtendedBehaviour {
          */        
         if (c.CompareTag("Player"))
         {
-            print(c.gameObject + " exited room with position " + this.transform.position);
             if (!isInRoom(ww.findOtherPlayer(c.gameObject)) && !isInRoom(c.gameObject))
             {
-                print(ww.findOtherPlayer(c.gameObject) + " isnt here so lets reset");
                 resetState();
             }
         }
+    
+		else if (!c.CompareTag("goaway")) {
+			c.GetComponent<Collider2D> ().enabled = false;
+			c.transform.position = getCentre ();
+			c.GetComponent<Collider2D> ().enabled = true;
+		}
     }
+		
 
     void OnTriggerEnter2D(Collider2D c)
     {

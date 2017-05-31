@@ -105,22 +105,25 @@ public class PlayerBehaviour : ExtendedBehaviour {
             anim.SetBool("PlayerMoving", false);
 
         //rotate player
-        if (moveHori > 0)//right
         {
-            rb.MoveRotation(270);
-        }
-        if (moveHori < 0)//left
-        {
-            rb.MoveRotation(90);
-        }
 
-        if (moveVert > 0)//up
-        {
-            rb.MoveRotation(0);
+            //Get the Screen positions of the object
+            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+            print(positionOnScreen);
+
+            //Get the Screen position of the mouse
+            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+            //Get the angle between the points
+            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+            //Ta Daaa
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
         }
-        if (moveVert < 0)//down
-        {
-            rb.MoveRotation(180);
-        }
+        
+    }
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 }

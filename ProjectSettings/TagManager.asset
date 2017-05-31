@@ -18,6 +18,8 @@ TagManager:
   - blueSpawn
   - greenSpawn
   - MinimapCamera2
+  - goaway
+  - Button
   layers:
   - Default
   - TransparentFX

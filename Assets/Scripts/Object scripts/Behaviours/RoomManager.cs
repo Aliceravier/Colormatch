@@ -44,8 +44,6 @@ public class RoomManager : ExtendedBehaviour {
         if (transform.Find("Overlay") != null)
         overlay = transform.Find("Overlay").gameObject;
 
-        
-
     }
 	
     void Start()

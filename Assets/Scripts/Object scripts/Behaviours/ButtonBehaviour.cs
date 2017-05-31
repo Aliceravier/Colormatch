@@ -42,6 +42,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 
     public void makeLock()
     {
+        print("Making lock");
         Instantiate(locker, transform);
     }
     

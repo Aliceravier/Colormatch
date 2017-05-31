@@ -36,44 +36,41 @@ public class Blinking : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () { 
-
-       /* GameObject room1 = mC.getPlayersRoom();
-        GameObject room2 = mC2.getPlayersRoom();
-
-        //if both players are in the same room then let player1's camera see minimapPos2
-        if (room1 == room2)
-        {
-            minimapCamera1.cullingMask |= (1 << LayerMask.NameToLayer("MinimapPos2"));
-        }
-
-        //otherwise stop Player 1 from seeing player2's position
-        else
-        {
-            minimapCamera1.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapPos2"));
-        }
-
-        //make the position overlays of the room(s) the players are in blink
-        makeBlink(room1.transform.Find("PositionOverlay").gameObject, Team.blue);
-        makeBlink(room2.transform.Find("PositionOverlay").gameObject, Team.green);*/
     }
 
     public void makeBlink(GameObject positionOverlay, Team team)
     {
 
         positionOverlay.GetComponent<SpriteRenderer>().enabled = isBlink;
+
         if (team == Team.blue)
-            if(gh.bothInSameRoom())
+        {
+            if (gh.bothInSameRoom())
+            {
+                positionOverlay.layer = LayerMask.NameToLayer("MinimapPos2");
                 minimapCamera1.cullingMask |= (1 << LayerMask.NameToLayer("MinimapPos2"));
+            }
             else
+            {
+                positionOverlay.layer = LayerMask.NameToLayer("MinimapPos1");
                 minimapCamera1.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapPos2"));
-        positionOverlay.layer = LayerMask.NameToLayer("MinimapPos1");
+            }
+            
+        }
 
         if (team == Team.green)
+        {
             if (gh.bothInSameRoom())
-            minimapCamera2.cullingMask |= (1 << LayerMask.NameToLayer("MinimapPos1"));
+            {
+                positionOverlay.layer = LayerMask.NameToLayer("MinimapPos1");
+                minimapCamera2.cullingMask |= (1 << LayerMask.NameToLayer("MinimapPos1"));
+            }
             else
-            minimapCamera2.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapPos1"));
-        positionOverlay.layer = LayerMask.NameToLayer("MinimapPos2");
+            {
+                positionOverlay.layer = LayerMask.NameToLayer("MinimapPos2");
+                minimapCamera2.cullingMask &= ~(1 << LayerMask.NameToLayer("MinimapPos1"));
+            }
+        }
     }
 
     IEnumerator blink(float flashTime, float downTime)

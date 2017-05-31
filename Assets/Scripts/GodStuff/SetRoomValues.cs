@@ -24,21 +24,29 @@ public class SetRoomValues : MonoBehaviour {
     //gives an array of all the rooms in the order they are in the scene
     {
         GameObject[] orderedRooms = new GameObject[9];
-        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
-        Vector2[] roomPositions = new Vector2[rooms.Length];
+        GameObject[] roomz = GameObject.FindGameObjectsWithTag("Room");
+		List<GameObject> rooms = new List<GameObject> ();
+
+		foreach (GameObject room in roomz) {
+			if (room.GetComponentInChildren<ButtonBehaviour> () != null)
+				rooms.Add (room);
+		}
+
+        Vector2[] roomPositions = new Vector2[rooms.Count];
         int i = 0;
 
         //makes array with positions
         foreach(GameObject room in rooms)
-        {
-            roomPositions[i] = room.transform.position;
-            //debug works
-            i++;
+		{
+			
+				roomPositions [i] = room.transform.position;
+				//debug works
+				i++;
         }
 
         //combines positions and rooms in roomInfo array
-        roomInfo[] roomPosAndGo = new roomInfo[rooms.Length];
-        for (int j = 0; j < rooms.Length; j++)
+		roomInfo[] roomPosAndGo = new roomInfo[rooms.Count];
+        for (int j = 0; j < 9; j++)
         {
             roomPosAndGo[j] = new roomInfo(roomPositions[j], rooms[j]);
             //debug works
@@ -54,7 +62,7 @@ public class SetRoomValues : MonoBehaviour {
 
         //adds the rooms to the various lists based on their y value
         foreach(roomInfo roomInfo in roomPosAndGo) //debug works
-        {
+        {	
             if (Mathf.Round(roomInfo.roomPosition[1]) == y1)
             {
                 highRow.Add(roomInfo);
@@ -72,18 +80,18 @@ public class SetRoomValues : MonoBehaviour {
 
         //makes variables to compare with x positions of rooms
         float x1 = Mathf.Round(getMinX(roomPositions));     
-        float x3 = getMaxX(roomPositions);
+		float x3 = Mathf.Round(getMaxX(roomPositions));
 
         //places rooms from the highest row into the first places of the orderedRooms array
         foreach (roomInfo roomInfo in highRow)
         {
-            if (Mathf.Round(roomInfo.roomPosition[0]) == x1) {               
+            if (Mathf.Round(roomInfo.roomPosition[0]) == x1) {
                 orderedRooms[0] = roomInfo.room;
             }            
-            else if (roomInfo.roomPosition[0] == x3) {
+			else if (Mathf.Round(roomInfo.roomPosition[0]) == x3) {
                 orderedRooms[2] = roomInfo.room;
             }            
-            else { orderedRooms[1] = roomInfo.room;}
+			else { orderedRooms[1] = roomInfo.room;}
             }
 
         //places rooms from the middle row into the 3-5 places of the orderedRooms array
@@ -93,7 +101,7 @@ public class SetRoomValues : MonoBehaviour {
             {
                 orderedRooms[3] = roomInfo.room;
             }
-            else if (roomInfo.roomPosition[0] == x3)
+			else if (Mathf.Round(roomInfo.roomPosition[0]) == x3)
             {
                 orderedRooms[5] = roomInfo.room;
             }
@@ -105,12 +113,14 @@ public class SetRoomValues : MonoBehaviour {
 
         //places rooms from the lowest row into the last places of the orderedRooms array
         foreach (roomInfo roomInfo in lowRow)
-        {
-            if (Mathf.Round(roomInfo.roomPosition[0]) == x1)
-                orderedRooms[6] = roomInfo.room;
-            else if (roomInfo.roomPosition[0] == x3)
-                orderedRooms[8] = roomInfo.room;
-            else orderedRooms[7] = roomInfo.room;
+		{
+			if (Mathf.Round (roomInfo.roomPosition [0]) == x1) {
+				orderedRooms [6] = roomInfo.room;
+			} else if (Mathf.Round (roomInfo.roomPosition [0]) == x3) {
+				orderedRooms [8] = roomInfo.room;
+			} else {
+				orderedRooms [7] = roomInfo.room;
+			}
         }
       return orderedRooms;
     }
@@ -121,6 +131,7 @@ public class SetRoomValues : MonoBehaviour {
         GameObject [] ordRooms = orderedRooms();
         for (int i = 0; i < 9; i++)
         {
+
             ordRooms[i].GetComponent<RoomManager>().roomValue = values[i]; //debug orderedRooms does not contain gOs
         }
     }

@@ -30,7 +30,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (name == "Player1")
+        if (name == "Player")
             cam = GameObject.FindGameObjectWithTag("Camera1").GetComponent<Camera>();
         if(name == "Player2")
             cam = GameObject.FindGameObjectWithTag("Camera2").GetComponent<Camera>();

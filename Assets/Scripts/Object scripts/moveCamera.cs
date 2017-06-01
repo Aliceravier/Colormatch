@@ -13,13 +13,13 @@ public class moveCamera : ExtendedBehaviour {
     [HideInInspector]
     public GameObject newRoom;
 
-
+    RoomManager rm;
     Camera cam;
 
 
 	// Use this for initialization
 	void Awake () {
-
+        
         Rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
         cam = GetComponent<Camera> ();
@@ -50,6 +50,19 @@ public class moveCamera : ExtendedBehaviour {
         }
 		//no room found, just return null
         return null;
+    }
+
+
+    public bool cameraFocusIsOn(GameObject room)
+    {
+        rm = room.GetComponent<RoomManager>();
+        Vector2 minCoords = rm.getMinPoint();
+        Vector2 maxCoords = rm.getMaxPoint();
+        if (transform.position.x > minCoords.x && transform.position.y > minCoords.y
+            && transform.position.x < maxCoords.x && transform.position.y < maxCoords.y)
+            return true;
+        else
+            return false;
     }
 
 	public void focusOnRoom(GameObject room){

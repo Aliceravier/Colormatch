@@ -28,12 +28,15 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	bool isDead;
     bool stopKilling = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         if (name == "Player")
             cam = GameObject.FindGameObjectWithTag("Camera1").GetComponent<Camera>();
-        if(name == "Player2")
+        if (name == "Player2")
             cam = GameObject.FindGameObjectWithTag("Camera2").GetComponent<Camera>();
+    }
+	void Awake () {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
@@ -109,17 +112,18 @@ public class PlayerBehaviour : ExtendedBehaviour {
         else
             anim.SetBool("PlayerMoving", false);
 
+        
         //rotate player
         {
 
             //Get the Camera viewport position of the object
             Vector2 positionOnScreen = cam.WorldToViewportPoint(transform.position);
 
-            //Get the Camera viewport position of the mouse
-            Vector2 mouseOnScreen = (Vector2)cam.ScreenToViewportPoint(Input.mousePosition);
+            //Get the Camera viewport position of the crosshair
+            Vector2 crosshairOnScreen = (Vector2)cam.WorldToViewportPoint(findChildObjectByTag("Crosshair").transform.position);
 
             //Get the angle between the points
-            float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+            float angle = AngleBetweenTwoPoints(positionOnScreen, crosshairOnScreen);
 
             //rotate by that angle plus 90° to get player face facing rather than side facing mouse
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));

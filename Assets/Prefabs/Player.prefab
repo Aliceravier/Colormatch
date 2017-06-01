@@ -57,7 +57,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584200921595506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.11, y: 14.45, z: 0}
+  m_LocalPosition: {x: 12.48, y: 13.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4051974462636560}
@@ -189,9 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Horizontal
-  verticalMovInput: Vertical
-  StabInput: Stab1
+  horizontalMovInput: Rotx_C1
+  verticalMovInput: Roty_C1
+  StabInput: Stab_C1
   values: 
   speed: 30
   canMove: 1
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectTeam: 0
-  maxHealth: 300
+  maxHealth: 300000
 --- !u!114 &114540282758376204
 MonoBehaviour:
   m_ObjectHideFlags: 1

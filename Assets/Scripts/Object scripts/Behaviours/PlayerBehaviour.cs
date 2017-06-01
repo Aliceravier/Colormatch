@@ -28,7 +28,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     bool stopKilling = false;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();

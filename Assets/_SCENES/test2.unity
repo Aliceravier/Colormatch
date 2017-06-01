@@ -1200,6 +1200,10 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 51282238}
+    - target: {fileID: 1372645579985408, guid: 64e9749fc7f29f945be57f9e2938ab2a, type: 2}
+      propertyPath: m_TagString
+      value: MinimapCamera2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64e9749fc7f29f945be57f9e2938ab2a, type: 2}
   m_IsPrefabParent: 0
@@ -1236,8 +1240,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: Hori_C1
+  m_VerticalAxis: Vert_C1
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10

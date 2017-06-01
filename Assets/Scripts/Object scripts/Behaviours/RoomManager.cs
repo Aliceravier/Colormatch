@@ -48,10 +48,11 @@ public class RoomManager : ExtendedBehaviour {
         
 
     }
-	
+
     void Start()
     {
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+
         players[0].GetComponent<PlayerBehaviour>().spawnPlayer();
         players[1].GetComponent<PlayerBehaviour>().spawnPlayer();
     }
@@ -69,6 +70,17 @@ public class RoomManager : ExtendedBehaviour {
                 blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
             }
         }
+        if (c.name == "Player")
+        {
+            if (!mC.cameraFocusIsOn(gameObject))
+                mC.focusOnRoom(gameObject);
+        }
+        if (c.name == "Player2")
+        {
+            if (!mC2.cameraFocusIsOn(gameObject))
+                mC2.focusOnRoom(gameObject);
+        }
+
     }
 
     void OnTriggerExit2D(Collider2D c)

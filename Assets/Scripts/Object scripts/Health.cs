@@ -29,6 +29,10 @@ public class Health : ExtendedBehaviour {
         return health;
     }
 
+	public float getMaxHealth(){
+		return maxHealth;
+	}
+
 	public void hurt(float damage){
 		if (!isDead)
 			health -= damage;

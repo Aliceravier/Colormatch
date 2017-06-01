@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4051974462636560}
   - component: {fileID: 61594553294885956}
-  - component: {fileID: 114540282758376204}
+  - component: {fileID: 114138931704152764}
   m_Layer: 12
   m_Name: Sword
   m_TagString: goaway
@@ -239,6 +239,20 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114138931704152764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694399067598110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c83aebdd8f3ea44e99932b0b60622c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 150
+  pushback: 5000
+  isStay: 0
 --- !u!114 &114447612091021740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,18 +283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTeam: 0
   maxHealth: 300
---- !u!114 &114540282758376204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1694399067598110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c83aebdd8f3ea44e99932b0b60622c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 300
 --- !u!114 &114599787441397518
 MonoBehaviour:
   m_ObjectHideFlags: 1

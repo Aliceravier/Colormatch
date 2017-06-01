@@ -37,7 +37,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
     }
 
     void killPlayer()
-    {        
+    {   
+		Pause (0.1f,0.1f);
         collider.enabled = false;
         renderer.enabled = false;
         canMove = false;

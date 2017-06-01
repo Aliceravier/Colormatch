@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4568493596625092}
   - component: {fileID: 61491415790323110}
-  - component: {fileID: 114403974036039578}
+  - component: {fileID: 114901528596022178}
   m_Layer: 12
   m_Name: Sword
   m_TagString: goaway
@@ -269,7 +269,7 @@ MonoBehaviour:
   values: 
   speed: 30
   canMove: 1
---- !u!114 &114403974036039578
+--- !u!114 &114901528596022178
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -280,7 +280,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c83aebdd8f3ea44e99932b0b60622c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 300
+  damage: 150
+  pushback: 200
+  isStay: 0
 --- !u!114 &114919418503979422
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -17,6 +17,10 @@ public class ExtendedBehaviour : MonoBehaviour {
 		StartCoroutine (_wait (seconds, action));
     }
 
+	public void Pause(float seconds, float timeScale = 0f){
+		StartCoroutine (_pause (seconds, timeScale));
+	}
+
 	public static float getScalingFactor(GameObject tile){
 		Sprite s = tile.GetComponent<SpriteRenderer> ().sprite;
 		return s.rect.width / s.bounds.size.x;
@@ -85,6 +89,15 @@ public class ExtendedBehaviour : MonoBehaviour {
 	IEnumerator _wait(float seconds, Action callback){
 		yield return new WaitForSeconds (seconds);
 		callback();
+
+	}
+
+	IEnumerator _pause(float seconds, float timeScale){
+		Time.timeScale = timeScale;
+		float pauseEnd = Time.realtimeSinceStartup + seconds;
+		while (Time.realtimeSinceStartup < pauseEnd)
+			yield return 0;
+		Time.timeScale = 1;
 
 	}
 

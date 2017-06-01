@@ -17,6 +17,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	private SpriteRenderer renderer;
     private Collider2D collider;
     private Rigidbody2D body;
+    private Camera cam;
 
 	[HideInInspector]
     public bool canMove = true;
@@ -29,6 +30,10 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if (name == "Player1")
+            cam = GameObject.FindGameObjectWithTag("Camera1").GetComponent<Camera>();
+        if(name == "Player2")
+            cam = GameObject.FindGameObjectWithTag("Camera2").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         renderer = GetComponent<SpriteRenderer>();
@@ -107,18 +112,17 @@ public class PlayerBehaviour : ExtendedBehaviour {
         //rotate player
         {
 
-            //Get the Screen positions of the object
-            Vector2 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-            print(positionOnScreen);
+            //Get the Camera viewport position of the object
+            Vector2 positionOnScreen = cam.WorldToViewportPoint(transform.position);
 
-            //Get the Screen position of the mouse
-            Vector2 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            //Get the Camera viewport position of the mouse
+            Vector2 mouseOnScreen = (Vector2)cam.ScreenToViewportPoint(Input.mousePosition);
 
             //Get the angle between the points
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
-            //Ta Daaa
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+            //rotate by that angle plus 90° to get player face facing rather than side facing mouse
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
         }
         
     }

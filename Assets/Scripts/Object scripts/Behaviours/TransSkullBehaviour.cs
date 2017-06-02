@@ -44,7 +44,6 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		isDead = h.getDeath ();
 		skullteam = h.getTeam ();
 
-
         if (isDead)
         {
             killSkull();

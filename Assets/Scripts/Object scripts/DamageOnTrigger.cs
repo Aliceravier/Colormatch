@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageOnHit : MonoBehaviour {
+public class DamageOnTrigger : MonoBehaviour {
 
 	[SerializeField]
 	float damage = 300;
 	[SerializeField]
-	bool isStay = true;
-	[SerializeField]
 	float pushback = 20;
 	[SerializeField]
-	float startHurt = 500;
+	bool isStay = false;
 	[SerializeField]
-	float endHurt = 0.1f;
+	float startHurt = 8000;
+	[SerializeField]
+	float endHurt = 0.001f;
+
+
 	Health theirHealth;
 	Team myTeam;
-
-
-
 	// Use this for initialization
-	void Start () {
-		myTeam = GetComponent<Health> ().getTeam ();
+	void Start () {//right now only good for swords/weapons ok  DO NOT USE FOR TRAPS
+		myTeam = GetComponentInParent<Health> ().getTeam ();
 	}
 	
 	// Update is called once per frame
@@ -29,7 +28,7 @@ public class DamageOnHit : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter2D (Collision2D c){
+	void OnTriggerEnter2D(Collider2D c){
 		if (!isStay) {
 			theirHealth = c.gameObject.GetComponent<Health> ();
 			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
@@ -37,9 +36,10 @@ public class DamageOnHit : MonoBehaviour {
 				theirHealth.hitFlash (startHurt, endHurt);
 			}
 		}
+
 	}
 
-	void OnCollisionStay2D (Collision2D c){
+	void OnTriggerStay2D(Collider2D c){
 		if (isStay) {
 			theirHealth = c.gameObject.GetComponent<Health> ();
 			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
@@ -47,7 +47,7 @@ public class DamageOnHit : MonoBehaviour {
 				theirHealth.hitFlash (startHurt, endHurt);
 			}
 		}
+
+
 	}
-
-
 }

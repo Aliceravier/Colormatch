@@ -50,7 +50,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
     }
 
     void killPlayer()
-    {        
+    {   
+		Pause (0.1f,0.1f);
         collider.enabled = false;
         renderer.enabled = false;
         canMove = false;
@@ -126,15 +127,16 @@ public class PlayerBehaviour : ExtendedBehaviour {
         
         //rotate player
         {
-            if (Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f)
-            {
-                float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
-                //rotate by that angle plus 90° to get player face rather than side facing 
-                rb.MoveRotation(angle - 90);
-            }
-
-            
-            //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
+            //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
+        if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f) )
+        {
+            rb.freezeRotation = false;
+            float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
+            //rotate by that angle plus 90° to get player face rather than side facing 
+            rb.MoveRotation(angle - 90);
+        }
+        else
+            rb.freezeRotation = true;  
         }
         
     }

@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4051974462636560}
   - component: {fileID: 61594553294885956}
+  - component: {fileID: 114138931704152764}
   - component: {fileID: 114540282758376204}
   m_Layer: 12
   m_Name: Sword
@@ -90,9 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584200921595506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-
   m_LocalPosition: {x: 12.48, y: 13.37, z: 0}
-
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4046674680479678}
@@ -241,6 +240,22 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114138931704152764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694399067598110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c83aebdd8f3ea44e99932b0b60622c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 150
+  pushback: 5000
+  isStay: 0
+  startHurt: 8000
+  endHurt: 0.001
 --- !u!114 &114447612091021740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -252,8 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Rotx_C1
-  verticalMovInput: Roty_C1
+  horizontalMovInput: Hori_C1
+  verticalMovInput: Vert_C1
+  rotationx: Rotx_C1
+  rotationy: Roty_C1
   StabInput: Stab_C1
   values: 
   speed: 30
@@ -283,6 +300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 300
+  pushback: 20
+  isStay: 0
+  startHurt: 8000
+  endHurt: 0.001
 --- !u!114 &114599787441397518
 MonoBehaviour:
   m_ObjectHideFlags: 1

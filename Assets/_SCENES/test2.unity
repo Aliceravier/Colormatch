@@ -1325,17 +1325,17 @@ Prefab:
     - target: {fileID: 114447612091021740, guid: 8549c4d07a5769e45b6c35060b97a3d1,
         type: 2}
       propertyPath: horizontalMovInput
-      value: Hori_K1
+      value: Hori_C1
       objectReference: {fileID: 0}
     - target: {fileID: 114447612091021740, guid: 8549c4d07a5769e45b6c35060b97a3d1,
         type: 2}
       propertyPath: verticalMovInput
-      value: Vert_K1
+      value: Vert_C1
       objectReference: {fileID: 0}
     - target: {fileID: 114447612091021740, guid: 8549c4d07a5769e45b6c35060b97a3d1,
         type: 2}
       propertyPath: StabInput
-      value: Stab_K1
+      value: Stab_C1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8549c4d07a5769e45b6c35060b97a3d1, type: 2}

@@ -106,22 +106,29 @@ public class PlayerBehaviour : ExtendedBehaviour {
             anim.SetBool("PlayerMoving", false);
 
         //rotate player
-        if (moveHori > 0)//right
+        if (Mathf.Abs(moveHori) > 0 || Mathf.Abs(moveVert) > 0)
         {
-            rb.MoveRotation(270);
-        }
-        if (moveHori < 0)//left
-        {
-            rb.MoveRotation(90);
-        }
+            rb.freezeRotation = false;
+            if (moveHori > 0)//right
+            {
+                rb.MoveRotation(270);
+            }
 
-        if (moveVert > 0)//up
-        {
-            rb.MoveRotation(0);
+            if (moveHori < 0)//left
+            {
+                rb.MoveRotation(90);
+            }
+
+            if (moveVert > 0)//up
+            {
+                rb.MoveRotation(0);
+            }
+            if (moveVert < 0)//down
+            {
+                rb.MoveRotation(180);
+            }
         }
-        if (moveVert < 0)//down
-        {
-            rb.MoveRotation(180);
-        }
+        else
+            rb.freezeRotation = true;
     }
 }

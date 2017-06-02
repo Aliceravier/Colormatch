@@ -253,8 +253,8 @@ MonoBehaviour:
   damage: 150
   pushback: 5000
   isStay: 0
-  startHurt: 8000
-  endHurt: 0.001
+  startHurt: 500
+  endHurt: 0.1
 --- !u!114 &114447612091021740
 MonoBehaviour:
   m_ObjectHideFlags: 1

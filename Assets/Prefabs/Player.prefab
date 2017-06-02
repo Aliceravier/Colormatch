@@ -90,8 +90,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584200921595506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.48, y: 13.37, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.3, y: 33.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4046674680479678}
@@ -254,8 +254,8 @@ MonoBehaviour:
   damage: 150
   pushback: 5000
   isStay: 0
-  startHurt: 8000
-  endHurt: 0.001
+  startHurt: 500
+  endHurt: 0.1
 --- !u!114 &114447612091021740
 MonoBehaviour:
   m_ObjectHideFlags: 1

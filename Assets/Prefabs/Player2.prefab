@@ -90,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1442660717668988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.3, y: 15.7, z: 0}
+  m_LocalPosition: {x: 78.4, y: -77.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4568493596625092}
@@ -267,7 +267,7 @@ MonoBehaviour:
   verticalMovInput: Vert_C2
   rotationx: Rotx_C2
   rotationy: Roty_C2
-  StabInput: Stab_K2
+  StabInput: Stab_C2
   values: 
   speed: 30
   canMove: 1
@@ -285,8 +285,8 @@ MonoBehaviour:
   damage: 150
   pushback: 200
   isStay: 0
-  startHurt: 8000
-  endHurt: 0.001
+  startHurt: 500
+  endHurt: 0.1
 --- !u!114 &114919418503979422
 MonoBehaviour:
   m_ObjectHideFlags: 1

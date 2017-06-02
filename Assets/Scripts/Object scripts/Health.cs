@@ -52,9 +52,7 @@ public class Health : ExtendedBehaviour {
 		SpriteRenderer sr = GetComponent<SpriteRenderer> ();
 		if (sr != null) {
 			Color original = sr.color;
-			print (sr.color);
 			sr.color = new Color (Mathf.Lerp (original.r, 1f, speed), Mathf.Lerp (original.g, 0f, speed), Mathf.Lerp (original.b, 0f, speed));
-			print (sr.color);
 			Wait (time, () => {
 				sr.color = original;
 			});

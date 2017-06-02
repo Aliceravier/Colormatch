@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectTeam: 2
-  maxHealth: 300
+  maxHealth: 600
 --- !u!114 &114613397384378468
 MonoBehaviour:
   m_ObjectHideFlags: 1

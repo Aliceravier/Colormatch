@@ -9,7 +9,7 @@ public class DamageOnTrigger : MonoBehaviour {
 	[SerializeField]
 	float pushback = 20;
 	[SerializeField]
-	bool isStay = false;
+	bool isContinuous = false;
 	[SerializeField]
 	float startHurt = 8000;
 	[SerializeField]
@@ -29,25 +29,27 @@ public class DamageOnTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D c){
-		if (!isStay) {
-			theirHealth = c.gameObject.GetComponent<Health> ();
-			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
-				theirHealth.rigidBodyHurt (damage, pushback, transform);
-				theirHealth.hitFlash (startHurt, endHurt);
+		if (!isContinuous) {
+			doHurt (c.gameObject);
 			}
-		}
 
 	}
 
 	void OnTriggerStay2D(Collider2D c){
-		if (isStay) {
-			theirHealth = c.gameObject.GetComponent<Health> ();
-			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
-				theirHealth.rigidBodyHurt (damage, pushback, transform);
-				theirHealth.hitFlash (startHurt, endHurt);
-			}
+		if (isContinuous) {
+			doHurt (c.gameObject);
 		}
 
+
+	}
+
+	void doHurt(GameObject other){
+
+		theirHealth = other.GetComponent<Health> ();
+		if (theirHealth != null && theirHealth.getTeam () != myTeam) {
+			theirHealth.rigidBodyHurt (damage, pushback, transform);
+			theirHealth.hitFlash (startHurt, endHurt);
+		}
 
 	}
 }

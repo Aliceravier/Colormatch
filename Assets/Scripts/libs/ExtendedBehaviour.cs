@@ -7,6 +7,7 @@ public class ExtendedBehaviour : MonoBehaviour {
 
     public Vector2 randomVector2(Vector2 minimumVector2, Vector2 maximumVector2)
     {
+		/*Takes two vectors, returns a random vector between the two*/
         Vector2 randomVector2 = new Vector2();
         randomVector2.x = UnityEngine.Random.Range(minimumVector2.x, maximumVector2.x);
         randomVector2.y = UnityEngine.Random.Range(minimumVector2.y, maximumVector2.y);

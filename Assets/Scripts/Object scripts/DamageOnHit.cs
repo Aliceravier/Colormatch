@@ -7,7 +7,7 @@ public class DamageOnHit : MonoBehaviour {
 	[SerializeField]
 	float damage = 300;
 	[SerializeField]
-	bool isStay = true;
+	bool isContinuous = true; //decides if damage is continuous or not
 	[SerializeField]
 	float pushback = 20;
 	[SerializeField]
@@ -30,24 +30,25 @@ public class DamageOnHit : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D c){
-		if (!isStay) {
-			theirHealth = c.gameObject.GetComponent<Health> ();
-			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
-				theirHealth.rigidBodyHurt (damage, pushback, transform);
-				theirHealth.hitFlash (startHurt, endHurt);
-			}
+		if (!isContinuous) {
+			doHurt (c.gameObject);
 		}
 	}
 
 	void OnCollisionStay2D (Collision2D c){
-		if (isStay) {
-			theirHealth = c.gameObject.GetComponent<Health> ();
-			if (theirHealth != null && theirHealth.getTeam () != myTeam) {
-				theirHealth.rigidBodyHurt (damage, pushback, transform);
-				theirHealth.hitFlash (startHurt, endHurt);
-			}
+		if (isContinuous) {
+			doHurt (c.gameObject);
 		}
 	}
 
+	void doHurt(GameObject other){
+		/*If other gameobject has health, then deals damage, knockback and makes them flash red*/
+		//refactor
+		theirHealth = other.GetComponent<Health> ();
+		if (theirHealth != null && theirHealth.getTeam () != myTeam) {
+			theirHealth.rigidBodyHurt (damage, pushback, transform);
+			theirHealth.hitFlash (startHurt, endHurt);
+		}
 
+	}
 }

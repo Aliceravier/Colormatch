@@ -35,7 +35,7 @@ public class Blinking : MonoBehaviour {
 
     public void makeBlink(GameObject positionOverlay, Team team)
     {
-
+		/*  */
         positionOverlay.GetComponent<SpriteRenderer>().enabled = isBlink;
 
         if (team == Team.blue)
@@ -69,7 +69,7 @@ public class Blinking : MonoBehaviour {
     }
 
     IEnumerator blink(float flashTime, float downTime)
-    {
+    {/*If you want an accurate image of the future of the human race, imagine a light blinking on and off forever, at repeated set intervals*/
         while (true)
         {
             isBlink = true;

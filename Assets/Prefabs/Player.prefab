@@ -89,8 +89,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584200921595506}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.11, y: 14.45, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.3, y: 33.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4046674680479678}
@@ -253,6 +253,8 @@ MonoBehaviour:
   damage: 150
   pushback: 5000
   isStay: 0
+  startHurt: 8000
+  endHurt: 0.001
 --- !u!114 &114447612091021740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,9 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Hori_K1
-  verticalMovInput: Vert_K1
-  StabInput: Stab_K1
+  horizontalMovInput: Hori_C1
+  verticalMovInput: Vert_C1
+  StabInput: Stab_C1
   values: 
   speed: 30
   canMove: 1

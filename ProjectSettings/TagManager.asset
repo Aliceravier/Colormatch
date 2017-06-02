@@ -18,8 +18,10 @@ TagManager:
   - blueSpawn
   - greenSpawn
   - MinimapCamera2
-  - goaway
   - Button
+  - goaway
+  - Undefined
+  - Crosshair
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - MinimapPos2
   - Minimap
   - PlayerInteraction
-  - 
+  - Player
   - 
   - 
   - 

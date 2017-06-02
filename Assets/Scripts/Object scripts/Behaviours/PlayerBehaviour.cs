@@ -6,6 +6,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	
     public string horizontalMovInput;
     public string verticalMovInput;
+    public string rotationx;
+    public string rotationy;
 	public string StabInput;
 
 	Team playerTeam;
@@ -13,7 +15,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;
-    
+
+    private bool canReswing = true;
 	private SpriteRenderer renderer;
     private Collider2D collider;
     private Rigidbody2D body;
@@ -24,6 +27,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	float moveHori = 0;
 	float moveVert = 0;
+    float rotx = 0;
+    float roty = 0;
 
 	bool isDead;
     bool stopKilling = false;
@@ -83,10 +88,16 @@ public class PlayerBehaviour : ExtendedBehaviour {
 		{
 			moveHori = Input.GetAxisRaw(horizontalMovInput);
 			moveVert = Input.GetAxisRaw(verticalMovInput);
+            rotx = Input.GetAxis(rotationx);
+            roty = Input.GetAxis(rotationy);
 		}
-		if (Input.GetButtonDown (StabInput) && !anim.GetBool("isSwing") && !isDead)
+		if (Input.GetAxis (StabInput) > 0.8f && !anim.GetBool("isSwing") && !isDead && canReswing)
 			anim.SetTrigger ("isSwing");
 
+        if (Input.GetAxis(StabInput) > 0.8)
+            canReswing = false;
+        else
+            canReswing = true;
 
 		if (isDead && !stopKilling)
 		{
@@ -115,23 +126,17 @@ public class PlayerBehaviour : ExtendedBehaviour {
         
         //rotate player
         {
+            if (Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f)
+            {
+                float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
+                //rotate by that angle plus 90° to get player face rather than side facing 
+                rb.MoveRotation(angle - 90);
+            }
 
-            //Get the Camera viewport position of the object
-            Vector2 positionOnScreen = cam.WorldToViewportPoint(transform.position);
-
-            //Get the Camera viewport position of the crosshair
-            Vector2 crosshairOnScreen = (Vector2)cam.WorldToViewportPoint(findChildObjectByTag("Crosshair").transform.position);
-
-            //Get the angle between the points
-            float angle = AngleBetweenTwoPoints(positionOnScreen, crosshairOnScreen);
-
-            //rotate by that angle plus 90° to get player face facing rather than side facing mouse
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
+            
+            //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90));
         }
         
     }
-    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
-    {
-        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
-    }
+
 }

@@ -124,7 +124,10 @@ public class RoomManager : ExtendedBehaviour {
                 
             }
             if (findChildObjectByTag("Button") != null)
+            {
+                print("making that lock");
                 bb.makeLock();
+            }
         }
     }
 

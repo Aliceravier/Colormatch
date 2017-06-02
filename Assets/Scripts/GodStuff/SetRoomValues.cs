@@ -7,6 +7,7 @@ public class SetRoomValues : MonoBehaviour {
 
     private class roomInfo
     {
+		/*An object containing information on both the position of a given room, and the gameobject itself */
         public Vector2 roomPosition;
         public GameObject room;
 
@@ -18,7 +19,20 @@ public class SetRoomValues : MonoBehaviour {
         }
     }
 
+
+
     int[] values = { 4, 3, 8, 9, 5, 1, 2, 7, 6 };
+
+	// Use this for initialization
+	void Start () {
+		giveRoomsValues();
+	}
+
+	// Update is called once per frame
+	void Update () {
+
+	}
+
 
     GameObject[] orderedRooms()
     //gives an array of all the rooms in the order they are in the scene
@@ -140,6 +154,7 @@ public class SetRoomValues : MonoBehaviour {
 
     float getMinX(Vector2[] roomPositions)
     {
+		/*Finds the minimum x coordinate in all rooms */
         float xMin = roomPositions[0][0];
         foreach (Vector2 roomPosition in roomPositions)
         {
@@ -151,6 +166,7 @@ public class SetRoomValues : MonoBehaviour {
 
     float getMaxX(Vector2[] roomPositions)
     {
+		/*Finds the maximum x coordinate in all rooms*/
         float xMax = roomPositions[0][0];
         foreach (Vector2 roomPosition in roomPositions)
         {
@@ -162,6 +178,7 @@ public class SetRoomValues : MonoBehaviour {
 
     float getMinY(Vector2[] roomPositions)
     {
+		/*Finds the minimum y coordinate in all rooms*/
         float yMin = roomPositions[0][1];
         foreach (Vector2 roomPosition in roomPositions)
         {
@@ -173,6 +190,7 @@ public class SetRoomValues : MonoBehaviour {
 
     float getMaxY(Vector2[] roomPositions)
     {
+		/*Finds the maximum y coordinate in all rooms */
         float yMax = roomPositions[0][1];
         foreach (Vector2 roomPosition in roomPositions)
         {
@@ -182,13 +200,5 @@ public class SetRoomValues : MonoBehaviour {
         return yMax;
     }
 
-    // Use this for initialization
-    void Start () {
-        giveRoomsValues();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 }

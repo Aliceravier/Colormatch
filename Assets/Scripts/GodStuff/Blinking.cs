@@ -35,9 +35,10 @@ public class Blinking : MonoBehaviour {
 
     public void makeBlink(GameObject positionOverlay, Team team)
     {
-		/*  */
+		/* Handles the position on the minimap blinking on and off repeatedly. Also, ensures that the correct player sees the correct player's position on their map */
         positionOverlay.GetComponent<SpriteRenderer>().enabled = isBlink;
 
+		//ensures only blue player can see blue player's pos
         if (team == Team.blue)
         {
             if (gh.bothInSameRoom())
@@ -53,6 +54,7 @@ public class Blinking : MonoBehaviour {
             
         }
 
+		//ensures only green player can see green player's pos
         if (team == Team.green)
         {
             if (gh.bothInSameRoom())
@@ -69,7 +71,7 @@ public class Blinking : MonoBehaviour {
     }
 
     IEnumerator blink(float flashTime, float downTime)
-    {/*If you want an accurate image of the future of the human race, imagine a light blinking on and off forever, at repeated set intervals*/
+    {/*If you want a picture of the future, imagine a bool blinking on and off forever, at repeated set intervals*/
         while (true)
         {
             isBlink = true;

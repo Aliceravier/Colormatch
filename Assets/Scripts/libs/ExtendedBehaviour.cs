@@ -15,18 +15,15 @@ public class ExtendedBehaviour : MonoBehaviour {
     }
 
 	public void Wait (float seconds, Action action){
+		/*Does any code inside action (format ()=>{<CODE>}) after seconds seconds */
 		StartCoroutine (_wait (seconds, action));
     }
 
 	public void Pause(float seconds, float timeScale = 0f){
+		/* Slows time to timeScale for seconds seconds (by default stops time)*/
 		StartCoroutine (_pause (seconds, timeScale));
 	}
-
-	public static float getScalingFactor(GameObject tile){
-		Sprite s = tile.GetComponent<SpriteRenderer> ().sprite;
-		return s.rect.width / s.bounds.size.x;
-
-	}
+		
 	public static Vector2 getTileSize(GameObject tile){
 		/*Gets the size of a tile :)
 		 */
@@ -35,12 +32,14 @@ public class ExtendedBehaviour : MonoBehaviour {
 	}
 
 	public static Vector2 getRealSize(GameObject thing){
+		/*Gets size of a tile * by the objects size, getting total overall size */
 		Vector2 size = getTileSize (thing);
 		return new Vector2 (size.x * thing.transform.localScale.x, size.y * thing.transform.localScale.y);
 	}
 
 
 	public static GameObject getPlayerOfTeam(Team team){
+		/*Given a team, returns a player of that team*/
 		GameObject[] players;
 		players = GameObject.FindGameObjectsWithTag("Player");
 		foreach (GameObject player in players)
@@ -52,6 +51,7 @@ public class ExtendedBehaviour : MonoBehaviour {
 	}
 
 	public GameObject findChildObjectByName(string name){
+		/*Returns the first child gameobject with a specific name it can find*/
 		foreach (Transform tile in this.transform)
 			if (tile.name.CompareTo (name) == 0)
 				return tile.gameObject;
@@ -60,6 +60,7 @@ public class ExtendedBehaviour : MonoBehaviour {
 	}
 
 	public GameObject[] findChildObjectsByName(string name){
+		
 		List<GameObject> objs = new List<GameObject> ();
 		foreach (Transform tile in this.transform)
 			if (tile.name.CompareTo (name) == 0)

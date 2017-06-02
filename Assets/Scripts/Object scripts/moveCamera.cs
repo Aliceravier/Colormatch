@@ -38,7 +38,7 @@ public class moveCamera : ExtendedBehaviour {
 
     public GameObject getPlayersRoom()
     {        
-		//returns room which player is in
+		/*Returns room which a player is in (REFACTOR) */
         foreach (GameObject room in Rooms)
         {
             Vector2 roomDims = maxRoom(room);
@@ -55,6 +55,7 @@ public class moveCamera : ExtendedBehaviour {
 
     public bool cameraFocusIsOn(GameObject room)
     {
+		/*returns true if camera is focused on the given room, false otherwise*/
         rm = room.GetComponent<RoomManager>();
         Vector2 minCoords = rm.getMinPoint();
         Vector2 maxCoords = rm.getMaxPoint();

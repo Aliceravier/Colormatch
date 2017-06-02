@@ -14,8 +14,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
     public float speed;
     private Animator anim;
     
-	private SpriteRenderer renderer;
-    private Collider2D collider;
+	private SpriteRenderer sr;
+    private Collider2D c;
     private Rigidbody2D body;
 
 	[HideInInspector]
@@ -31,16 +31,16 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	void Awake () {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        renderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+		c = GetComponent<BoxCollider2D>();
 		playerTeam = GetComponent<Health> ().getTeam ();
     }
 
     void killPlayer()
     {   
 		Pause (0.1f,0.1f);
-        collider.enabled = false;
-        renderer.enabled = false;
+        c.enabled = false;
+        sr.enabled = false;
         canMove = false;
     }
 
@@ -60,8 +60,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
             transform.position = spawn.transform.position;
             //make player visible
             canMove = true;
-            renderer.enabled = true;
-            collider.enabled = true;            
+            sr.enabled = true;
+            c.enabled = true;            
 			GetComponent<Health>().setUp();
             stopKilling = false;
         });

@@ -132,52 +132,57 @@ public class RoomManager : ExtendedBehaviour {
 
     public bool bothInThisRoom()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+		/*returns true if both players are in this room*/
         return (isInRoom(players[0]) && isInRoom(players[1]));
     }
 
     public bool isInRoom(GameObject thing)
     {
+		/* returns true if a specific thing is in the room (and if it has a collider)*/
         return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) &&
                 Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2) &&
                 thing.GetComponent<Collider2D>().enabled);
     }
 
 	void makeEnemies(GameObject enemy, int nbEnemies, Team team)
-    {   //make not spawn on spawntile
-        Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
-        Vector2 enemyDims = getTileSize(enemy);
-        Vector2 smallestCoordsInRoom = getMinPoint() + wallDims + enemyDims / 2;
-        Vector2 biggestCoordsInRoom = getMaxPoint() - wallDims - enemyDims / 2;
+    {   
+		/*A function which instantiates a number of enemy gameobjects within a given room, of a specific team*/
+
         CircleCollider2D collider = enemy.GetComponent<CircleCollider2D>(); //maybe this is useless?
+		GameObject[] tiles = findChildObjectsByTag("Tile");
 
         for (int i = 0; i < nbEnemies; i++)
-        {
-            GameObject[] tiles = findChildObjectsByTag("Tile");
+		{
+			//get a tile
             GameObject tile = tiles[Random.Range(0, tiles.Length)];
-            Vector3 position = tile.transform.position;
-            Vector3 castingPosition = position + new Vector3(0, 0, -10);
-            Vector3 targetPosition = castingPosition + new Vector3(0, 0, +20);
+			Vector3 castingPosition = tile.transform.position + new Vector3(0, 0, -10);
 
-            
+            //FIRES A RAY AT THE TILE
             collider.enabled = false; //maybe this is useless?
             RaycastHit2D hit = Physics2D.Raycast(castingPosition, new Vector3(0,0,1));
             collider.enabled = true; //maybe this is useless?
 
-            //Instantiate(enemy, position, Quaternion.identity);
+            //IF SOMETHING GETS IN THE WAY LETS UH GO BACK LOL
             if (hit.collider != null)
             {
                 i -= 1;
             }
             else
             {
-                GameObject monster = Instantiate(enemy, position, Quaternion.identity);
-                monster.transform.parent = transform;
-				monster.GetComponent<Health> ().setTeam (team);
-				monster.GetComponent<Health> ().colourByTeam ();
+				//MAKE AN ENEMY OF A SPECIFIC TEAM
+				makeEnemy(enemy, tile.transform.position, team);
             }
         }
     }
+
+	void makeEnemy(GameObject enemy, Vector3 pos, Team team){
+		/*Given a gameobject with health (AN ENEMY), a position and a team, goes makes the thing at that position with that team*/
+		GameObject monster = Instantiate(enemy, pos, Quaternion.identity);
+		monster.transform.parent = transform;
+		monster.GetComponent<Health> ().setTeam (team);
+		monster.GetComponent<Health> ().colourByTeam ();
+
+	}
 
 
     public void resetState()

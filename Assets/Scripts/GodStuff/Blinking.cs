@@ -10,8 +10,6 @@ public class Blinking : MonoBehaviour {
     private bool isBlink;
     public float flashTime = 0.5f;
     public float downTime = 0.5f;
-    moveCamera mC;
-    moveCamera mC2;
     Camera minimapCamera1;
     Camera minimapCamera2;
     GameObject positionOverlay;
@@ -20,9 +18,6 @@ public class Blinking : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-        mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
-        mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         gh = GameObject.FindGameObjectWithTag("God").GetComponent<GameHandler>();
 
         if (GameObject.FindGameObjectWithTag("MinimapCamera1") != null)

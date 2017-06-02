@@ -10,7 +10,7 @@ public class hitMe : MonoBehaviour {
         print(this.transform.position + new Vector3(0, 0, -10));
 
         print(this.transform.position + new Vector3(0, 0, 20));
-        Vector3 start = this.transform.position + new Vector3(0, 0, -10);
+//        Vector3 start = this.transform.position + new Vector3(0, 0, -10);
         Vector3 end = this.transform.position + new Vector3(0, 0, 20);
         RaycastHit2D hit = Physics2D.Linecast(this.transform.position + new Vector3(0, 0, -10), this.transform.position + new Vector3(0, 0, 20));
         //Debug.DrawRay(start, new Vector3(0, 0, 30), Color.green);

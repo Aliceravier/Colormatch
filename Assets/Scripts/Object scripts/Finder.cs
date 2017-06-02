@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Finder : MonoBehaviour {
 
-	string tag = "Player";
+	string toFind = "Player";
 
 	List<GameObject> usefulStuff = new List<GameObject>();
 
@@ -19,14 +19,14 @@ public class Finder : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D c){
-		if (c.gameObject.CompareTag(tag)) {
+		if (c.gameObject.CompareTag(toFind)) {
 			usefulStuff.Add (c.gameObject);
 		}
 
 	}
 
 	void OnTriggerExit2D(Collider2D c){
-		if (c.gameObject.tag ==(tag))
+		if (c.gameObject.tag ==(toFind))
 			usefulStuff.Remove (c.gameObject);
 
 	}
@@ -37,7 +37,7 @@ public class Finder : MonoBehaviour {
 
 	public void setTag(string tag){
 		usefulStuff.Clear ();
-		this.tag = tag;
+		toFind = tag;
 	}
 
 

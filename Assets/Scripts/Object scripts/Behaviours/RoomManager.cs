@@ -70,7 +70,7 @@ public class RoomManager : ExtendedBehaviour {
                 blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
             }
         }
-        if (c.name == "Player")
+        if (c.name == "Player1")
         {
             if (!mC.cameraFocusIsOn(gameObject))
                 mC.focusOnRoom(gameObject);

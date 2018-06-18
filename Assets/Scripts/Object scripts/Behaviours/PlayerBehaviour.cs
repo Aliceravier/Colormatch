@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Luminosity.IO;
 
 public class PlayerBehaviour : ExtendedBehaviour {
-	
-    public string horizontalMovInput;
-    public string verticalMovInput;
-    public string rotationx;
-    public string rotationy;
-	public string StabInput;
 
-	Team playerTeam;
+    public PlayerID _playerID;
+    Team playerTeam;
     public List<int> values;
     private Rigidbody2D rb;
     public float speed;
@@ -87,15 +83,15 @@ public class PlayerBehaviour : ExtendedBehaviour {
 		moveVert = 0;
 		if (canMove)
 		{
-			moveHori = Input.GetAxisRaw(horizontalMovInput);
-			moveVert = Input.GetAxisRaw(verticalMovInput);
-            rotx = Input.GetAxis(rotationx);
-            roty = Input.GetAxis(rotationy);
+			moveHori = InputManager.GetAxisRaw("Horizontal", _playerID);
+			moveVert = InputManager.GetAxisRaw("Vertical", _playerID);
+            rotx = InputManager.GetAxis("LookHorizontal", _playerID);
+            roty = InputManager.GetAxis("LookVertical", _playerID);
 		}
-		if (Input.GetAxis (StabInput) > 0.8f && !anim.GetBool("isSwing") && !isDead && canReswing)
+		if (InputManager.GetAxis ("Jump", _playerID) > 0.8f && !anim.GetBool("isSwing") && !isDead && canReswing)
 			anim.SetTrigger ("isSwing");
 
-        if (Input.GetAxis(StabInput) > 0.8)
+        if (InputManager.GetAxis("Jump", _playerID) > 0.8)
             canReswing = false;
         else
             canReswing = true;

@@ -88,8 +88,11 @@ public class PlayerBehaviour : ExtendedBehaviour {
             rotx = InputManager.GetAxis("LookHorizontal", _playerID);
             roty = InputManager.GetAxis("LookVertical", _playerID);
 		}
-		if (InputManager.GetAxis ("Jump", _playerID) > 0.8f && !anim.GetBool("isSwing") && !isDead && canReswing)
-			anim.SetTrigger ("isSwing");
+        if (InputManager.GetButton("Jump", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
+        {
+            Debug.Log("stab stab00");
+            anim.SetTrigger("isSwing");
+        }
 
         if (InputManager.GetAxis("Jump", _playerID) > 0.8)
             canReswing = false;
@@ -124,15 +127,19 @@ public class PlayerBehaviour : ExtendedBehaviour {
         //rotate player
         {
             //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
-        if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f) )
-        {
-            rb.freezeRotation = false;
-            float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
-            //rotate by that angle plus 90° to get player face rather than side facing 
-            rb.MoveRotation(angle - 90);
-        }
-        else
-            rb.freezeRotation = true;  
+            if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f))
+            {
+                rb.freezeRotation = false;
+                float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
+                //rotate by that angle plus 90° to get player face rather than side facing 
+                rb.MoveRotation(angle - 90);
+            }
+            else
+            {
+                rb.angularVelocity = 0;
+                rb.freezeRotation = true;
+            }
+
         }
         
     }

@@ -88,13 +88,13 @@ public class PlayerBehaviour : ExtendedBehaviour {
             rotx = InputManager.GetAxis("LookHorizontal", _playerID);
             roty = InputManager.GetAxis("LookVertical", _playerID);
 		}
-        if (InputManager.GetButton("Jump", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
+        if (InputManager.GetButton("Slash", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
         {
             Debug.Log("stab stab00");
             anim.SetTrigger("isSwing");
         }
 
-        if (InputManager.GetAxis("Jump", _playerID) > 0.8)
+        if (InputManager.GetButton("Slash", _playerID))
             canReswing = false;
         else
             canReswing = true;

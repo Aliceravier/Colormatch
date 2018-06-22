@@ -139,7 +139,7 @@ public class RoomManager : ExtendedBehaviour {
 
     public bool isInRoom(GameObject thing)
     {
-        return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) &&
+        return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) && //rename to roomSize
                 Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2) &&
                 thing.GetComponent<Collider2D>().enabled);
     }
@@ -235,7 +235,7 @@ public class RoomManager : ExtendedBehaviour {
 
 		//find max, min points
 		Vector2 min = getMinPoint();
-		Vector2 max = getMaxPoint ();
+		Vector2 max = getMaxPoint();
 
 
 		//get height and width

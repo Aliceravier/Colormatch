@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomManager : ExtendedBehaviour {
 
@@ -208,13 +209,15 @@ public class RoomManager : ExtendedBehaviour {
         }
     }
 
-	public void ChangeTiles(Color color, string tag){
-		/*Changes all child tiles with a specified tag to a specified color.
+	public void ChangeTiles(Color color, string layer){
+        /*Changes all child tiles with a specified tag to a specified color.
 		 */
-		foreach (Transform child in transform)
-			if (child.gameObject.CompareTag(tag))
-				child.gameObject.GetComponent<SpriteRenderer>().color = color;
-        overlay.GetComponent<SpriteRenderer>().color = color;
+        Tilemap tileMap = findChildObjectByName(layer).GetComponent<Tilemap>();
+        foreach(Vector3Int pos in tileMap.cellBounds.allPositionsWithin)
+        {
+            tileMap.SetTileFlags(pos, TileFlags.None);
+            tileMap.SetColor(pos, color);
+        }
 	}
 
 	public void setRoomTeam(Team t){

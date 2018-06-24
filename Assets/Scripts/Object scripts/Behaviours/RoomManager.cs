@@ -147,7 +147,15 @@ public class RoomManager : ExtendedBehaviour {
 
 	void makeEnemies(GameObject enemy, int nbEnemies, Team team)
     {   //make not spawn on spawntile
-        Vector2 wallDims = getTileSize(this.transform.Find("Wall").gameObject);
+        //find all spawners in room
+        GameObject[] spawners = findChildObjectsByTag("Spawner");
+        //use spawn on them
+        foreach(GameObject spawner in spawners)
+        {
+            spawner.GetComponent<Spawn>().spawn();
+        }
+        /*
+        Vector2 wallDims = getTileSize(this.transform.Find("Wall tileMap").gameObject);
         Vector2 enemyDims = getTileSize(enemy);
         Vector2 smallestCoordsInRoom = getMinPoint() + wallDims + enemyDims / 2;
         Vector2 biggestCoordsInRoom = getMaxPoint() - wallDims - enemyDims / 2;
@@ -178,7 +186,7 @@ public class RoomManager : ExtendedBehaviour {
 				monster.GetComponent<Health> ().setTeam (team);
 				monster.GetComponent<Health> ().colourByTeam ();
             }
-        }
+        }*/
     }
 
 

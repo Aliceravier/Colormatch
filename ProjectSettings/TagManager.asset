@@ -22,6 +22,7 @@ TagManager:
   - goaway
   - Undefined
   - Crosshair
+  - Spawner
   layers:
   - Default
   - TransparentFX

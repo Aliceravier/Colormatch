@@ -5,10 +5,20 @@ using UnityEngine;
 public class Spawn : MonoBehaviour {
 
     public GameObject spawnee;
+    bool hasSpawned = false;
 
     public void spawn()
     {
-        Instantiate(spawnee);
+        if (!hasSpawned)
+        {
+            Instantiate(spawnee, transform.position, Quaternion.identity, transform.parent);
+            hasSpawned = true;
+        }
+    }
+
+    public void setHasSpawned(bool hasSpawned)
+    {
+        this.hasSpawned = hasSpawned;
     }
 
 }

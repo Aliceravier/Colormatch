@@ -26,18 +26,46 @@ public class RoomManager : MonoBehaviour {
             playerToRooms.Add(player, new LastCurRooms(null, null));
            
             updateActiveRoom(player);
-            Debug.Log("Awake player is " + player + "with rooms" + playerToRooms[player].currentRoom + ", " + playerToRooms[player].lastRoom);
             playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;
         }
 	}
 
     // Update is called once per frame
     void Update() {
+        
         foreach (GameObject player in players)
         {
-            Debug.Log("Update player is " + player + "with rooms" + playerToRooms[player].currentRoom + ", " + playerToRooms[player].lastRoom);
             updateActiveRoom(player);
+            GameObject currentRoom = playerToRooms[player].currentRoom;
+            GameObject lastRoom = playerToRooms[player].lastRoom;
+            
+            if(currentRoom != lastRoom) //referenceEquals if '!=' doesn't work
+            {
+                if(!isOthersInRoom(player, lastRoom))
+                {
+                    lastRoom.GetComponent<RoomBehaviour>().resetState();
+                }
+
+                if(!isOthersInRoom(player, currentRoom))
+                {
+                    currentRoom.GetComponent<RoomBehaviour>().makeEnemies();
+                }
+            }
+            playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;
         }
+    }
+
+    private bool isOthersInRoom(GameObject player, GameObject room)
+    {
+        RoomBehaviour rb = room.GetComponent<RoomBehaviour>();
+        foreach (GameObject testPlayer in players)
+        {
+            if (testPlayer != player && rb.isInRoom(testPlayer))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void updateActiveRoom(GameObject player)

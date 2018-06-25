@@ -27,13 +27,16 @@ public class RoomBehaviour : ExtendedBehaviour {
     Blinking blink;
     ButtonBehaviour bb;
     GameObject[] players;
-    
+    GameObject[] spawners;
+
+
 
     private GameObject overlay;
 
 	// Use this for initialization
 	void Awake () {
         walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
+        spawners = findChildObjectsByTag("Spawner");
         mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
@@ -116,7 +119,7 @@ public class RoomBehaviour : ExtendedBehaviour {
             if (enemy != null)
             {
                     if (!isInRoom(ww.findOtherPlayer(c.gameObject)))
-                        makeEnemies(enemy, nbEnemies, roomTeam);
+                        makeEnemies();
                 
             }
             if (findChildObjectByTag("Button") != null)
@@ -140,48 +143,13 @@ public class RoomBehaviour : ExtendedBehaviour {
                 thing.GetComponent<Collider2D>().enabled);
     }
 
-	void makeEnemies(GameObject enemy, int nbEnemies, Team team)
-    {   //make not spawn on spawntile
-        //find all spawners in room
-        GameObject[] spawners = findChildObjectsByTag("Spawner");
-        //use spawn on them
+	public void makeEnemies()
+    {
+        //use spawn on spawners
         foreach(GameObject spawner in spawners)
         {
             spawner.GetComponent<Spawn>().spawn();
         }
-        /*
-        Vector2 wallDims = getTileSize(this.transform.Find("Wall tileMap").gameObject);
-        Vector2 enemyDims = getTileSize(enemy);
-        Vector2 smallestCoordsInRoom = getMinPoint() + wallDims + enemyDims / 2;
-        Vector2 biggestCoordsInRoom = getMaxPoint() - wallDims - enemyDims / 2;
-        CircleCollider2D collider = enemy.GetComponent<CircleCollider2D>(); //maybe this is useless?
-
-        for (int i = 0; i < nbEnemies; i++)
-        {
-            GameObject[] tiles = findChildObjectsByTag("Tile");
-            GameObject tile = tiles[Random.Range(0, tiles.Length)];
-            Vector3 position = tile.transform.position;
-            Vector3 castingPosition = position + new Vector3(0, 0, -10);
-            Vector3 targetPosition = castingPosition + new Vector3(0, 0, +20);
-
-            
-            collider.enabled = false; //maybe this is useless?
-            RaycastHit2D hit = Physics2D.Raycast(castingPosition, new Vector3(0,0,1));
-            collider.enabled = true; //maybe this is useless?
-
-            //Instantiate(enemy, position, Quaternion.identity);
-            if (hit.collider != null)
-            {
-                i -= 1;
-            }
-            else
-            {
-                GameObject monster = Instantiate(enemy, position, Quaternion.identity);
-                monster.transform.parent = transform;
-				monster.GetComponent<Health> ().setTeam (team);
-				monster.GetComponent<Health> ().colourByTeam ();
-            }
-        }*/
     }
 
 
@@ -210,6 +178,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         {
             Destroy(enemy);
         }
+        resetSpawners();
     }
 
 	public void ChangeTiles(Color color, string layer){
@@ -296,5 +265,12 @@ public class RoomBehaviour : ExtendedBehaviour {
 		return (Vector2) transform.position - getCentre ();
 	}
 
+    public void resetSpawners()
+    {
+        foreach(GameObject spawner in spawners)
+        {
+            spawner.GetComponent<Spawn>().setHasSpawned(false);
+        }
+    }
 		
 }

@@ -132,7 +132,7 @@ public class SetRoomValues : MonoBehaviour {
         for (int i = 0; i < 9; i++)
         {
 
-            ordRooms[i].GetComponent<RoomManager>().roomValue = values[i]; //debug orderedRooms does not contain gOs
+            ordRooms[i].GetComponent<RoomBehaviour>().roomValue = values[i]; //debug orderedRooms does not contain gOs
         }
     }
 

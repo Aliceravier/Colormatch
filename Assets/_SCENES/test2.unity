@@ -231,6 +231,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashTime: 0.5
   downTime: 0.5
+--- !u!114 &152245985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 152245982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bd818e70775d645bbdf21f632ce72f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &191040189
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +594,8 @@ Prefab:
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114963724602857564, guid: 38fe62595dc53e0419b381c6e359d35a, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 38fe62595dc53e0419b381c6e359d35a, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &688354794

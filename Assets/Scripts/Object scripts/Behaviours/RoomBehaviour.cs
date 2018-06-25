@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class RoomManager : ExtendedBehaviour {
+public class RoomBehaviour : ExtendedBehaviour {
 
 	public Team roomTeam = Team.neutral;
 	public int roomValue = 5;
@@ -13,7 +13,6 @@ public class RoomManager : ExtendedBehaviour {
     public LayerMask playerInteraction;
     public bool minimapActive;
     public Tilemap walls;
-    public GameObject marker;
 
     [HideInInspector]
     public Vector2 roomSize;
@@ -34,6 +33,7 @@ public class RoomManager : ExtendedBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+        walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
         mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
         mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
@@ -42,7 +42,7 @@ public class RoomManager : ExtendedBehaviour {
         bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
-        walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
+        
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -74,17 +74,6 @@ public class RoomManager : ExtendedBehaviour {
             {
                 blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
             }
-        }
-        if (c.name == "Player1")
-        {
-            if (!mC.cameraFocusIsOn(gameObject))
-
-                mC.focusOnRoom(gameObject);
-        }
-        if (c.name == "Player2")
-        {
-            if (!mC2.cameraFocusIsOn(gameObject))
-                mC2.focusOnRoom(gameObject);
         }
 
     }
@@ -229,7 +218,6 @@ public class RoomManager : ExtendedBehaviour {
         Tilemap tileMap = findChildObjectByName(layer).GetComponent<Tilemap>();
         foreach(Vector3Int pos in tileMap.cellBounds.allPositionsWithin)
         {
-            print("position is " + pos);
             //Instantiate(marker, tileMap.CellToWorld(pos), Quaternion.identity);
             tileMap.SetTileFlags(pos, TileFlags.None);
             tileMap.SetColor(pos, color);
@@ -255,15 +243,6 @@ public class RoomManager : ExtendedBehaviour {
         return (Vector2)size;       
 	}
 
-    public Vector2 getMidPoint()
-    {
-        Vector3 center = walls.cellBounds.center;
-        Vector3Int roundedCenter = new Vector3Int((int)center.x -1, (int)center.y, (int)center.z);
-        return walls.GetCellCenterWorld(roundedCenter);
-    }
-
-
-
 	public Vector2 getMinPoint(){
         /*Gets minimum point of room.
 		 */
@@ -280,12 +259,12 @@ public class RoomManager : ExtendedBehaviour {
 	}
 
 	public Vector2 getCentre(){
-		/*Gets the centre point :)
+        /*Gets the centre point :)
 		 */
-		Vector2 min = getMinPoint();
-		Vector2 size = getSize();
-		return new Vector2 (min.x + (size.x / 2), min.y + (size.y / 2));
-	}
+        Vector3 center = walls.cellBounds.center;
+        Vector3Int roundedCenter = new Vector3Int((int)center.x - 1, (int)center.y, (int)center.z);
+        return walls.GetCellCenterWorld(roundedCenter);
+    }
 
 	public Transform getClosestCentreTile(){
 		Vector2 centre = getCentre();

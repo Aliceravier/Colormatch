@@ -47,7 +47,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
     
 	void setRoom(GameObject player){//RECOTJJAJNFJOR COLLOOUR
 		/* Takes a player, sets the room to be their team and colour */
-		RoomManager rm = this.transform.parent.GetComponent<RoomManager> ();
+		RoomBehaviour rm = this.transform.parent.GetComponent<RoomBehaviour> ();
 		rm.setRoomTeam (player.GetComponent<Health> ().getTeam());
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Floor");
 
@@ -57,7 +57,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
 		/*Tells God what room was got by which player*/
 		GameObject god = GameObject.FindGameObjectWithTag("God");
 		whoWon ww = god.GetComponent<whoWon>();
-		int roomValue = this.GetComponentInParent<RoomManager>().roomValue;
+		int roomValue = this.GetComponentInParent<RoomBehaviour>().roomValue;
 		ww.updateInfo(player, roomValue);  //updates the players' value tables and checks if someone won  
 
 	}

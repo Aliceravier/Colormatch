@@ -12,7 +12,7 @@ public class moveCamera : ExtendedBehaviour {
     public bool isLeaving = false;
 
     [HideInInspector]
-    public GameObject newRoom;
+    public GameObject activeRoom;
 
     RoomManager rm;
     Camera cam;
@@ -25,11 +25,13 @@ public class moveCamera : ExtendedBehaviour {
         player = getPlayerOfTeam (playerTeam);
         cam = GetComponent<Camera> ();
 		setAspectRatio (playerTeam);
+        rm = GameObject.FindGameObjectWithTag("God").GetComponent<RoomManager>();
     }
 
     void LateUpdate()
     {
-        focusOnRoom(getPlayersRoom());
+        activeRoom = rm.getActiveRoom(player);
+        focusOnRoom(activeRoom);
     }
 
 	// Update is called once per frame
@@ -42,38 +44,8 @@ public class moveCamera : ExtendedBehaviour {
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
-    public GameObject getPlayersRoom() //put this in a God script
-    {        
-		//returns room which player is in
-        foreach (GameObject room in rooms)
-        {
-            rm = room.GetComponent<RoomManager>();
-            Vector2 roomDims = roomSize(room);
-            if (Mathf.Abs(player.transform.position.x - rm.getMidPoint().x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.position.y - rm.getMidPoint().y) < (roomDims.y / 2))
-            {
-                return room;
-            }
-        }
-		//no room found, just return null
-        return null;
-    }
-
-
-    public bool cameraFocusIsOn(GameObject room)
-    {
-        rm = room.GetComponent<RoomManager>();
-        Vector2 minCoords = rm.getMinPoint();
-        Vector2 maxCoords = rm.getMaxPoint();
-        if (transform.position.x > minCoords.x && transform.position.y > minCoords.y
-            && transform.position.x < maxCoords.x && transform.position.y < maxCoords.y)
-            return true;
-        else
-            return false;
-    }
-
 	public void focusOnRoom(GameObject room){
-        Vector2 midPoint = room.GetComponent<RoomManager>().getMidPoint();
+        Vector2 midPoint = room.GetComponent<RoomBehaviour>().getCentre();
         print("midpoint is "+midPoint);
         
 		Vector2 roomDims = roomSize(room);
@@ -130,7 +102,7 @@ public class moveCamera : ExtendedBehaviour {
 
     //get dimensions of room
 	public Vector2 roomSize(GameObject room) {
-		return room.GetComponent<RoomManager>().roomSize;
+		return room.GetComponent<RoomBehaviour>().roomSize;
 	}
 	
 }

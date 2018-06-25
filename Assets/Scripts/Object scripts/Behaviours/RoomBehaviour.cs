@@ -21,13 +21,12 @@ public class RoomBehaviour : ExtendedBehaviour {
 
     private GameObject positionOverlay;
     private GameObject button;
-    moveCamera mC;
-    moveCamera mC2;
     whoWon ww;
     Blinking blink;
     public ButtonBehaviour bb;
     GameObject[] players;
     GameObject[] spawners;
+    GameObject[] enemies;
 
 
 
@@ -37,8 +36,6 @@ public class RoomBehaviour : ExtendedBehaviour {
 	void Awake () {
         walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
         spawners = findChildObjectsByTag("Spawner");
-        mC2 = GameObject.FindGameObjectWithTag("Camera2").GetComponent<moveCamera>();
-        mC = GameObject.FindGameObjectWithTag("Camera1").GetComponent<moveCamera>();
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
         ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
         if(findChildObjectByTag("Button") != null)
@@ -103,18 +100,6 @@ public class RoomBehaviour : ExtendedBehaviour {
         {
             Health h = c.GetComponent<Health>();
             Team team = h.getTeam();
-
-
-            //focuses on room if thing that entered is a player and they're alive
-            if (!h.getDeath() && team == Team.blue)
-            {
-                mC.focusOnRoom(this.gameObject);
-                    
-            }
-            if (!h.getDeath() && team == Team.green)
-            {
-                mC2.focusOnRoom(this.gameObject);
-            }
 
             //make enemies appear
             if (enemy != null)

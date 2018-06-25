@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ButtonBehaviour : ExtendedBehaviour {
 
-    public GameObject locker;
+    LockBehaviour locker;
 
     private Animator anim;
     private GameObject button;
@@ -14,14 +14,12 @@ public class ButtonBehaviour : ExtendedBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animator>();	
+        anim = GetComponent<Animator>();
+        locker = transform.GetChild(0).GetComponent<LockBehaviour>();
         
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-	}
 
     void OnTriggerEnter2D(Collider2D c)
     {
@@ -47,7 +45,7 @@ public class ButtonBehaviour : ExtendedBehaviour {
     
 	void setRoom(GameObject player){//RECOTJJAJNFJOR COLLOOUR
 		/* Takes a player, sets the room to be their team and colour */
-		RoomBehaviour rm = this.transform.parent.GetComponent<RoomBehaviour> ();
+		RoomBehaviour rm = transform.parent.GetComponent<RoomBehaviour> ();
 		rm.setRoomTeam (player.GetComponent<Health> ().getTeam());
 		rm.ChangeTiles(player.GetComponent<SpriteRenderer>().color, "Floor");
 

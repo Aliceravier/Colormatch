@@ -1895,12 +1895,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114499012266863170, guid: 1943b01107eb7a1419d1f6e43ffd8e72,
-        type: 2}
-      propertyPath: marker
-      value: 
-      objectReference: {fileID: 1331306762741672, guid: bfa02447cc94e8c42baa06bcbbc37222,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1943b01107eb7a1419d1f6e43ffd8e72, type: 2}
   m_IsPrefabParent: 0

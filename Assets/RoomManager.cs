@@ -48,7 +48,7 @@ public class RoomManager : MonoBehaviour {
 
                 if(!isOthersInRoom(player, currentRoom))
                 {
-                    currentRoom.GetComponent<RoomBehaviour>().makeEnemies();
+                    currentRoom.GetComponent<RoomBehaviour>().spawnRoom();
                 }
             }
             playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;

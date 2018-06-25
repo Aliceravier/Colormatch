@@ -25,7 +25,7 @@ public class RoomBehaviour : ExtendedBehaviour {
     moveCamera mC2;
     whoWon ww;
     Blinking blink;
-    ButtonBehaviour bb;
+    public ButtonBehaviour bb;
     GameObject[] players;
     GameObject[] spawners;
 
@@ -119,7 +119,7 @@ public class RoomBehaviour : ExtendedBehaviour {
             if (enemy != null)
             {
                     if (!isInRoom(ww.findOtherPlayer(c.gameObject)))
-                        makeEnemies();
+                        spawnRoom();
                 
             }
             if (findChildObjectByTag("Button") != null)
@@ -143,13 +143,14 @@ public class RoomBehaviour : ExtendedBehaviour {
                 thing.GetComponent<Collider2D>().enabled);
     }
 
-	public void makeEnemies()
+	public void spawnRoom()
     {
         //use spawn on spawners
         foreach(GameObject spawner in spawners)
         {
             spawner.GetComponent<Spawn>().spawn();
         }
+       // bb.makeLock();
     }
 
 

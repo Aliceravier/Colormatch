@@ -135,17 +135,15 @@ public class RoomBehaviour : ExtendedBehaviour {
         //use spawn on spawners
         foreach(GameObject spawner in spawners)
         {
-            spawner.GetComponent<Spawn>().spawn();
+            spawner.GetComponent<Spawn>().spawn(roomTeam);
         }
        // bb.makeLock();
     }
 
-	void makeEnemy(GameObject enemy, Vector3 pos, Team team){
+	void makeEnemy(GameObject enemy, Team team){
 		/*Given a gameobject with health (AN ENEMY), a position and a team, goes makes the thing at that position with that team*/
-		GameObject monster = Instantiate(enemy, pos, Quaternion.identity);
-		monster.transform.parent = transform;
-		monster.GetComponent<Health> ().setTeam (team);
-		monster.GetComponent<Health> ().colourByTeam ();
+		//Omonster.GetComponent<Health> ().setTeam (team);
+		//monster.GetComponent<Health> ().colourByTeam ();
 
 	}
 

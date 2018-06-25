@@ -263,8 +263,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1810661173876944}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -57.5, y: -72.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -97.5, y: 32.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4372257295913908}
@@ -424,7 +424,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnee: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
+  spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
+    type: 2}
 --- !u!114 &114588241528051554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,7 +437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnee: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
+  spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
+    type: 2}
 --- !u!114 &114605036428376790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -448,7 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnee: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201, type: 2}
+  spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
+    type: 2}
 --- !u!212 &212122210445049932
 SpriteRenderer:
   m_ObjectHideFlags: 1

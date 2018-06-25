@@ -20,22 +20,15 @@ public class Health : ExtendedBehaviour {
 	void Update () {
         if (health <= 0)
         {
-            isDead = true;
+            this.isDead = true;
         }
 	}
 
-    public float getHealth()
-    {
-        return health;
-    }
-
-	public float getMaxHealth(){
-		return maxHealth;
-	}
-
 	public void hurt(float damage){
-		if (!isDead)
-			health -= damage;
+        if (!isDead)
+        {
+            this.health -= damage;
+        }
 	}
 
 
@@ -59,17 +52,43 @@ public class Health : ExtendedBehaviour {
 		}
 
 	}
-	public bool getDeath(){
+
+    public void setUp()
+    {
+        health = maxHealth;
+        isDead = false;
+        colourByTeam();
+    }
+
+    public void colourByTeam()
+    {
+        /*finds a player of team t, gets their color, sets thing to be that color. Else, white*/
+        GameObject player = getPlayerOfTeam(objectTeam);
+        if (player != null)
+            GetComponent<SpriteRenderer>().color = player.GetComponent<SpriteRenderer>().color;
+        else
+            GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+        
+    /*Getters and setters
+     */
+    public float getHealth()
+    {
+        return health;
+    }
+
+    public float getMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public bool getDeath(){
 		return isDead;
 	}
 
 	public void setDeath(bool deathState){
-		isDead = deathState;
-	}
-
-	public void setUp(){
-		health = maxHealth;
-		isDead = false;
+		this.isDead = deathState;
 	}
 
 	public Team getTeam(){
@@ -77,17 +96,7 @@ public class Health : ExtendedBehaviour {
 	}
 
 	public void setTeam(Team t){
-		objectTeam = t;
-
-	}
-
-	public void colourByTeam(){
-		/*finds a player of team t, gets their color, sets thing to be that color. Else, white*/
-		GameObject player = getPlayerOfTeam (objectTeam);
-		if (player != null)
-			GetComponent<SpriteRenderer> ().color = player.GetComponent<SpriteRenderer> ().color;
-		else
-			GetComponent<SpriteRenderer> ().color = Color.white;
+		this.objectTeam = t;
 	}
 
 

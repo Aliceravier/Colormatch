@@ -258,7 +258,7 @@ public class RoomManager : ExtendedBehaviour {
     public Vector2 getMidPoint()
     {
         Vector3 center = walls.cellBounds.center;
-        Vector3Int roundedCenter = new Vector3Int((int) center.x, (int)center.y, (int)center.z);
+        Vector3Int roundedCenter = new Vector3Int((int)center.x -1, (int)center.y, (int)center.z);
         return walls.GetCellCenterWorld(roundedCenter);
     }
 

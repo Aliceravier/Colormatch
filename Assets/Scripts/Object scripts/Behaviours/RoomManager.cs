@@ -12,6 +12,8 @@ public class RoomManager : ExtendedBehaviour {
 	[HideInInspector] //WHAT THE FUCK
     public LayerMask playerInteraction;
     public bool minimapActive;
+    public Tilemap walls;
+    public GameObject marker;
 
     [HideInInspector]
     public Vector2 roomSize;
@@ -26,6 +28,7 @@ public class RoomManager : ExtendedBehaviour {
     Blinking blink;
     ButtonBehaviour bb;
     GameObject[] players;
+    
 
     private GameObject overlay;
 
@@ -39,9 +42,11 @@ public class RoomManager : ExtendedBehaviour {
         bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
         positionOverlay = transform.Find("PositionOverlay").gameObject;
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+        walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
         players = GameObject.FindGameObjectsWithTag("Player");
+        
 
         if (transform.Find("Overlay") != null)
         overlay = transform.Find("Overlay").gameObject;
@@ -50,6 +55,7 @@ public class RoomManager : ExtendedBehaviour {
 
     void Start()
     {
+        
         positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
 
         players[0].GetComponent<PlayerBehaviour>().spawnPlayer();
@@ -223,6 +229,8 @@ public class RoomManager : ExtendedBehaviour {
         Tilemap tileMap = findChildObjectByName(layer).GetComponent<Tilemap>();
         foreach(Vector3Int pos in tileMap.cellBounds.allPositionsWithin)
         {
+            print("position is " + pos);
+            //Instantiate(marker, tileMap.CellToWorld(pos), Quaternion.identity);
             tileMap.SetTileFlags(pos, TileFlags.None);
             tileMap.SetColor(pos, color);
         }
@@ -235,75 +243,40 @@ public class RoomManager : ExtendedBehaviour {
 	}
 
 	public Vector2 getSize() {
-		/*Gets size of room
+        /*Gets size of room as a Vector2
 		 */
 
-		//special case checks :))))
-		if (firstTile == null)
-			firstTile = transform.GetChild (1);
-		//get size of a single tile, for magical variable purposes
-
-
-		//find max, min points
-		Vector2 min = getMinPoint();
-		Vector2 max = getMaxPoint();
-
-
-		//get height and width
-		float height = Mathf.Abs(max.y - min.y);
-		float width = Mathf.Abs (max.x - min.x);
-
-		return new Vector2 (width, height); //dimensions of room
+        Vector3 size = walls.size;
+        Vector3 cellSize = walls.cellSize;
+        //print("raw size is: " + size);
+        //print("cell size is: " + cellSize);
+        size = Vector3.Scale(size, cellSize);
+        //print("size is: "+(Vector2)size);
+        return (Vector2)size;       
 	}
+
+    public Vector2 getMidPoint()
+    {
+        Vector3 center = walls.cellBounds.center;
+        Vector3Int roundedCenter = new Vector3Int((int) center.x, (int)center.y, (int)center.z);
+        return walls.GetCellCenterWorld(roundedCenter);
+    }
+
+
 
 	public Vector2 getMinPoint(){
-		/*Gets minimum point of room.
-		 */ 
-		if (firstTile == null)
-			firstTile = transform.GetChild (1);
-
-		Vector2 tileSize = getTileSize(firstTile.gameObject);
-		float xmin = firstTile.position.x;
-		float ymin = firstTile.position.y;
-
-		foreach (Transform tile in transform) {
-			float xtile = tile.position.x;
-			float ytile = tile.position.y;
-
-			if (xtile < xmin)
-				xmin = xtile;
-			if (ytile < ymin)
-				ymin = ytile;
-
+        /*Gets minimum point of room.
+		 */
+        print("min point " + walls.CellToWorld(new Vector3Int(0, 0, 1)));
+        return walls.CellToWorld(new Vector3Int(0, 0, 1));
 		}
-		return new Vector2 (xmin - tileSize.x/2, ymin - tileSize.y/2);
-
-	}
 
 	public Vector2 getMaxPoint(){
-		/* Gets maximum point of room.
+        /* Gets maximum point of room.
 		 */
-
-		if (firstTile == null)
-			firstTile = transform.GetChild (1);
-
-		Vector2 tileSize = getTileSize(firstTile.gameObject);
-		
-		float ymax = firstTile.position.y;
-		float xmax = firstTile.position.x;
-
-		foreach (Transform tile in transform)
-		{
-			float xtile = tile.position.x;
-			float ytile = tile.position.y;
-
-
-			if (ytile > ymax)
-				ymax = ytile;
-			if (xtile > xmax)
-				xmax = xtile;      
-		}
-		return new Vector2 (xmax + tileSize.x/2, ymax + tileSize.y/2);
+        Vector3 midPoint = walls.CellToWorld(walls.size);
+        print("max cell position "+midPoint);
+        return new Vector2(midPoint.x + walls.cellSize.x, midPoint.y + walls.cellSize.y);
 	}
 
 	public Vector2 getCentre(){
@@ -311,7 +284,6 @@ public class RoomManager : ExtendedBehaviour {
 		 */
 		Vector2 min = getMinPoint();
 		Vector2 size = getSize();
-
 		return new Vector2 (min.x + (size.x / 2), min.y + (size.y / 2));
 	}
 

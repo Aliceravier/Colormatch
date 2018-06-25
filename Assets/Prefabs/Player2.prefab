@@ -263,9 +263,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Hori_K2
-  verticalMovInput: Vert_K2
-  StabInput: Stab_K2
+  horizontalMovInput: Hori_C2
+  verticalMovInput: Vert_C2
+  rotationx: Rotx_C2
+  rotationy: Roty_C2
+  StabInput: Stab_C2
   values: 
   speed: 30
   canMove: 1

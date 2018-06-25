@@ -20,6 +20,9 @@ TagManager:
   - MinimapCamera2
   - Button
   - goaway
+  - Undefined
+  - Crosshair
+  - Spawner
   layers:
   - Default
   - TransparentFX

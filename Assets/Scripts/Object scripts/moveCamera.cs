@@ -1,29 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class moveCamera : ExtendedBehaviour {
 
     [SerializeField]
 	Team playerTeam = Team.neutral;
     private GameObject player;
-    GameObject[] Rooms;
+    GameObject[] rooms;
     public bool isLeaving = false;
 
     [HideInInspector]
-    public GameObject newRoom;
+    public GameObject activeRoom;
 
     RoomManager rm;
     Camera cam;
-
+    public float cameraSpeed = 4f;
 
 	// Use this for initialization
 	void Awake () {
         
-        Rooms = GameObject.FindGameObjectsWithTag("Room");
+        rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
         cam = GetComponent<Camera> ();
 		setAspectRatio (playerTeam);
+        rm = GameObject.FindGameObjectWithTag("God").GetComponent<RoomManager>();
+    }
+
+    void LateUpdate()
+    {
+        activeRoom = rm.getActiveRoom(player);
+        focusOnRoom(activeRoom);
     }
 
 	// Update is called once per frame
@@ -36,42 +44,15 @@ public class moveCamera : ExtendedBehaviour {
 		return screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 	}
 
-    public GameObject getPlayersRoom()
-    {        
-		/*Returns room which a player is in (REFACTOR) */
-        foreach (GameObject room in Rooms)
-        {
-            Vector2 roomDims = maxRoom(room);
-            if (Mathf.Abs(player.transform.position.x - room.transform.position.x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.position.y - room.transform.position.y) < (roomDims.y / 2))
-            {
-                return room;
-            }
-        }
-		//no room found, just return null
-        return null;
-    }
-
-
-    public bool cameraFocusIsOn(GameObject room)
-    {
-		/*returns true if camera is focused on the given room, false otherwise*/
-        rm = room.GetComponent<RoomManager>();
-        Vector2 minCoords = rm.getMinPoint();
-        Vector2 maxCoords = rm.getMaxPoint();
-        if (transform.position.x > minCoords.x && transform.position.y > minCoords.y
-            && transform.position.x < maxCoords.x && transform.position.y < maxCoords.y)
-            return true;
-        else
-            return false;
-    }
 
 	public void focusOnRoom(GameObject room){
-        this.transform.position = new Vector3(room.transform.position.x, room.transform.position.y, -10);
-		Vector2 roomDims = maxRoom(room);
-		//print (playerTeam.ToString () + " " + room);
+        Vector2 midPoint = room.GetComponent<RoomBehaviour>().getCentre();
+        
+		Vector2 roomDims = roomSize(room);
 		cam.orthographicSize = roomDims.y/2;
-	}
+        Vector3 newRoom = new Vector3(midPoint.x, midPoint.y, -10);
+        transform.position = Vector3.Lerp(transform.position, newRoom, Time.fixedDeltaTime * cameraSpeed);
+    }
 
 	void setAspectRatio(Team team){
 		//set aspect wanted
@@ -120,8 +101,8 @@ public class moveCamera : ExtendedBehaviour {
 	}
 
     //get dimensions of room
-	public Vector2 maxRoom(GameObject room) {
-		return room.GetComponent<RoomManager>().roomSize;
+	public Vector2 roomSize(GameObject room) {
+		return room.GetComponent<RoomBehaviour>().roomSize;
 	}
 	
 }

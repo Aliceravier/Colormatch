@@ -728,6 +728,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
     - target: {fileID: 1684233444896892, guid: b65b75a8b17e5b24d98f8c0c982ccc46, type: 2}
       propertyPath: m_TagString
       value: greenSpawn
@@ -740,6 +742,7 @@ Prefab:
       propertyPath: m_TagString
       value: blueSpawn
       objectReference: {fileID: 0}
+>>>>>>> f00a4a1ed4630c5c042e5b7be10608af89be2dd1
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b65b75a8b17e5b24d98f8c0c982ccc46, type: 2}
   m_IsPrefabParent: 0

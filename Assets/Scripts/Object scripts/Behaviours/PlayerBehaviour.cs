@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Luminosity.IO;
 
 public class PlayerBehaviour : ExtendedBehaviour {
-	
-    public string horizontalMovInput;
-    public string verticalMovInput;
-	public string StabInput;
 
-	Team playerTeam;
+    public PlayerID _playerID;
+    Team playerTeam;
     public List<int> values;
     private Rigidbody2D rb;
     public float speed;
@@ -16,18 +14,29 @@ public class PlayerBehaviour : ExtendedBehaviour {
     
 	private SpriteRenderer sr;
     private Collider2D c;
+    private bool canReswing = true;
     private Rigidbody2D body;
+    private Camera cam;
 
 	[HideInInspector]
     public bool canMove = true;
 
 	float moveHori = 0;
 	float moveVert = 0;
+    float rotx = 0;
+    float roty = 0;
 
 	bool isDead;
     bool stopKilling = false;
 
-	// Use this for initialization
+    // Use this for initialization
+    void Start()
+    {
+        if (name == "Player1")
+            cam = GameObject.FindGameObjectWithTag("Camera1").GetComponent<Camera>();
+        if (name == "Player2")
+            cam = GameObject.FindGameObjectWithTag("Camera2").GetComponent<Camera>();
+    }
 	void Awake () {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -74,12 +83,21 @@ public class PlayerBehaviour : ExtendedBehaviour {
 		moveVert = 0;
 		if (canMove)
 		{
-			moveHori = Input.GetAxisRaw(horizontalMovInput);
-			moveVert = Input.GetAxisRaw(verticalMovInput);
+			moveHori = InputManager.GetAxisRaw("Horizontal", _playerID);
+			moveVert = InputManager.GetAxisRaw("Vertical", _playerID);
+            rotx = InputManager.GetAxis("LookHorizontal", _playerID);
+            roty = InputManager.GetAxis("LookVertical", _playerID);
 		}
-		if (Input.GetButtonDown (StabInput) && !anim.GetBool("isSwing") && !isDead)
-			anim.SetTrigger ("isSwing");
+        if (InputManager.GetButton("Slash", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
+        {
+            Debug.Log("stab stab00");
+            anim.SetTrigger("isSwing");
+        }
 
+        if (InputManager.GetButton("Slash", _playerID))
+            canReswing = false;
+        else
+            canReswing = true;
 
 		if (isDead && !stopKilling)
 		{
@@ -105,30 +123,25 @@ public class PlayerBehaviour : ExtendedBehaviour {
         else
             anim.SetBool("PlayerMoving", false);
 
+        
         //rotate player
-        if (Mathf.Abs(moveHori) > 0 || Mathf.Abs(moveVert) > 0)
         {
-            rb.freezeRotation = false;
-            if (moveHori > 0)//right
+            //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
+            if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f))
             {
-                rb.MoveRotation(270);
+                rb.freezeRotation = false;
+                float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
+                //rotate by that angle plus 90° to get player face rather than side facing 
+                rb.MoveRotation(angle - 90);
+            }
+            else
+            {
+                rb.angularVelocity = 0;
+                rb.freezeRotation = true;
             }
 
-            if (moveHori < 0)//left
-            {
-                rb.MoveRotation(90);
-            }
-
-            if (moveVert > 0)//up
-            {
-                rb.MoveRotation(0);
-            }
-            if (moveVert < 0)//down
-            {
-                rb.MoveRotation(180);
-            }
         }
-        else
-            rb.freezeRotation = true;
+        
     }
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameHandler : MonoBehaviour {
 
 	GameObject[] rooms;
-    RoomManager rm;
+    RoomBehaviour rm;
 	// Use this for initialization
 	void Start () {
 		rooms = GameObject.FindGameObjectsWithTag ("Room");
@@ -28,7 +28,7 @@ public class GameHandler : MonoBehaviour {
     {
         foreach (GameObject room in rooms)
         {
-            rm = room.GetComponent<RoomManager>();
+            rm = room.GetComponent<RoomBehaviour>();
             if (rm.bothInThisRoom())
                 return true;
         }

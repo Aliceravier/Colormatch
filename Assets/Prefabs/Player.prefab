@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 4051974462636560}
   - component: {fileID: 61594553294885956}
   - component: {fileID: 114138931704152764}
+  - component: {fileID: 114540282758376204}
   m_Layer: 12
   m_Name: Sword
   m_TagString: goaway
@@ -268,6 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalMovInput: Hori_C1
   verticalMovInput: Vert_C1
+  rotationx: Rotx_C1
+  rotationy: Roty_C1
   StabInput: Stab_C1
   values: 
   speed: 30
@@ -285,6 +288,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTeam: 0
   maxHealth: 300
+--- !u!114 &114540282758376204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694399067598110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c83aebdd8f3ea44e99932b0b60622c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 300
+  pushback: 20
+  isStay: 0
+  startHurt: 8000
+  endHurt: 0.001
 --- !u!114 &114599787441397518
 MonoBehaviour:
   m_ObjectHideFlags: 1

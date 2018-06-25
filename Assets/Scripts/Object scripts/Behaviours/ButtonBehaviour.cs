@@ -57,7 +57,6 @@ public class ButtonBehaviour : ExtendedBehaviour {
 		whoWon ww = god.GetComponent<whoWon>();
 		int roomValue = this.GetComponentInParent<RoomBehaviour>().roomValue;
 		ww.updateInfo(player, roomValue);  //updates the players' value tables and checks if someone won  
-
 	}
 
 

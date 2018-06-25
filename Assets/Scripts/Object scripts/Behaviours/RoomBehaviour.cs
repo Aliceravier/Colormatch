@@ -65,18 +65,12 @@ public class RoomBehaviour : ExtendedBehaviour {
 	void Update () {
     }
 
-    void OnTriggerStay2D(Collider2D c)
-    {
-        
+    public void startBlink(GameObject player)
+    {      
         if (minimapActive)
         {
-            if (c.CompareTag("Player"))
-            {
-                blink.makeBlink(positionOverlay, c.GetComponent<Health>().getTeam());
-            }
+            blink.makeBlink(positionOverlay, player.GetComponent<Health>().getTeam());
         }
-
-
     }
 
     void OnTriggerExit2D(Collider2D c)

@@ -50,6 +50,9 @@ public class RoomManager : MonoBehaviour {
                 {
                     currentRoom.GetComponent<RoomBehaviour>().spawnRoom();
                 }
+
+                currentRoom.GetComponent<RoomBehaviour>().startBlink(player);
+
             }
             playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;
         }

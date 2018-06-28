@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4996308683438998}
   - component: {fileID: 212122210445049932}
-  - component: {fileID: 114266300784923266}
+  - component: {fileID: 114422059940573460}
   m_Layer: 8
   m_Name: PositionOverlay
   m_TagString: Minimap
@@ -400,17 +400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3ef121350ff6b47b9e2accd8781083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114266300784923266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504769646806778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3ef121350ff6b47b9e2accd8781083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114384334569890020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -422,6 +411,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 293ea7841cfb7a343887bae8c41a6995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114422059940573460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504769646806778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458d9f0ada633124f89955af43c04349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkThreshold: 0.5
 --- !u!114 &114451545325730200
 MonoBehaviour:
   m_ObjectHideFlags: 1

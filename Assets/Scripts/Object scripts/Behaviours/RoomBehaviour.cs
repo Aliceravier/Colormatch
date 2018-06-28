@@ -13,13 +13,15 @@ public class RoomBehaviour : ExtendedBehaviour {
     public LayerMask playerInteraction;
     public bool minimapActive;
     public Tilemap walls;
+    public GameObject[] roomPopulation;
+    
 
     [HideInInspector]
     public Vector2 roomSize;
 
 	Transform firstTile;
 
-    private GameObject positionOverlay;
+    private OverlayBehaviour positionOverlay;
     private GameObject button;
     whoWon ww;
     Blinking blink;
@@ -40,8 +42,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
         if(findChildObjectByTag("Button") != null)
         bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
-        positionOverlay = transform.Find("PositionOverlay").gameObject;
-        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+        positionOverlay = GetComponentInChildren<OverlayBehaviour>();
         
         roomSize = getSize();
 		firstTile = transform.GetChild (1);
@@ -55,11 +56,8 @@ public class RoomBehaviour : ExtendedBehaviour {
 
     void Start()
     {
-        
-        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
 
-        players[0].GetComponent<PlayerBehaviour>().spawnPlayer();
-        players[1].GetComponent<PlayerBehaviour>().spawnPlayer();
+        
     }
 	// Update is called once per frame
 	void Update () {
@@ -69,58 +67,35 @@ public class RoomBehaviour : ExtendedBehaviour {
     {      
         if (minimapActive)
         {
-            blink.makeBlink(positionOverlay, player.GetComponent<Health>().getTeam());
+            positionOverlay.startBlinking(player.GetComponent<cameraReference>().getVisibleLayers());
         }
     }
 
-    void OnTriggerExit2D(Collider2D c)
-    {   /*Checks if there are players still in the room when a player leaves and resets the rooms state if not
-         *
-         */        
-        if (c.CompareTag("Player"))
-        {
-            if (!isInRoom(ww.findOtherPlayer(c.gameObject)) && !isInRoom(c.gameObject))
-            {
-                resetState();
-            }
-        }
-    
-    }
+
+    public GameObject[] getRoomPopulation()
+    {
+        
+        List<GameObject> playersInRoom = new List<GameObject>();
 		
-
-    void OnTriggerEnter2D(Collider2D c)
-    {
-        if (c.CompareTag("Player"))
+        foreach (GameObject player in players)
         {
-            Health h = c.GetComponent<Health>();
-            Team team = h.getTeam();
-
-            //make enemies appear
-            if (enemy != null)
+            if (isInRoom(player))
             {
-                    if (!isInRoom(ww.findOtherPlayer(c.gameObject)))
-                        spawnRoom();
-                
-            }
-            if (findChildObjectByTag("Button") != null)
-            {
-                bb.makeLock();
+                playersInRoom.Add(player);
             }
         }
-    }
+        
+        roomPopulation = playersInRoom.ToArray();
+        
+        return roomPopulation;
 
-
-    public bool bothInThisRoom()
-    {
-		/*returns true if both players are in this room*/
-        return (isInRoom(players[0]) && isInRoom(players[1]));
     }
 
     public bool isInRoom(GameObject thing)
     {
 		/* returns true if a specific thing is in the room (and if it has a collider)*/
-        return (Mathf.Abs(thing.transform.position.x - this.transform.position.x) < (getSize().x / 2) && //rename to roomSize
-                Mathf.Abs(thing.transform.position.y - this.transform.position.y) < (getSize().y / 2) &&
+        return (Mathf.Abs(thing.transform.position.x - getCentre().x) < (getSize().x / 2) && //rename to roomSize
+                Mathf.Abs(thing.transform.position.y - getCentre().y) < (getSize().y / 2) &&
                 thing.GetComponent<Collider2D>().enabled);
     }
 
@@ -131,15 +106,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         {
             spawner.GetComponent<Spawn>().spawn(roomTeam);
         }
-       // bb.makeLock();
     }
-
-	void makeEnemy(GameObject enemy, Team team){
-		/*Given a gameobject with health (AN ENEMY), a position and a team, goes makes the thing at that position with that team*/
-		//Omonster.GetComponent<Health> ().setTeam (team);
-		//monster.GetComponent<Health> ().colourByTeam ();
-
-	}
 
 
     public void resetState()
@@ -150,8 +117,7 @@ public class RoomBehaviour : ExtendedBehaviour {
          */
     {
         //set positionOverlay to invisible
-        positionOverlay = this.transform.Find("PositionOverlay").gameObject;
-        positionOverlay.GetComponent<SpriteRenderer>().enabled = false;
+        positionOverlay.stopBlinking();
 
         //set button animation to unpressed
         if (transform.Find("Button") != null)
@@ -194,10 +160,7 @@ public class RoomBehaviour : ExtendedBehaviour {
 
         Vector3 size = walls.size;
         Vector3 cellSize = walls.cellSize;
-        //print("raw size is: " + size);
-        //print("cell size is: " + cellSize);
         size = Vector3.Scale(size, cellSize);
-        //print("size is: "+(Vector2)size);
         return (Vector2)size;       
 	}
 

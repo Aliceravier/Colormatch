@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4390430719695902}
   - component: {fileID: 212100470860172046}
-  - component: {fileID: 114695208341027276}
+  - component: {fileID: 114808270857411144}
   m_Layer: 8
   m_Name: PositionOverlay
   m_TagString: Minimap
@@ -306,8 +306,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335388710667424}
-  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 7.5, y: 32.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -97.5, y: -72.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4223418304127988}
@@ -418,7 +418,7 @@ MonoBehaviour:
   playerInteraction:
     serializedVersion: 2
     m_Bits: 0
-  minimapActive: 0
+  minimapActive: 1
   walls: {fileID: 0}
   roomSize: {x: 0, y: 0}
   bb: {fileID: 0}
@@ -472,7 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
     type: 2}
---- !u!114 &114695208341027276
+--- !u!114 &114808270857411144
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -480,9 +480,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199715139983776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd3ef121350ff6b47b9e2accd8781083, type: 3}
+  m_Script: {fileID: 11500000, guid: 458d9f0ada633124f89955af43c04349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkThreshold: 0.5
 --- !u!114 &114913248417101344
 MonoBehaviour:
   m_ObjectHideFlags: 1

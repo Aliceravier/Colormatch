@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour {
         foreach (GameObject room in rooms)
         {
             rm = room.GetComponent<RoomBehaviour>();
-            if (rm.bothInThisRoom())
+            //if (rm.bothInThisRoom())
                 return true;
         }
         return false;

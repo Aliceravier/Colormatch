@@ -30,7 +30,7 @@ public class moveCamera : ExtendedBehaviour {
 
     void LateUpdate()
     {
-        activeRoom = rm.getActiveRoom(player);
+        activeRoom = player.GetComponent<PlayerStatistics>().currentRoom;
         focusOnRoom(activeRoom);
     }
 

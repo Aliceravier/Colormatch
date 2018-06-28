@@ -1,17 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class LastCurRooms
-{
-    public GameObject lastRoom;
-    public GameObject currentRoom;
-    public LastCurRooms(GameObject lastRoom, GameObject currentRoom)
-    {
-        this.lastRoom = lastRoom;
-        this.currentRoom = currentRoom;
-    }
-}
 
+/*A handler for moving between rooms - todo: make into a nice observer design pattern */
+//could potentially just store the room on the player itself? do iin future
 public class RoomManager : MonoBehaviour {
     Dictionary<GameObject, LastCurRooms> playerToRooms = new Dictionary<GameObject, LastCurRooms>();
     GameObject[] rooms;
@@ -19,52 +11,65 @@ public class RoomManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rooms = GameObject.FindGameObjectsWithTag("Room");
-
         players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
-            playerToRooms.Add(player, new LastCurRooms(null, null));
+            PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
            
             updateActiveRoom(player);
-            playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;
+            playerToRoom.lastRoom = playerToRoom.currentRoom;
+            player.GetComponent<PlayerBehaviour>().spawnPlayer();
         }
 	}
 
     // Update is called once per frame
+    //this is awful and will be dramatically improved when we observer it UP
     void Update() {
         
         foreach (GameObject player in players)
         {
+            PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
             updateActiveRoom(player);
-            GameObject currentRoom = playerToRooms[player].currentRoom;
-            GameObject lastRoom = playerToRooms[player].lastRoom;
+            GameObject currentRoom = playerToRoom.currentRoom;
+            GameObject lastRoom = playerToRoom.lastRoom;
             
-            if(currentRoom != lastRoom) //referenceEquals if '!=' doesn't work
+            
+
+            if (currentRoom != lastRoom) //referenceEquals if '!=' doesn't work
             {
-                if(!isOthersInRoom(player, lastRoom))
+                if (!isOthersInRoom(lastRoom, player))
+                    
                 {
+                    Debug.Log("no others in last room " + lastRoom);
                     lastRoom.GetComponent<RoomBehaviour>().resetState();
                 }
 
-                if(!isOthersInRoom(player, currentRoom))
+                if(!isOthersInRoom(currentRoom, player))
                 {
-                    currentRoom.GetComponent<RoomBehaviour>().spawnRoom();
+                    Debug.Log("no others in current room " + currentRoom);
+                    currentRoom.GetComponent<RoomBehaviour>().spawnRoom(); 
+                    resetMasks();
+                }
+                else
+                {
+                    showAllMiniMaps(); //currently 
                 }
 
                 currentRoom.GetComponent<RoomBehaviour>().startBlink(player);
+                playerToRoom.lastRoom = currentRoom;
 
             }
-            playerToRooms[player].lastRoom = playerToRooms[player].currentRoom;
+           
+
         }
     }
 
-    private bool isOthersInRoom(GameObject player, GameObject room)
+    private bool isOthersInRoom(GameObject room, GameObject player)
     {
         RoomBehaviour rb = room.GetComponent<RoomBehaviour>();
-        foreach (GameObject testPlayer in players)
+        foreach (GameObject otherplayer in players)
         {
-            if (testPlayer != player && rb.isInRoom(testPlayer))
-            {
+            if (player != otherplayer && rb.isInRoom(otherplayer)){
                 return true;
             }
         }
@@ -75,16 +80,15 @@ public class RoomManager : MonoBehaviour {
     {
         /* for the given player, updates in the dictionnary which room they are currently in
          */
+        PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
         foreach (GameObject room in rooms)
         {
             RoomBehaviour rm = room.GetComponent<RoomBehaviour>();
             Vector2 roomDims = rm.roomSize;
-            if (Mathf.Abs(player.transform.position.x - rm.getCentre().x) < (roomDims.x / 2) &&
-                Mathf.Abs(player.transform.position.y - rm.getCentre().y) < (roomDims.y / 2))
-            {
-                LastCurRooms before = playerToRooms[player];
-                before.currentRoom= room;
-                playerToRooms[player] = before;
+            if (rm.isInRoom(player)) {
+                playerToRoom.currentRoom = room;
+                rm.getRoomPopulation();
+                return;
             }
         }
     }
@@ -93,7 +97,31 @@ public class RoomManager : MonoBehaviour {
     {
         return playerToRooms[player].currentRoom;
     }
+
+    private void resetMasks()
+    {
+        foreach (GameObject player in players)
+        {
+            cameraReference cr = player.GetComponent<cameraReference>();
+            cr.resetMask();
+        }
+    }
+
+    /* currently gets all players and forces them to all show all players on their miniimaps
+    will break with more than 2 players
+    todo: fix*/
+
+    private void showAllMiniMaps()
+    {
+        foreach (GameObject player in players)
+        {
+            cameraReference cr = player.GetComponent<cameraReference>();
+            cr.viewAllMinimaps(players);
+        }
+    }
 }
+
+
 
 //code to update whenever player moves from room to room: exposes active rooms to camera with getters
 //spawns rooms

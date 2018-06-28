@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 95190093611280576}
   - component: {fileID: 111545358429985292}
   - component: {fileID: 114522410180275306}
+  - component: {fileID: 114924841922850528}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -226,6 +227,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!111 &111545358429985292
 Animation:
   m_ObjectHideFlags: 1
@@ -253,7 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 150
   pushback: 5000
-  isStay: 0
+  isContinuous: 0
   startHurt: 500
   endHurt: 0.1
 --- !u!114 &114447612091021740
@@ -267,11 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e4ad6b32392fa44aada349a742d91ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalMovInput: Hori_C1
-  verticalMovInput: Vert_C1
-  rotationx: Rotx_C1
-  rotationy: Roty_C1
-  StabInput: Stab_C1
+  _playerID: 0
   values: 
   speed: 30
   canMove: 1
@@ -301,7 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 300
   pushback: 20
-  isStay: 0
+  isContinuous: 0
   startHurt: 8000
   endHurt: 0.001
 --- !u!114 &114599787441397518
@@ -315,6 +313,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48a19fb1ead8b042a3f7233df31ce85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114924841922850528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1584200921595506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e162a64315c4c14b8d993cc9040475b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  minimapCamera: {fileID: 0}
 --- !u!212 &212046931510217328
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -324,9 +335,11 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -339,6 +352,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -355,6 +369,8 @@ SpriteRenderer:
   m_Size: {x: 4, y: 0.512}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212429551150426044
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -364,9 +380,11 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -379,6 +397,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -395,6 +414,8 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212811651100351050
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -404,9 +425,11 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -419,6 +442,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -435,3 +459,5 @@ SpriteRenderer:
   m_Size: {x: 4, y: 0.512}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

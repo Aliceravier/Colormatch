@@ -699,6 +699,11 @@ Prefab:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114636835691351566, guid: 63ab549b5f9d94d43bd9c22731f54115,
+        type: 2}
+      propertyPath: roomValue
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114928843999766632, guid: 63ab549b5f9d94d43bd9c22731f54115, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 63ab549b5f9d94d43bd9c22731f54115, type: 2}
@@ -1019,6 +1024,11 @@ Prefab:
     - target: {fileID: 1941333244298042, guid: 63ab549b5f9d94d43bd9c22731f54115, type: 2}
       propertyPath: m_Icon
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114636835691351566, guid: 63ab549b5f9d94d43bd9c22731f54115,
+        type: 2}
+      propertyPath: roomValue
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114928843999766632, guid: 63ab549b5f9d94d43bd9c22731f54115, type: 2}

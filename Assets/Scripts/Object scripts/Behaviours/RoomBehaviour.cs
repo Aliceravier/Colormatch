@@ -13,6 +13,7 @@ public class RoomBehaviour : ExtendedBehaviour {
     public LayerMask playerInteraction;
     public bool minimapActive;
     public Tilemap walls;
+    public Tilemap floor;
     public GameObject[] roomPopulation;
     
 
@@ -37,6 +38,7 @@ public class RoomBehaviour : ExtendedBehaviour {
 	// Use this for initialization
 	void Awake () {
         walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
+        floor = findChildObjectByName("Floor").GetComponent<Tilemap>();
         spawners = findChildObjectsByTag("Spawner");
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
         ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
@@ -44,7 +46,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
         positionOverlay = GetComponentInChildren<OverlayBehaviour>();
         
-        roomSize = getSize();
+        roomSize = roomDims();
 		firstTile = transform.GetChild (1);
         players = GameObject.FindGameObjectsWithTag("Player");
         
@@ -81,21 +83,26 @@ public class RoomBehaviour : ExtendedBehaviour {
         {
             if (isInRoom(player))
             {
+                print("player " + player + "is in room with value " + roomValue);
                 playersInRoom.Add(player);
             }
         }
         
         roomPopulation = playersInRoom.ToArray();
-        
+        print("got room population for room with value: " + roomValue + " of "+ roomPopulation.Length);
         return roomPopulation;
 
     }
 
     public bool isInRoom(GameObject thing)
     {
-		/* returns true if a specific thing is in the room (and if it has a collider)*/
-        return (Mathf.Abs(thing.transform.position.x - getCentre().x) < (getSize().x / 2) && //rename to roomSize
-                Mathf.Abs(thing.transform.position.y - getCentre().y) < (getSize().y / 2) &&
+        /* returns true if a specific thing is in the room (and if it has a collider)*/
+        /*print("position x is: " + thing.transform.position.x);
+        print("centre x is: " + getCentre().x);
+        print("roomdims x is: " + roomDims().x);
+        print("divided by two: " + roomDims().x / 2);*/
+        return (Mathf.Abs(thing.transform.position.x - getCentre().x) < (roomDims().x / 2) && 
+                Mathf.Abs(thing.transform.position.y - getCentre().y) < (roomDims().y / 2) &&
                 thing.GetComponent<Collider2D>().enabled);
     }
 
@@ -154,12 +161,14 @@ public class RoomBehaviour : ExtendedBehaviour {
 		roomTeam = t;
 	}
 
-	public Vector2 getSize() {
+	public Vector2 roomDims() {
         /*Gets size of room as a Vector2
 		 */
 
         Vector3 size = walls.size;
+        print("size of value "+ roomValue+ " is: "+size);
         Vector3 cellSize = walls.cellSize;
+        print("cellsize is: " + cellSize);
         size = Vector3.Scale(size, cellSize);
         return (Vector2)size;       
 	}

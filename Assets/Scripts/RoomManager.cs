@@ -32,21 +32,22 @@ public class RoomManager : MonoBehaviour {
             updateActiveRoom(player);
             GameObject currentRoom = playerToRoom.currentRoom;
             GameObject lastRoom = playerToRoom.lastRoom;
-            
-            
+                     
 
             if (currentRoom != lastRoom) //referenceEquals if '!=' doesn't work
             {
+                print("currentRoom room and last room are different");
+                updatePopulations(player);
                 if (!isOthersInRoom(lastRoom, player))
                     
                 {
-                    Debug.Log("no others in last room " + lastRoom);
+                    ///Debug.Log("no others in last room " + lastRoom);
                     lastRoom.GetComponent<RoomBehaviour>().resetState();
                 }
 
                 if(!isOthersInRoom(currentRoom, player))
                 {
-                    Debug.Log("no others in current room " + currentRoom);
+                    //Debug.Log("no others in current room " + currentRoom);
                     currentRoom.GetComponent<RoomBehaviour>().spawnRoom(); 
                     resetMasks();
                 }
@@ -76,20 +77,31 @@ public class RoomManager : MonoBehaviour {
         return false;
     }
 
+    public void updatePopulations(GameObject player)
+    { //updates populations of player's last and current rooms
+        PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
+        GameObject currentRoom = playerToRoom.currentRoom;
+        GameObject lastRoom = playerToRoom.lastRoom;
+        currentRoom.GetComponent<RoomBehaviour>().getRoomPopulation();
+        lastRoom.GetComponent<RoomBehaviour>().getRoomPopulation();
+    }
+
     public void updateActiveRoom(GameObject player)
     {
-        /* for the given player, updates in the dictionnary which room they are currently in
+        /* for the given player, updates in playerStatistics which room they are currently in
          */
         PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
         foreach (GameObject room in rooms)
         {
-            RoomBehaviour rm = room.GetComponent<RoomBehaviour>();
-            Vector2 roomDims = rm.roomSize;
-            if (rm.isInRoom(player)) {
+            RoomBehaviour rb = room.GetComponent<RoomBehaviour>();
+            if (rb.isInRoom(player))
+            {
+                rb.ChangeTiles(Color.yellow, "Floor");
+                print("got an isinroom on room with value " + rb.roomValue);
                 playerToRoom.currentRoom = room;
-                rm.getRoomPopulation();
-                return;
             }
+            else
+                rb.ChangeTiles(Color.red, "Floor");
         }
     }
 

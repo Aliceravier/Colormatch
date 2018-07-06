@@ -147,17 +147,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashTime: 0.5
   downTime: 0.5
---- !u!114 &152245985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 152245982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5721422b7ac445b49bd7cb1048fbd027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &153072116 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1442660717668988, guid: 8c0dd18d706e0384d85d973d74746ef4,
@@ -936,6 +925,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1408866458 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1536899753978394, guid: 1943b01107eb7a1419d1f6e43ffd8e72,
+    type: 2}
+  m_PrefabInternal: {fileID: 2117016656}
+--- !u!114 &1408866459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408866458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae3f90c1155f264ea01b661003b4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1410039835
 Prefab:
   m_ObjectHideFlags: 0

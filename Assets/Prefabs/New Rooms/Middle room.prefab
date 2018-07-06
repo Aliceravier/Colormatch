@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4665760848137670}
   - component: {fileID: 212721866792167676}
   - component: {fileID: 114247551836643030}
+  - component: {fileID: 114915743842295576}
   m_Layer: 10
   m_Name: Overlay
   m_TagString: Minimap
@@ -110,7 +111,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -126,7 +127,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (2)
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -178,7 +179,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (1)
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -455,6 +456,8 @@ MonoBehaviour:
     m_Bits: 0
   minimapActive: 1
   walls: {fileID: 0}
+  floor: {fileID: 0}
+  roomPopulation: []
   roomSize: {x: 0, y: 0}
   bb: {fileID: 0}
 --- !u!114 &114556555655119780
@@ -482,6 +485,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
     type: 2}
+--- !u!114 &114915743842295576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1189734963506578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae3f90c1155f264ea01b661003b4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114992721846911116
 MonoBehaviour:
   m_ObjectHideFlags: 1

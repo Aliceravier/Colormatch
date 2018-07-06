@@ -42,7 +42,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 4376490166748826}
   - component: {fileID: 212630786343925140}
   - component: {fileID: 114130612347784404}
+  - component: {fileID: 114173730492125992}
   m_Layer: 10
   m_Name: Overlay (1)
   m_TagString: Minimap
@@ -128,7 +129,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner(2)
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -178,7 +179,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner (1)
   m_TagString: Spawner
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -293,8 +294,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1810661173876944}
-  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: 7.5, y: -32.5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -97.5, y: 32.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4372257295913908}
@@ -400,6 +401,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3ef121350ff6b47b9e2accd8781083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114173730492125992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1536899753978394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae3f90c1155f264ea01b661003b4362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114384334569890020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +466,8 @@ MonoBehaviour:
     m_Bits: 0
   minimapActive: 1
   walls: {fileID: 0}
+  floor: {fileID: 0}
+  roomPopulation: []
   roomSize: {x: 0, y: 0}
   bb: {fileID: 0}
 --- !u!114 &114516312900420302

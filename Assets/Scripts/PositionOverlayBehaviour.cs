@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverlayBehaviour : MonoBehaviour {
+public class PositionOverlayBehaviour : MonoBehaviour {
 
     float timer = 0f;
     public float blinkThreshold = 0.5f;

@@ -22,7 +22,7 @@ public class RoomBehaviour : ExtendedBehaviour {
 
 	Transform firstTile;
 
-    private OverlayBehaviour positionOverlay;
+    private PositionOverlayBehaviour positionOverlay;
     private GameObject button;
     whoWon ww;
     Blinking blink;
@@ -44,7 +44,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         ww = GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>();
         if(findChildObjectByTag("Button") != null)
         bb = findChildObjectByTag("Button").GetComponent<ButtonBehaviour>();
-        positionOverlay = GetComponentInChildren<OverlayBehaviour>();
+        positionOverlay = GetComponentInChildren<PositionOverlayBehaviour>();
         
         roomSize = roomDims();
 		firstTile = transform.GetChild (1);
@@ -96,11 +96,6 @@ public class RoomBehaviour : ExtendedBehaviour {
 
     public bool isInRoom(GameObject thing)
     {
-        /* returns true if a specific thing is in the room (and if it has a collider)*/
-        /*print("position x is: " + thing.transform.position.x);
-        print("centre x is: " + getCentre().x);
-        print("roomdims x is: " + roomDims().x);
-        print("divided by two: " + roomDims().x / 2);*/
         return (Mathf.Abs(thing.transform.position.x - getCentre().x) < (roomDims().x / 2) && 
                 Mathf.Abs(thing.transform.position.y - getCentre().y) < (roomDims().y / 2) &&
                 thing.GetComponent<Collider2D>().enabled);
@@ -115,7 +110,13 @@ public class RoomBehaviour : ExtendedBehaviour {
         }
     }
 
-
+    public void resetOverlays()
+    {
+        foreach (GameObject player in roomPopulation)
+        {
+            startBlink(player); //TODO: refactor pls
+        }
+    }
     public void resetState()
         /* sets room to have 
          * no visible positionOverlay and have their button unpressed
@@ -125,6 +126,7 @@ public class RoomBehaviour : ExtendedBehaviour {
     {
         //set positionOverlay to invisible
         positionOverlay.stopBlinking();
+       
 
         //set button animation to unpressed
         if (transform.Find("Button") != null)
@@ -153,7 +155,9 @@ public class RoomBehaviour : ExtendedBehaviour {
             tileMap.SetTileFlags(pos, TileFlags.None);
             tileMap.SetColor(pos, color);
         }
-	}
+
+        GetComponentInChildren<OverlayBehaviour>().setColour(color);
+    }
 
 	public void setRoomTeam(Team t){
 		/*Worthless setter atm :)
@@ -165,10 +169,8 @@ public class RoomBehaviour : ExtendedBehaviour {
         /*Gets size of room as a Vector2
 		 */
 
-        Vector3 size = walls.size;
-        print("size of value "+ roomValue+ " is: "+size);
+        Vector3 size = new Vector3(walls.size.x -1, walls.size.y,walls.size.z);
         Vector3 cellSize = walls.cellSize;
-        print("cellsize is: " + cellSize);
         size = Vector3.Scale(size, cellSize);
         return (Vector2)size;       
 	}
@@ -176,7 +178,6 @@ public class RoomBehaviour : ExtendedBehaviour {
 	public Vector2 getMinPoint(){
         /*Gets minimum point of room.
 		 */
-        print("min point " + walls.CellToWorld(new Vector3Int(0, 0, 1)));
         return walls.CellToWorld(new Vector3Int(0, 0, 1));
 		}
 
@@ -184,7 +185,6 @@ public class RoomBehaviour : ExtendedBehaviour {
         /* Gets maximum point of room.
 		 */
         Vector3 midPoint = walls.CellToWorld(walls.size);
-        print("max cell position "+midPoint);
         return new Vector2(midPoint.x + walls.cellSize.x, midPoint.y + walls.cellSize.y);
 	}
 

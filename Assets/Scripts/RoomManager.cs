@@ -41,13 +41,15 @@ public class RoomManager : MonoBehaviour {
                 if (!isOthersInRoom(lastRoom, player))
                     
                 {
-                    ///Debug.Log("no others in last room " + lastRoom);
                     lastRoom.GetComponent<RoomBehaviour>().resetState();
+                }
+                else
+                {
+                    lastRoom.GetComponent<RoomBehaviour>().resetOverlays();
                 }
 
                 if(!isOthersInRoom(currentRoom, player))
                 {
-                    //Debug.Log("no others in current room " + currentRoom);
                     currentRoom.GetComponent<RoomBehaviour>().spawnRoom(); 
                     resetMasks();
                 }
@@ -96,12 +98,8 @@ public class RoomManager : MonoBehaviour {
             RoomBehaviour rb = room.GetComponent<RoomBehaviour>();
             if (rb.isInRoom(player))
             {
-                rb.ChangeTiles(Color.yellow, "Floor");
-                print("got an isinroom on room with value " + rb.roomValue);
                 playerToRoom.currentRoom = room;
             }
-            else
-                rb.ChangeTiles(Color.red, "Floor");
         }
     }
 

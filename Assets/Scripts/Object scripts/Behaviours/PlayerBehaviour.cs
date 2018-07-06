@@ -16,7 +16,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     private Collider2D c;
     private bool canReswing = true;
     private Rigidbody2D body;
-    private Camera cam;
+
 
 	[HideInInspector]
     public bool canMove = true;
@@ -29,14 +29,6 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	bool isDead;
     bool stopKilling = false;
 
-    // Use this for initialization
-    void Start()
-    {
-        if (name == "Player1")
-            cam = GameObject.FindGameObjectWithTag("Camera1").GetComponent<Camera>();
-        if (name == "Player2")
-            cam = GameObject.FindGameObjectWithTag("Camera2").GetComponent<Camera>();
-    }
 	void Awake () {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -125,7 +117,9 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
         
         //rotate player
-        {
+
+
+        /*{
             //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
             if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f))
             {
@@ -140,7 +134,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
                 rb.freezeRotation = true;
             }
 
-        }
+        }*/
         
     }
 

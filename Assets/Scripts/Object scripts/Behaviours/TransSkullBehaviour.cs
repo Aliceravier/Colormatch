@@ -14,6 +14,8 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 	bool isDead;
 	Team skullteam;
 
+    RoomBehaviour parentRoom;
+
 	Finder f; 
 	Health h;
 	Rigidbody2D rb;
@@ -32,6 +34,7 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		f = GetComponentInChildren<Finder>();
 		h = GetComponent<Health> ();
 		rb = GetComponent<Rigidbody2D> ();
+        parentRoom = GetComponentInParent<RoomBehaviour>();
 	}
 	void Start () {
 		
@@ -53,24 +56,33 @@ public class TransSkullBehaviour : ExtendedBehaviour {
 		targets = f.getList ();
 		GameObject closestPlayer = findClosestPlayer ();
 
-		//finds the vector between player and position, or just doesn't lol
-		if (closestPlayer != null) {
-			target = findClosestPlayer ().transform.position - transform.position;
-		}
-		else
-			target = new Vector2 (0, 0);
+        //finds the vector between player and position, or just doesn't lol
+        if (closestPlayer != null && isInRoom(closestPlayer))
+        {
+            target = closestPlayer.transform.position - transform.position;
+        }
+        else {
+            target = new Vector2(0, 0);
+        }
 
 
 		//find player in room if a player is in the room
         //move towards player
         
 	}
-
+    
 	void FixedUpdate(){
 		rb.velocity = (target.normalized * moveSpeed * Time.smoothDeltaTime);
 
 	}
-
+    bool isInRoom(GameObject target)
+    {
+        foreach (GameObject player in parentRoom.getRoomPopulation())
+        {
+            if (target == player) return true;
+        }
+        return false;
+    }
 	void killSkull(){
 		GetComponent<Collider2D> ().enabled = false;
 		Wait (deathTime, () => {

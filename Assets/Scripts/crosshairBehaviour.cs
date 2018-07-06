@@ -18,9 +18,6 @@ public class crosshairBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        move = Input.GetAxisRaw(horizontalMovInput);
-        Vector3 movement = new Vector3(move, 0,0);
-        //transform.position += movement;
 
     }
 }

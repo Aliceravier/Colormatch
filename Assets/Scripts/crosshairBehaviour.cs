@@ -20,7 +20,7 @@ public class crosshairBehaviour : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         if (!InputHelper.isControllerInput(id))
         {
             Vector3 targetPosition = playerCamera.ScreenToWorldPoint(InputManager.mousePosition);

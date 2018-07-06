@@ -4,19 +4,20 @@ using UnityEngine;
 using Luminosity.IO;
 
 public class PlayerBehaviour : ExtendedBehaviour {
-
+    public float Threshold = 30f;
     public PlayerID _playerID;
     Team playerTeam;
     public List<int> values;
     private Rigidbody2D rb;
     public float speed;
     private Animator anim;
+    public float rotateSpeed = 2;
     
 	private SpriteRenderer sr;
     private Collider2D c;
     private bool canReswing = true;
     private Rigidbody2D body;
-
+    private Transform crosshair;
 
 	[HideInInspector]
     public bool canMove = true;
@@ -35,6 +36,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
         sr = GetComponent<SpriteRenderer>();
 		c = GetComponent<BoxCollider2D>();
 		playerTeam = GetComponent<Health> ().getTeam ();
+        crosshair = transform.Find("Crosshair");
     }
 
     void killPlayer()
@@ -115,10 +117,15 @@ public class PlayerBehaviour : ExtendedBehaviour {
         else
             anim.SetBool("PlayerMoving", false);
 
-        
+
         //rotate player
+        Vector3 targetPoint = crosshair.position - transform.position;
+        float targetAngle = Vector2.Angle(transform.up, targetPoint);
+        Vector3 cross = Vector3.Cross(transform.up, targetPoint);
 
-
+        //targetAngle = targetPoint.y < 0 ? -targetAngle : targetAngle;
+        rb.AddTorque(targetAngle * cross.z * rotateSpeed);
+        
         /*{
             //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
             if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f))

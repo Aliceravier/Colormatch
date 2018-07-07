@@ -24,8 +24,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	float moveHori = 0;
 	float moveVert = 0;
-    float rotx = 0;
-    float roty = 0;
+    public Vector2 stickRotation;
 
 	bool isDead;
     bool stopKilling = false;
@@ -79,12 +78,10 @@ public class PlayerBehaviour : ExtendedBehaviour {
 		{
 			moveHori = InputManager.GetAxisRaw("Horizontal", _playerID);
 			moveVert = InputManager.GetAxisRaw("Vertical", _playerID);
-            rotx = InputManager.GetAxis("LookHorizontal", _playerID);
-            roty = InputManager.GetAxis("LookVertical", _playerID);
+            stickRotation = new Vector2(InputManager.GetAxis("LookHorizontal", _playerID),InputManager.GetAxis("LookVertical", _playerID));
 		}
         if (InputManager.GetButton("Slash", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
         {
-            Debug.Log("stab stab00");
             anim.SetTrigger("isSwing");
         }
 
@@ -123,25 +120,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
         float targetAngle = Vector2.Angle(transform.up, targetPoint);
         Vector3 cross = Vector3.Cross(transform.up, targetPoint);
 
-        //targetAngle = targetPoint.y < 0 ? -targetAngle : targetAngle;
         rb.AddTorque(targetAngle * cross.z * rotateSpeed);
-        
-        /*{
-            //hopefully this works in stopping unwanted rotation from collisions but I actually can't test it properly 
-            if ((Mathf.Abs(rotx) > 0.01f && Mathf.Abs(roty) > 0.01f) || (Mathf.Abs(rotx) > 0.5f && roty == 0.0f) || (Mathf.Abs(roty) > 0.5f && rotx == 0.0f))
-            {
-                rb.freezeRotation = false;
-                float angle = Mathf.Atan2(roty, rotx) * Mathf.Rad2Deg;
-                //rotate by that angle plus 90° to get player face rather than side facing 
-                rb.MoveRotation(angle - 90);
-            }
-            else
-            {
-                rb.angularVelocity = 0;
-                rb.freezeRotation = true;
-            }
-
-        }*/
         
     }
 

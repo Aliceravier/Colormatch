@@ -420,6 +420,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114671407912445910, guid: 33c95001b7a4377429cf8a395d2f78d5,
+        type: 2}
+      propertyPath: tolerance
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114671407912445910, guid: 33c95001b7a4377429cf8a395d2f78d5,
+        type: 2}
+      propertyPath: range
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 33c95001b7a4377429cf8a395d2f78d5, type: 2}
   m_IsPrefabParent: 0
@@ -1662,7 +1672,7 @@ MonoBehaviour:
         m_negative: 0
         m_deadZone: 0
         m_gravity: 1
-        m_sensitivity: 0.1
+        m_sensitivity: 1
         m_snap: 0
         m_invert: 0
         m_type: 6
@@ -1678,7 +1688,7 @@ MonoBehaviour:
         m_negative: 0
         m_deadZone: 0
         m_gravity: 1
-        m_sensitivity: 0.1
+        m_sensitivity: 1
         m_snap: 0
         m_invert: 1
         m_type: 6
@@ -1908,7 +1918,7 @@ MonoBehaviour:
         m_negative: 0
         m_deadZone: 0
         m_gravity: 1
-        m_sensitivity: 0.1
+        m_sensitivity: 1
         m_snap: 0
         m_invert: 0
         m_type: 9
@@ -1924,7 +1934,7 @@ MonoBehaviour:
         m_negative: 0
         m_deadZone: 0
         m_gravity: 1
-        m_sensitivity: 0.1
+        m_sensitivity: 1
         m_snap: 0
         m_invert: 0
         m_type: 9
@@ -2111,7 +2121,7 @@ MonoBehaviour:
         m_gamepadAxis: 0
         m_gamepadIndex: 0
   m_playerOneDefault: 85c52da314c14ce8bc1999635dc6e642
-  m_playerTwoDefault: 4adc278247524ee19ad97f281cb66ce7
+  m_playerTwoDefault: e41ebaf35836418ba98e5e505b0d4a4b
   m_playerThreeDefault: 
   m_playerFourDefault: 
   m_ignoreTimescale: 1

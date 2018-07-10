@@ -71,6 +71,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
     }
 
 	void Update(){
+        //if controller, use triggers
+
 		isDead = GetComponent<Health>().getDeath ();
 		moveHori = 0;
 		moveVert = 0;
@@ -80,12 +82,12 @@ public class PlayerBehaviour : ExtendedBehaviour {
 			moveVert = InputManager.GetAxisRaw("Vertical", _playerID);
             stickRotation = new Vector2(InputManager.GetAxis("LookHorizontal", _playerID),InputManager.GetAxis("LookVertical", _playerID));
 		}
-        if (InputManager.GetButton("Slash", _playerID) && !anim.GetBool("isSwing") && !isDead && canReswing)
+        if (isStabbing() && !anim.GetBool("isSwing") && !isDead && canReswing)
         {
             anim.SetTrigger("isSwing");
         }
 
-        if (InputManager.GetButton("Slash", _playerID))
+        if (isStabbing())
             canReswing = false;
         else
             canReswing = true;
@@ -119,9 +121,21 @@ public class PlayerBehaviour : ExtendedBehaviour {
         Vector3 targetPoint = crosshair.position - transform.position;
         float targetAngle = Vector2.Angle(transform.up, targetPoint);
         Vector3 cross = Vector3.Cross(transform.up, targetPoint);
-
+        Debug.Log("Torque is " + (targetAngle * cross.z * rotateSpeed));
         rb.AddTorque(targetAngle * cross.z * rotateSpeed);
         
+    }
+
+
+    bool isStabbing()
+    {
+        if (InputHelper.isControllerInput(_playerID))
+        {
+            return InputManager.GetAxis("Slash", _playerID) != 0;
+        } else
+        {
+            return InputManager.GetButton("Slash", _playerID);
+        }
     }
 
 }

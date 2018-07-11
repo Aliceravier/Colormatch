@@ -703,7 +703,7 @@ MonoBehaviour:
         m_invert: 0
         m_type: 6
         m_axis: 0
-        m_joystick: 0
+        m_joystick: 1
         m_gamepadButton: 0
         m_gamepadAxis: 0
         m_gamepadIndex: 1

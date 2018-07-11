@@ -418,8 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e162a64315c4c14b8d993cc9040475b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  minimapCamera: {fileID: 0}
+  playerCamera: {fileID: 1087536875404680, guid: 67a8c0fcf71bdd844882906e5a894163,
+    type: 2}
+  minimapCamera: {fileID: 1883667950789864, guid: d574863ceefabab45810c4e53f795ed3,
+    type: 2}
   visibleLayers:
     serializedVersion: 2
     m_Bits: 256

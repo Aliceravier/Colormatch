@@ -19,7 +19,7 @@ public class moveCamera : ExtendedBehaviour {
     public float cameraSpeed = 4f;
 
 	// Use this for initialization
-	void Awake () {
+	public void Awake() {
         
         rooms = GameObject.FindGameObjectsWithTag("Room");
         player = getPlayerOfTeam (playerTeam);
@@ -30,6 +30,8 @@ public class moveCamera : ExtendedBehaviour {
 
     void LateUpdate()
     {
+        print("the player is: " + player);
+        Debug.Log("the current room is: "+player.GetComponent<PlayerStatistics>().currentRoom);
         activeRoom = player.GetComponent<PlayerStatistics>().currentRoom;
         focusOnRoom(activeRoom);
     }

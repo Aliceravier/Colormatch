@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine; using UnityEngine.Networking;
 
 /*A handler for moving between rooms - todo: make into a nice observer design pattern */
-public class RoomManager : MonoBehaviour {
+public class RoomManager : NetworkBehaviour {
     GameObject[] rooms;
     GameObject[] players;
     // Use this for initialization
@@ -12,7 +12,7 @@ public class RoomManager : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player");
     }
     
-    void Start() { 
+    public void Start() { 
         foreach (GameObject player in players)
         {
             PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();

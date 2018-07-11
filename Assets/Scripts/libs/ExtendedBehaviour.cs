@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine; using UnityEngine.Networking;
 using System;
 
-public class ExtendedBehaviour : MonoBehaviour {
+public class ExtendedBehaviour : NetworkBehaviour {
 
     public Vector2 randomVector2(Vector2 minimumVector2, Vector2 maximumVector2)
     {

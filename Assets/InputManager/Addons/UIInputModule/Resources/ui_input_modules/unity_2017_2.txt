@@ -24,7 +24,7 @@
 //
 //	https://bitbucket.org/Unity-Technologies/ui
 #endregion
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 
 namespace Luminosity.IO

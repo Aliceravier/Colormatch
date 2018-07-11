@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 
 
 //potential problem: minimap only works if the minimap layer is set above all the other layers. Reason: unknown

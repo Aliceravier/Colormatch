@@ -9,7 +9,7 @@
 // - Create a camera. Make the camera a child of the capsule. Reset it's transform.
 // - Add a MouseLook script to the camera.
 //   -> Set the mouse look to use LookY. (You want the camera to tilt up and down like a head. The character already turns.)
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 using System.Collections;
 
 namespace Luminosity.IO.Examples

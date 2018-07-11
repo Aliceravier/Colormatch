@@ -22,7 +22,7 @@
 //	ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #endregion [Copyright (c) 2018 Cristian Alexandru Geambasu]
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 using UnityEditor;
 using Luminosity.IO;
 

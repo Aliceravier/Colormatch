@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 
 /*A handler for moving between rooms - todo: make into a nice observer design pattern */
-//could potentially just store the room on the player itself? do iin future
 public class RoomManager : MonoBehaviour {
-    Dictionary<GameObject, LastCurRooms> playerToRooms = new Dictionary<GameObject, LastCurRooms>();
     GameObject[] rooms;
     GameObject[] players;
     // Use this for initialization
-    void Start () {
+    void Awake() {
         rooms = GameObject.FindGameObjectsWithTag("Room");
         players = GameObject.FindGameObjectsWithTag("Player");
+    }
+    
+    void Start() { 
         foreach (GameObject player in players)
         {
             PlayerStatistics playerToRoom = player.GetComponent<PlayerStatistics>();
-           
+            
             updateActiveRoom(player);
             playerToRoom.lastRoom = playerToRoom.currentRoom;
             player.GetComponent<PlayerBehaviour>().spawnPlayer();
@@ -101,11 +102,6 @@ public class RoomManager : MonoBehaviour {
                 playerToRoom.currentRoom = room;
             }
         }
-    }
-
-    public GameObject getActiveRoom(GameObject player)
-    {
-        return playerToRooms[player].currentRoom;
     }
 
     private void resetMasks()

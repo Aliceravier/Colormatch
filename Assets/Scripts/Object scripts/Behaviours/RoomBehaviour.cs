@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 using UnityEngine.Tilemaps;
 
 public class RoomBehaviour : ExtendedBehaviour {
@@ -38,6 +38,7 @@ public class RoomBehaviour : ExtendedBehaviour {
 	// Use this for initialization
 	void Awake () {
         walls = findChildObjectByName("Walls").GetComponent<Tilemap>();
+        Debug.Log("gameObject" + gameObject + "wall status " + walls);
         floor = findChildObjectByName("Floor").GetComponent<Tilemap>();
         spawners = findChildObjectsByTag("Spawner");
         blink = GameObject.FindGameObjectWithTag("God").GetComponent<Blinking>();
@@ -189,6 +190,7 @@ public class RoomBehaviour : ExtendedBehaviour {
 	}
 
 	public Vector2 getCentre(){
+        
         /*Gets the centre point :)
 		 */
         Vector3 center = walls.cellBounds.center;

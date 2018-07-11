@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEngine; using UnityEngine.Networking;
 public class LastCurRooms
 {
     public GameObject lastRoom;

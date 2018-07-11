@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-using UnityEngine;
+using UnityEngine; using UnityEngine.Networking;
 
 namespace UnityEngine.Tilemaps
 {

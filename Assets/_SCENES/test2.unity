@@ -620,7 +620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 728066625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 14769dd1010f6f64aa851aea989d7725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -637,7 +637,9 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
   m_OnlineScene: 
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 1584200921595506, guid: 8549c4d07a5769e45b6c35060b97a3d1, type: 2}
+  - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -693,6 +695,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  spawnPosition: {fileID: 0}
+  curPlayer: 1
 --- !u!4 &728066627
 Transform:
   m_ObjectHideFlags: 0
@@ -1544,7 +1548,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114173730492125992, guid: 1943b01107eb7a1419d1f6e43ffd8e72, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1943b01107eb7a1419d1f6e43ffd8e72, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &2117016657 stripped

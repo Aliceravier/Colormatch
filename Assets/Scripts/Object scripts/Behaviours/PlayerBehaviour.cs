@@ -24,6 +24,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	float moveHori = 0;
 	float moveVert = 0;
+    Vector2 movement;
     public Vector2 stickRotation;
 
 	bool isDead;
@@ -72,16 +73,18 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	void Update(){
         //if controller, use triggers
+        stickRotation = new Vector2(InputManager.GetAxis("LookHorizontal", _playerID), InputManager.GetAxis("LookVertical", _playerID));
+        if (stickRotation.sqrMagnitude > 1.0f) stickRotation.Normalize(); //makes stick move circular :）
 
-		isDead = GetComponent<Health>().getDeath ();
-		moveHori = 0;
-		moveVert = 0;
-		if (canMove)
-		{
-			moveHori = InputManager.GetAxisRaw("Horizontal", _playerID);
-			moveVert = InputManager.GetAxisRaw("Vertical", _playerID);
-            stickRotation = new Vector2(InputManager.GetAxis("LookHorizontal", _playerID),InputManager.GetAxis("LookVertical", _playerID));
-		}
+
+        isDead = GetComponent<Health>().getDeath ();
+
+        movement = new Vector2(InputManager.GetAxisRaw("Horizontal", _playerID),InputManager.GetAxisRaw("Vertical", _playerID));
+        Debug.Log(movement.magnitude);
+        if (movement.magnitude < 0.19f)
+        {
+            movement = Vector2.zero;
+        }
         if (isStabbing() && !anim.GetBool("isSwing") && !isDead && canReswing)
         {
             anim.SetTrigger("isSwing");
@@ -103,8 +106,8 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        
-        Vector2 movement = new Vector2(moveHori, moveVert);
+        if (!canMove) return;
+
         rb.velocity = speed*movement;
  
 

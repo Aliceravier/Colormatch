@@ -8,6 +8,9 @@ public class CrosshairBehaviour : MonoBehaviour {
     public float tolerance = 0.25f;
     Camera playerCamera;
     Vector2 stickRotation;
+
+
+    private Quaternion rotation;
     
     float move = 0;
     PlayerID id;
@@ -17,7 +20,7 @@ public class CrosshairBehaviour : MonoBehaviour {
     void Awake () {
         id = GetComponentInParent<PlayerBehaviour>()._playerID;
         playerCamera = GetComponentInParent<cameraReference>().playerCamera.GetComponent<Camera>();
-        
+        rotation = transform.rotation;
 
     }
 	
@@ -25,6 +28,7 @@ public class CrosshairBehaviour : MonoBehaviour {
 	void LateUpdate () {
         if (InputHelper.isControllerInput(id))
         {
+            transform.rotation = rotation;
             moveToStickPosition();
             
         } else

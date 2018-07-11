@@ -22,8 +22,6 @@ public class PlayerBehaviour : ExtendedBehaviour {
 	[HideInInspector]
     public bool canMove = true;
 
-	float moveHori = 0;
-	float moveVert = 0;
     Vector2 movement;
     public Vector2 stickRotation;
 
@@ -73,7 +71,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	void Update(){
         //if controller, use triggers
-        stickRotation = new Vector2(InputManager.GetAxis("LookHorizontal", _playerID), InputManager.GetAxis("LookVertical", _playerID));
+        stickRotation = new Vector2(InputManager.GetAxisRaw("LookHorizontal", _playerID), InputManager.GetAxisRaw("LookVertical", _playerID));
         if (stickRotation.sqrMagnitude > 1.0f) stickRotation.Normalize(); //makes stick move circular :）
 
 

@@ -15,6 +15,7 @@ public class RoomBehaviour : ExtendedBehaviour {
     public Tilemap walls;
     public Tilemap floor;
     public GameObject[] roomPopulation;
+    public GameObject[] coins;
     
 
     [HideInInspector]
@@ -49,6 +50,7 @@ public class RoomBehaviour : ExtendedBehaviour {
         roomSize = roomDims();
 		firstTile = transform.GetChild (1);
         players = GameObject.FindGameObjectsWithTag("Player");
+        coins = GameObject.FindGameObjectsWithTag("Coin");
         
 
         if (transform.Find("Overlay") != null)
@@ -145,7 +147,8 @@ public class RoomBehaviour : ExtendedBehaviour {
         resetSpawners();
     }
 
-	public void ChangeTiles(Color color, string layer){
+    //find way to make this not use string layer
+	public void ChangeTiles(Color color, string layer = "Floor"){
         /*Changes all child tiles with a specified tag to a specified color.
 		 */
         Tilemap tileMap = findChildObjectByName(layer).GetComponent<Tilemap>();
@@ -231,6 +234,15 @@ public class RoomBehaviour : ExtendedBehaviour {
         foreach(GameObject spawner in spawners)
         {
             spawner.GetComponent<Spawn>().setHasSpawned(false);
+        }
+    }
+
+    public void checkCoins()
+    {
+        coins = GameObject.FindGameObjectsWithTag("Coin");
+        if(coins.Length == 0)
+        {
+            ChangeTiles(Color.yellow);
         }
     }
 		

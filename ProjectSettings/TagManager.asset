@@ -23,6 +23,7 @@ TagManager:
   - Undefined
   - Crosshair
   - Spawner
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
     public float speed;
     private Animator anim;
     public float rotateSpeed = 2;
+    public int coinCount;
     
 	private SpriteRenderer sr;
     private Collider2D c;
@@ -136,6 +137,17 @@ public class PlayerBehaviour : ExtendedBehaviour {
         } else
         {
             return InputManager.GetButton("Slash", _playerID);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Coin"))
+        {
+            other.gameObject.SetActive(false);
+            coinCount++;
+            GameObject room = this.GetComponent<PlayerStatistics>().currentRoom;
+            room.GetComponent<RoomBehaviour>().checkCoins();
         }
     }
 

@@ -29,6 +29,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1061500700968222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4182607513570148}
+  - component: {fileID: 114713170661298634}
+  m_Layer: 0
+  m_Name: CoinSpawner3
+  m_TagString: Spawner
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1199715139983776
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +110,22 @@ GameObject:
   m_Name: Corner room
   m_TagString: Room
   m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1409299454301994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4751329561579868}
+  - component: {fileID: 114114191678820882}
+  m_Layer: 0
+  m_Name: CoinSpawner2
+  m_TagString: Spawner
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -183,6 +215,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1999806663394384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4295690959841362}
+  - component: {fileID: 114599541685232052}
+  m_Layer: 0
+  m_Name: CoinSpawner1
+  m_TagString: Spawner
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4182607513570148
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061500700968222}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -25, y: 30, z: 0}
+  m_LocalScale: {x: 10.000002, y: 10.000002, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4875678273408316}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4223418304127988
 Transform:
   m_ObjectHideFlags: 1
@@ -223,6 +284,19 @@ Transform:
   m_Father: {fileID: 4875678273408316}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4295690959841362
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999806663394384}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -30, y: -7.5, z: 0}
+  m_LocalScale: {x: 10.000002, y: 10.000002, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4875678273408316}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4359571218276686
 Transform:
   m_ObjectHideFlags: 1
@@ -261,6 +335,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4875678273408316}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4751329561579868
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1409299454301994}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 2.5, y: 7.5, z: 0}
+  m_LocalScale: {x: 10.000002, y: 10.000002, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4875678273408316}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4771642380937088
 Transform:
@@ -319,6 +406,9 @@ Transform:
   - {fileID: 4264328235979856}
   - {fileID: 4771642380937088}
   - {fileID: 4851404139830060}
+  - {fileID: 4295690959841362}
+  - {fileID: 4751329561579868}
+  - {fileID: 4182607513570148}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
@@ -401,6 +491,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61dddbcee71a3045b82b1d02ee2c414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114114191678820882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1409299454301994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawneePrefab: {fileID: 1422938690004806, guid: 001641b78c0c9ec40a1727851b9753b9,
+    type: 2}
 --- !u!114 &114201772195802574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,6 +526,7 @@ MonoBehaviour:
   walls: {fileID: 0}
   floor: {fileID: 0}
   roomPopulation: []
+  coins: []
   roomSize: {x: 0, y: 0}
   bb: {fileID: 0}
 --- !u!114 &114275448879242292
@@ -462,6 +566,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
     type: 2}
+--- !u!114 &114599541685232052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1999806663394384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawneePrefab: {fileID: 1422938690004806, guid: 001641b78c0c9ec40a1727851b9753b9,
+    type: 2}
 --- !u!114 &114676779696298736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,6 +591,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawneePrefab: {fileID: 1549974085178952, guid: 20aac32697316814b8697f85e2c0b201,
+    type: 2}
+--- !u!114 &114713170661298634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061500700968222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b47726cf478ce64c94c3280c9226976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawneePrefab: {fileID: 1422938690004806, guid: 001641b78c0c9ec40a1727851b9753b9,
     type: 2}
 --- !u!114 &114773138086488658
 MonoBehaviour:

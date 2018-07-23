@@ -69,7 +69,7 @@ public class whoWon : ExtendedBehaviour {
     void endGame(GameObject player)
     {
     //gameOverText.text = "Game Over!";
-}
+    }
 
     public GameObject findOtherPlayer(GameObject player)
     {

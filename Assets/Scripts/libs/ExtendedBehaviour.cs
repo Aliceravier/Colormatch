@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
-public class ExtendedBehaviour : MonoBehaviour {
+public class ExtendedBehaviour : NetworkBehaviour {
 
     public Vector2 randomVector2(Vector2 minimumVector2, Vector2 maximumVector2)
     {

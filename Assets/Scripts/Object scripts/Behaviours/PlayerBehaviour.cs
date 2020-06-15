@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Luminosity.IO;
+using Mirror;
 
 public class PlayerBehaviour : ExtendedBehaviour {
     public float Threshold = 30f;
@@ -104,26 +105,29 @@ public class PlayerBehaviour : ExtendedBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        if (!canMove) return;
-
-        rb.velocity = speed*movement;
- 
-
-        //walking animation set
-        if (movement.x != 0 || movement.y != 0)
+        if (this.isLocalPlayer)
         {
-            anim.SetBool("PlayerMoving", true);
+            if (!canMove) return;
+
+            rb.velocity = speed * movement;
+
+
+            //walking animation set
+            if (movement.x != 0 || movement.y != 0)
+            {
+                anim.SetBool("PlayerMoving", true);
+            }
+            else
+                anim.SetBool("PlayerMoving", false);
+
+
+            //rotate player
+            Vector3 targetPoint = crosshair.position - transform.position;
+            float targetAngle = Vector2.Angle(transform.up, targetPoint);
+            Vector3 cross = Vector3.Cross(transform.up, targetPoint);
+            Debug.Log("Torque is " + (targetAngle * cross.z * rotateSpeed));
+            rb.AddTorque(targetAngle * cross.z * rotateSpeed);
         }
-        else
-            anim.SetBool("PlayerMoving", false);
-
-
-        //rotate player
-        Vector3 targetPoint = crosshair.position - transform.position;
-        float targetAngle = Vector2.Angle(transform.up, targetPoint);
-        Vector3 cross = Vector3.Cross(transform.up, targetPoint);
-        Debug.Log("Torque is " + (targetAngle * cross.z * rotateSpeed));
-        rb.AddTorque(targetAngle * cross.z * rotateSpeed);
         
     }
 

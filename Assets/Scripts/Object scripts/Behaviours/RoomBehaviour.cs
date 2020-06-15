@@ -128,15 +128,6 @@ public class RoomBehaviour : ExtendedBehaviour {
     {
         //set positionOverlay to invisible
         positionOverlay.stopBlinking();
-       
-
-        //set button animation to unpressed
-        if (transform.Find("Button") != null)
-        {
-            button = transform.Find("Button").gameObject;
-            Animator buttonAnim = button.GetComponent<Animator>();
-            buttonAnim.SetBool("ButtonOn", false); //changes anim to unpushed
-        }
 
         //make enemies dissapear
         GameObject[] enemies = findChildObjectsByTag("Enemy");
@@ -237,12 +228,13 @@ public class RoomBehaviour : ExtendedBehaviour {
         }
     }
 
-    public void checkCoins()
+    public void checkCoins(GameObject player)
     {
         coins = GameObject.FindGameObjectsWithTag("Coin");
         if(coins.Length == 0)
         {
             ChangeTiles(Color.yellow);
+            GameObject.FindGameObjectWithTag("God").GetComponent<whoWon>().updateInfo(player, roomValue);
         }
     }
 		

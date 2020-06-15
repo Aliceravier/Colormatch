@@ -180,7 +180,7 @@ namespace UnityEditor
 
 				if (go != null)
 				{
-					Object prefab = PrefabUtility.GetPrefabParent(go);
+					Object prefab = PrefabUtility.GetCorrespondingObjectFromSource(go);
 
 					if (prefab)
 					{
@@ -467,7 +467,7 @@ namespace UnityEditor
 	}
 
 	[CustomEditor(typeof(GameObjectBrush))]
-	public class GameObjectBrushEditor : GridBrushEditorBase
+	public class GameObjectBrushEditor : UnityEditor.Tilemaps.GridBrushEditorBase
 	{
 		public GameObjectBrush brush { get { return target as GameObjectBrush; } }
 

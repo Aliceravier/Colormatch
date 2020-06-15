@@ -147,7 +147,7 @@ public class PlayerBehaviour : ExtendedBehaviour {
             other.gameObject.SetActive(false);
             coinCount++;
             GameObject room = this.GetComponent<PlayerStatistics>().currentRoom;
-            room.GetComponent<RoomBehaviour>().checkCoins();
+            room.GetComponent<RoomBehaviour>().checkCoins(this.gameObject);
         }
     }
 

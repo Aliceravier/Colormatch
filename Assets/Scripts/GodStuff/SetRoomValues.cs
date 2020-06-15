@@ -42,7 +42,7 @@ public class SetRoomValues : MonoBehaviour {
 		List<GameObject> rooms = new List<GameObject> ();
 
 		foreach (GameObject room in roomz) {
-			if (room.GetComponentInChildren<ButtonBehaviour> () != null)
+			if (room.CompareTag("MainRoom"))
 				rooms.Add (room);
 		}
 

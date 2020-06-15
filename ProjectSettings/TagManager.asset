@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Room
-  - Exit
   - Tile
   - Player1
   - Player2
@@ -20,10 +19,12 @@ TagManager:
   - MinimapCamera2
   - Button
   - goaway
-  - Undefined
   - Crosshair
   - Spawner
   - Coin
+  - YellowGuy
+  - RedGuy
+  - MainRoom
   layers:
   - Default
   - TransparentFX
